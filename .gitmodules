@@ -1,0 +1,3 @@
+[submodule "/home/mfaik/Development/midvec2-gui/src/submodules"]
+	path = /home/mfaik/Development/midvec2-gui/src/submodules
+	url = https://github.com/therealddx/midvec2.git
