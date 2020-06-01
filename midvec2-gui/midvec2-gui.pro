@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Cursor.cpp \
+    GuiNode.cpp \
     MvecGraphicsScene.cpp \
     MvecGraphicsView.cpp \
     MvecHoverArea.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 HEADERS += \
     Cursor.h \
+    GuiNode.h \
     MainWindow.h \
     MvecGraphicsScene.h \
     MvecGraphicsView.h \
