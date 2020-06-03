@@ -17,7 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Cursor.cpp \
-    GuiNode.cpp \
+    GraphicNode.cpp \
     MvecGraphicsScene.cpp \
     MvecGraphicsView.cpp \
     MvecHoverArea.cpp \
@@ -26,7 +26,7 @@ SOURCES += \
 
 HEADERS += \
     Cursor.h \
-    GuiNode.h \
+    GraphicNode.h \
     MainWindow.h \
     MvecGraphicsScene.h \
     MvecGraphicsView.h \
@@ -34,6 +34,9 @@ HEADERS += \
 
 FORMS += \
     MainWindow.ui
+
+INCLUDEPATH += \
+  submodules/
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -23,7 +23,7 @@ private slots:
   void on_addSource_btn_clicked();
   void on_addCore_btn_clicked();
   void on_addShow_btn_clicked();
-  void on_addNode_btn_clicked();
+  void on_addByte_btn_clicked();
   void on_addMix_btn_clicked();
 
 private:

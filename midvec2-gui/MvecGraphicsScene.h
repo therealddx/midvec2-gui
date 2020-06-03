@@ -16,6 +16,7 @@
 
 // include: app.
 #include "MvecHoverArea.h"
+#include "GraphicNode.h"
 
 class MvecGraphicsScene : public QGraphicsScene
 {
@@ -31,17 +32,14 @@ public:
   enum class MousePressState
   {
     NoAction = 0,
-    AddNode
+    AddSourceNode,
+    AddMixNode,
+    AddByteNode,
+    AddCoreNode,
+    AddShowNode
     // AddConnection
     // DeleteObject
   };
-
-  struct AddNodeArgs
-  {
-    QString _nodeType;
-  };
-
-  inline void SetAddNodeArgs(struct AddNodeArgs arg_addArgs) { _addNodeArgs = arg_addArgs; }
 
   inline MousePressState GetMousePressState() { return _mousePressState; }
   inline void SetMousePressState(MousePressState arg_state) { _mousePressState = arg_state; }
@@ -51,9 +49,25 @@ private:
   // data.
   MvecHoverArea* _hoverArea;
   MousePressState _mousePressState;
-  struct AddNodeArgs _addNodeArgs;
 
-  // functions.
+  // Node instance database.
+  struct NodeDbRecord
+  {
+    uint64_t _pk;
+    GraphicNode* _graphicNode;
+  };
+
+  std::vector<struct NodeDbRecord> _nodeDb;
+
+  // functions: node database.
+  void _createNodeDbRecord(GraphicNode* arg_graphicNode);
+  bool _readNodeDbRecord(uint64_t arg_findPk, struct NodeDbRecord& rtn_record);
+  void _deleteNodeDbRecord(uint64_t arg_findPk);
+
+  uint64_t _numNodesMade;
+  static const uint64_t MAX_NUM_NODES = UINT64_MAX;
+
+  void _handleAddNode(MousePressState arg_mousePressState);
   virtual void mousePressEvent(QGraphicsSceneMouseEvent* arg_event);
 };
 

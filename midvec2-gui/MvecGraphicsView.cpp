@@ -24,4 +24,7 @@ void MvecGraphicsView::showEvent(QShowEvent* arg_event)
 
   // verify scene.
   qDebug() << _scene->sceneRect().width() << ", " << _scene->sceneRect().height();
+
+  // defer to base.
+  QGraphicsView::showEvent(arg_event);
 }

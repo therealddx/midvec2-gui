@@ -22,47 +22,27 @@ MvecGraphicsScene* MainWindow::_getScene()
 
 void MainWindow::on_addSource_btn_clicked()
 {
-  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddNode);
-
-  struct MvecGraphicsScene::AddNodeArgs myStruct;
-  myStruct._nodeType = "SourceNode";
-  _getScene()->SetAddNodeArgs( myStruct );
+  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddSourceNode);
 }
 
 void MainWindow::on_addCore_btn_clicked()
 {
-  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddNode);
-
-  struct MvecGraphicsScene::AddNodeArgs myStruct;
-  myStruct._nodeType = "CoreNode";
-  _getScene()->SetAddNodeArgs( myStruct );
+  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddCoreNode);
 }
 
 void MainWindow::on_addShow_btn_clicked()
 {
-  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddNode);
-
-  struct MvecGraphicsScene::AddNodeArgs myStruct;
-  myStruct._nodeType = QString("ShowNode");
-  _getScene()->SetAddNodeArgs( myStruct );
+  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddShowNode);
 }
 
-void MainWindow::on_addNode_btn_clicked()
+void MainWindow::on_addByte_btn_clicked()
 {
-  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddNode);
-
-  struct MvecGraphicsScene::AddNodeArgs myStruct;
-  myStruct._nodeType = "Node";
-  _getScene()->SetAddNodeArgs( myStruct );
+  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddByteNode);
 }
 
 void MainWindow::on_addMix_btn_clicked()
 {
-  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddNode);
-
-  struct MvecGraphicsScene::AddNodeArgs myStruct;
-  myStruct._nodeType = "MixNode";
-  _getScene()->SetAddNodeArgs( myStruct );
+  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddMixNode);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* arg_event)
