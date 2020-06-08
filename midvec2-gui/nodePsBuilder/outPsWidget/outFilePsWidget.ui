@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SelectFileDialog</class>
- <widget class="QDialog" name="SelectFileDialog">
+ <class>outFilePsWidget</class>
+ <widget class="QWidget" name="outFilePsWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>250</width>
     <height>150</height>
    </rect>
   </property>
@@ -17,24 +17,12 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="selectFile_btn">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>10</width>
-         <height>30</height>
-        </size>
-       </property>
+      <widget class="QLabel" name="selectFile_lbl">
        <property name="text">
-        <string>(select file)</string>
+        <string>(enter absolute path below)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignHCenter</set>
        </property>
       </widget>
      </item>
@@ -53,7 +41,7 @@
         </size>
        </property>
        <property name="readOnly">
-        <bool>true</bool>
+        <bool>false</bool>
        </property>
       </widget>
      </item>

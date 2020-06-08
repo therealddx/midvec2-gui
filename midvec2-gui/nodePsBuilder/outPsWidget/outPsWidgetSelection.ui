@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>inPsWidgetSelection</class>
- <widget class="QWidget" name="inPsWidgetSelection">
+ <class>outPsWidgetSelection</class>
+ <widget class="QWidget" name="outPsWidgetSelection">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -19,7 +19,7 @@
      <item>
       <widget class="QLabel" name="type_lbl">
        <property name="text">
-        <string>Input Pipe Type</string>
+        <string>Output Pipe Type</string>
        </property>
       </widget>
      </item>
@@ -36,7 +36,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QWidget" name="widget" native="true">
+    <widget class="QWidget" name="activeWidget" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>

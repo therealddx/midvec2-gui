@@ -6,7 +6,8 @@
 
 #include <NodeBuilder/nodePs.hpp>
 
-#include <nodePsBuilder/inPsWidgetSelection.h>
+#include <nodePsBuilder/inPsWidget/inPsWidgetSelection.h>
+#include <nodePsBuilder/outPsWidget/outPsWidgetSelection.h>
 
 //
 // nodePsTab.
@@ -37,6 +38,9 @@ public:
   byteNodePsTab(QWidget* parent = nullptr);
   ~byteNodePsTab();
   nodePs* Make(); // returns byteNodePs
+private:
+  inPsWidgetSelection* _inPsWidgetSelection;
+  outPsWidgetSelection* _outPsWidgetSelection;
 };
 
 //

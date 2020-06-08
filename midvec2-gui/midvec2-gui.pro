@@ -15,6 +15,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+# LIBS tag. kinda goofy.
+#   -L[dir]  : the *.a file lives here.
+#   -l[filename] : the *.a file is named as: "lib" + [filename] + ".a".
+LIBS += -L$$PWD/../build-midvec2-lib-Desktop_Qt_5_14_2_GCC_64bit-Debug/ -lmidvec2
+
 SOURCES += \
   main.cpp       \
   MainWindow.cpp \
@@ -24,10 +29,13 @@ SOURCES += \
   MvecUi/MvecGraphicsScene.cpp      \
   MvecUi/MvecGraphicsView.cpp       \
   MvecUi/MvecHoverArea.cpp          \
-  nodePsBuilder/StockSelectWidget/SelectIpPortDialog.cpp \
-  nodePsBuilder/StockSelectWidget/SelectFileDialog.cpp \
-  nodePsBuilder/inPsWidgetSelection.cpp \
-  nodePsBuilder/nodePsDialog.cpp \
+  nodePsBuilder/inPsWidget/inPsWidgetSelection.cpp \
+  nodePsBuilder/inPsWidget/inFilePsWidget.cpp \
+  nodePsBuilder/inPsWidget/inUdpPsWidget.cpp  \
+  nodePsBuilder/outPsWidget/outPsWidgetSelection.cpp \
+  nodePsBuilder/outPsWidget/outFilePsWidget.cpp \
+  nodePsBuilder/outPsWidget/outUdpPsWidget.cpp   \
+  nodePsBuilder/nodePsDialog.cpp        \
   nodePsBuilder/nodePsTab.cpp
 
 HEADERS += \
@@ -39,17 +47,25 @@ HEADERS += \
   MvecUi/MvecGraphicsScene.h      \
   MvecUi/MvecGraphicsView.h       \
   MvecUi/MvecHoverArea.h          \
-  nodePsBuilder/StockSelectWidget/SelectIpPortDialog.h \
-  nodePsBuilder/StockSelectWidget/SelectFileDialog.h \
-  nodePsBuilder/inPsWidgetSelection.h \
+  nodePsBuilder/inPsWidget/inPsWidget.h \
+  nodePsBuilder/inPsWidget/inPsWidgetSelection.h \
+  nodePsBuilder/inPsWidget/inFilePsWidget.h \
+  nodePsBuilder/inPsWidget/inUdpPsWidget.h  \
+  nodePsBuilder/outPsWidget/outPsWidgetSelection.h \
+  nodePsBuilder/outPsWidget/outPsWidget.h \
+  nodePsBuilder/outPsWidget/outFilePsWidget.h \
+  nodePsBuilder/outPsWidget/outUdpPsWidget.h \
   nodePsBuilder/nodePsDialog.h \
   nodePsBuilder/nodePsTab.h
 
 FORMS += \
   MainWindow.ui \
-  nodePsBuilder/StockSelectWidget/SelectIpPortDialog.ui \
-  nodePsBuilder/StockSelectWidget/SelectFileDialog.ui \
-  nodePsBuilder/inPsWidgetSelection.ui \
+  nodePsBuilder/inPsWidget/inPsWidgetSelection.ui \
+  nodePsBuilder/inPsWidget/inFilePsWidget.ui \
+  nodePsBuilder/inPsWidget/inUdpPsWidget.ui \
+  nodePsBuilder/outPsWidget/outPsWidgetSelection.ui \
+  nodePsBuilder/outPsWidget/outFilePsWidget.ui \
+  nodePsBuilder/outPsWidget/outUdpPsWidget.ui \
   nodePsBuilder/nodePsDialog.ui \
   nodePsBuilder/nodePsTab.ui
 
@@ -62,4 +78,3 @@ INCLUDEPATH += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-

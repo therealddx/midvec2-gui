@@ -28,9 +28,11 @@ nodePs* nodePsTab::Make()
 //
 byteNodePsTab::byteNodePsTab(QWidget* arg_parent)
   : nodePsTab(arg_parent)
+  , _inPsWidgetSelection(new inPsWidgetSelection)
+  , _outPsWidgetSelection(new outPsWidgetSelection)
 {
-  this->addTab(new inPsWidgetSelection(), "Input Pipe");
-  this->addTab(new QWidget(), "Output Pipe");
+  this->addTab(this->_inPsWidgetSelection, "Input Pipe");
+  this->addTab(this->_outPsWidgetSelection, "Output Pipe");
 }
 
 byteNodePsTab::~byteNodePsTab()
@@ -40,7 +42,12 @@ byteNodePsTab::~byteNodePsTab()
 
 nodePs* byteNodePsTab::Make()
 {
-  return nullptr;
+  qDebug() << "byteNodePsTab::Make";
+
+  return new byteNodePs<int>
+    ( this->_inPsWidgetSelection->Make()
+    , this->_outPsWidgetSelection->Make()
+    );
 }
 
 //
@@ -50,9 +57,9 @@ coreNodePsTab::coreNodePsTab(QWidget* arg_parent)
   : nodePsTab(arg_parent)
 {
   // the sw/c from nodePsDialog
-  this->addTab(new QWidget(), "Input Pipe");
+  this->addTab(new inPsWidgetSelection(), "Input Pipe");
   this->addTab(new QWidget(), "Processor");
-  this->addTab(new QWidget(), "Output Pipe");
+  this->addTab(new outPsWidgetSelection(), "Output Pipe");
 }
 
 coreNodePsTab::~coreNodePsTab()
@@ -72,7 +79,7 @@ showNodePsTab::showNodePsTab(QWidget* arg_parent)
   : nodePsTab(arg_parent)
 {
   // the sw/c from nodePsDialog
-  this->addTab(new QWidget(), "Input Pipe");
+  this->addTab(new inPsWidgetSelection(), "Input Pipe");
   this->addTab(new QWidget(), "Display");
 }
 
@@ -93,7 +100,7 @@ mixNodePsTab::mixNodePsTab(QWidget* arg_parent)
   : nodePsTab(arg_parent)
 {
   // the sw/c from nodePsDialog
-  this->addTab(new QWidget(), "Input Pipe");
+  this->addTab(new inPsWidgetSelection(), "Input Pipe");
   this->addTab(new QWidget(), "Mixer");
   this->addTab(new QWidget(), "Output Pipe");
 }
@@ -116,7 +123,7 @@ sourceNodePsTab::sourceNodePsTab(QWidget* arg_parent)
 {
   // the sw/c from nodePsDialog
   this->addTab(new QWidget(), "Generator");
-  this->addTab(new QWidget(), "Output Pipe");
+  this->addTab(new outPsWidgetSelection(), "Output Pipe");
 }
 
 sourceNodePsTab::~sourceNodePsTab()
