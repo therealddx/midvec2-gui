@@ -22,33 +22,33 @@ MvecGraphicsScene* MainWindow::_getScene()
 
 void MainWindow::on_addSource_btn_clicked()
 {
-  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddSourceNode);
+  _getScene()->SetMousePressState(MousePressState::AddSourceNode);
 }
 
 void MainWindow::on_addCore_btn_clicked()
 {
-  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddCoreNode);
+  _getScene()->SetMousePressState(MousePressState::AddCoreNode);
 }
 
 void MainWindow::on_addShow_btn_clicked()
 {
-  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddShowNode);
+  _getScene()->SetMousePressState(MousePressState::AddShowNode);
 }
 
 void MainWindow::on_addByte_btn_clicked()
 {
-  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddByteNode);
+  _getScene()->SetMousePressState(MousePressState::AddByteNode);
 }
 
 void MainWindow::on_addMix_btn_clicked()
 {
-  _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::AddMixNode);
+  _getScene()->SetMousePressState(MousePressState::AddMixNode);
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* arg_event)
 {
   if (arg_event->key() == Qt::Key::Key_Escape)
   {
-    _getScene()->SetMousePressState(MvecGraphicsScene::MousePressState::NoAction);
+    _getScene()->SetMousePressState(MousePressState::NoAction);
   }
 }

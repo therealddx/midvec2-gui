@@ -16,29 +16,50 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Cursor.cpp \
-    GraphicNode.cpp \
-    MvecGraphicsScene.cpp \
-    MvecGraphicsView.cpp \
-    MvecHoverArea.cpp \
-    main.cpp \
-    MainWindow.cpp
+  main.cpp       \
+  MainWindow.cpp \
+  MvecUi/Cursor.cpp                 \
+  MvecUi/GraphicNodeContextMenu.cpp \
+  MvecUi/GraphicNode.cpp            \
+  MvecUi/MvecGraphicsScene.cpp      \
+  MvecUi/MvecGraphicsView.cpp       \
+  MvecUi/MvecHoverArea.cpp          \
+  nodePsBuilder/StockSelectWidget/SelectIpPortDialog.cpp \
+  nodePsBuilder/StockSelectWidget/SelectFileDialog.cpp \
+  nodePsBuilder/inPsWidgetSelection.cpp \
+  nodePsBuilder/nodePsDialog.cpp \
+  nodePsBuilder/nodePsTab.cpp
 
 HEADERS += \
-    Cursor.h \
-    GraphicNode.h \
-    MainWindow.h \
-    MvecGraphicsScene.h \
-    MvecGraphicsView.h \
-    MvecHoverArea.h
+  MainWindow.h \
+  MvecUi/Cursor.h                 \
+  MvecUi/EventEnums.h             \
+  MvecUi/GraphicNodeContextMenu.h \
+  MvecUi/GraphicNode.h            \
+  MvecUi/MvecGraphicsScene.h      \
+  MvecUi/MvecGraphicsView.h       \
+  MvecUi/MvecHoverArea.h          \
+  nodePsBuilder/StockSelectWidget/SelectIpPortDialog.h \
+  nodePsBuilder/StockSelectWidget/SelectFileDialog.h \
+  nodePsBuilder/inPsWidgetSelection.h \
+  nodePsBuilder/nodePsDialog.h \
+  nodePsBuilder/nodePsTab.h
 
 FORMS += \
-    MainWindow.ui
+  MainWindow.ui \
+  nodePsBuilder/StockSelectWidget/SelectIpPortDialog.ui \
+  nodePsBuilder/StockSelectWidget/SelectFileDialog.ui \
+  nodePsBuilder/inPsWidgetSelection.ui \
+  nodePsBuilder/nodePsDialog.ui \
+  nodePsBuilder/nodePsTab.ui
 
 INCLUDEPATH += \
-  submodules/
+  submodules/midvec2-lib/src/ \
+  MvecUi/                     \
+  nodePsBuilder/
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+

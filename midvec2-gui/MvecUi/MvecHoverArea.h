@@ -3,17 +3,14 @@
 
 #include <QObject>
 #include <QWidget>
-
 #include <QGraphicsRectItem>
 #include <QGraphicsLineItem>
 #include <QGraphicsSceneHoverEvent>
-
 #include <QPen>
 #include <QColor>
-
 #include <QDebug>
 
-#include "Cursor.h"
+#include <MvecUi/Cursor.h>
 
 class MvecHoverArea : public QGraphicsRectItem
 {

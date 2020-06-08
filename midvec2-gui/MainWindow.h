@@ -4,7 +4,8 @@
 #include <QMainWindow>
 #include <QPushButton>
 
-#include "MvecGraphicsScene.h"
+#include <MvecUi/MvecGraphicsScene.h>
+#include <MvecUi/EventEnums.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

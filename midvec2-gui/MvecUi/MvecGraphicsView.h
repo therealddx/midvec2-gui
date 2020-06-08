@@ -15,7 +15,7 @@
 #include <QDebug>
 
 // include: app.
-#include "MvecGraphicsScene.h"
+#include <MvecUi/MvecGraphicsScene.h>
 
 class MvecGraphicsView : public QGraphicsView
 {

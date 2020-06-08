@@ -35,64 +35,35 @@ void MvecGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent* arg_event)
     return;
   }
 
-  // handle: add-node.
-  _handleAddNode(_mousePressState);
+  // handle: add for any recognized node type.
+  if ( _mousePressState == MousePressState::AddByteNode
+    || _mousePressState == MousePressState::AddSourceNode
+    || _mousePressState == MousePressState::AddCoreNode
+    || _mousePressState == MousePressState::AddMixNode
+    || _mousePressState == MousePressState::AddShowNode )
+  {
+    // handle: add-node.
+    _handleAddNode(_mousePressState);
 
-  // done: reset state.
-  this->SetMousePressState(MousePressState::NoAction);
+    // reset state.
+    this->SetMousePressState(MousePressState::NoAction);
 
-  // defer to base.
-  QGraphicsScene::mousePressEvent(arg_event);
+    // defer to base.
+    QGraphicsScene::mousePressEvent(arg_event);
+
+    // exit.
+    return;
+  }
 }
 
 void MvecGraphicsScene::_handleAddNode(MousePressState arg_mousePressState)
 {
-  // vars.
-  std::stringstream stringLoader;
-  std::string graphicNodeBasename;
-  std::string graphicNodeFullname;
-
-  // map: assign 'graphicNodeBasename'.
-  switch (arg_mousePressState)
-  {
-    case MousePressState::AddByteNode:
-    {
-      graphicNodeBasename = "Byte";
-    }
-    break;
-    case MousePressState::AddSourceNode:
-    {
-      graphicNodeBasename = "Source";
-    }
-    break;
-    case MousePressState::AddMixNode:
-    {
-      graphicNodeBasename = "Mix";
-    }
-    break;
-    case MousePressState::AddShowNode:
-    {
-      graphicNodeBasename = "Show";
-    }
-    break;
-    case MousePressState::AddCoreNode:
-    {
-      graphicNodeBasename = "Core";
-    }
-    break;
-    default:
-    {
-      // just move on.
-      return;
-    }
-  }
-
-  stringLoader << graphicNodeBasename << "_" << _numNodesMade;
-  stringLoader >> graphicNodeFullname;
+  // make a new GraphicNode.
+  GraphicNode* newGn =
+    new GraphicNode(_hoverArea->GetCursorPos(), arg_mousePressState, *this);
 
   // create a db entry for it.
-  this->_createNodeDbRecord(new GraphicNode(_hoverArea->GetCursorPos(), graphicNodeFullname, *this));
-
+  this->_createNodeDbRecord(newGn);
 }
 
 void MvecGraphicsScene::_createNodeDbRecord(GraphicNode* arg_graphicNode)

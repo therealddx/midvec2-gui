@@ -15,8 +15,9 @@
 #include <QDebug>
 
 // include: app.
-#include "MvecHoverArea.h"
-#include "GraphicNode.h"
+#include <MvecUi/EventEnums.h>
+#include <MvecUi/MvecHoverArea.h>
+#include <MvecUi/GraphicNode.h>
 
 class MvecGraphicsScene : public QGraphicsScene
 {
@@ -24,23 +25,6 @@ public:
   MvecGraphicsScene(int arg_width, int arg_height);
 
   // decls.
-
-  //
-  // MousePressState.
-  // Defines action to be taken when mouse is pressed inside this scene.
-  //
-  enum class MousePressState
-  {
-    NoAction = 0,
-    AddSourceNode,
-    AddMixNode,
-    AddByteNode,
-    AddCoreNode,
-    AddShowNode
-    // AddConnection
-    // DeleteObject
-  };
-
   inline MousePressState GetMousePressState() { return _mousePressState; }
   inline void SetMousePressState(MousePressState arg_state) { _mousePressState = arg_state; }
 

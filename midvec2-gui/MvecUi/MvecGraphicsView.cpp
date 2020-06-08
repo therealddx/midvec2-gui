@@ -3,7 +3,7 @@
 #include <QDebug>
 
 MvecGraphicsView::MvecGraphicsView(QWidget*& arg_parentWidget)
-: QGraphicsView(arg_parentWidget)
+  : QGraphicsView(arg_parentWidget)
 {
 }
 
@@ -21,9 +21,6 @@ void MvecGraphicsView::showEvent(QShowEvent* arg_event)
   // verify view.
   qDebug() << "MvecGraphicsView::MvecGraphicsView: " <<
               this->geometry().width() << ", " << this->geometry().height();
-
-  // verify scene.
-  qDebug() << _scene->sceneRect().width() << ", " << _scene->sceneRect().height();
 
   // defer to base.
   QGraphicsView::showEvent(arg_event);
