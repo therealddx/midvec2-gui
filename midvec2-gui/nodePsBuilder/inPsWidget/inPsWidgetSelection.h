@@ -27,9 +27,9 @@ private:
 
   // gui-specific handles.
   // Ui::nodePartPsWidgetSelection<inPs>* ui; // non-templated: Ui::inPsWidgetSelection* ui;
-  QWidget* _lastQWidget;
-  nodePartPsWidget<inPs>* _inFilePsWidget;
-  nodePartPsWidget<inPs>* _inUdpPsWidget;
+  // QWidget* _lastQWidget;
+  // nodePartPsWidget<inPs>* _inFilePsWidget;
+  // nodePartPsWidget<inPs>* _inUdpPsWidget;
 
 private slots:
   void onDropdownChanged();

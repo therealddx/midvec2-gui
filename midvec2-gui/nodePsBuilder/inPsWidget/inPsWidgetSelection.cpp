@@ -15,13 +15,13 @@ inPsWidgetSelection::inPsWidgetSelection( /* QWidget* arg_parent */ )
   // ui->setupUi(this);
 
   // setup cmb.
-  populateDropdown(ui->types_cmb);
+  // populateDropdown(ui->types_cmb);
   connect(ui->types_cmb, SIGNAL(currentTextChanged(const QString&)), this, SLOT(onDropdownChanged()));
 
   // init members.
-  _inFilePsWidget = _availableWidgets[std::string("File")];
-  _inUdpPsWidget  = _availableWidgets[std::string("Udp" )];
-  _lastQWidget = ui->activeWidget;
+  // _inFilePsWidget = _availableWidgets[std::string("File")];
+  // _inUdpPsWidget  = _availableWidgets[std::string("Udp" )];
+  // _lastQWidget = ui->activeWidget;
 
   // set a default active.
   ui->types_cmb->setCurrentText("File");
@@ -29,10 +29,10 @@ inPsWidgetSelection::inPsWidgetSelection( /* QWidget* arg_parent */ )
 
 inPsWidgetSelection::~inPsWidgetSelection()
 {
-  delete ui;
-
-  delete _inFilePsWidget;
-  delete _inUdpPsWidget;
+  // delete ui;
+  //
+  // delete _inFilePsWidget;
+  // delete _inUdpPsWidget;
 }
 
 void inPsWidgetSelection::onDropdownChanged()

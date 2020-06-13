@@ -27,9 +27,9 @@ private:
 
   // gui-specific handles.
   // Ui::outPsWidgetSelection* ui;
-  QWidget* _lastQWidget;
-  nodePartPsWidget<outPs>* _outFilePsWidget;
-  nodePartPsWidget<outPs>* _outUdpPsWidget;
+  // QWidget* _lastQWidget;
+  // nodePartPsWidget<outPs>* _outFilePsWidget;
+  // nodePartPsWidget<outPs>* _outUdpPsWidget;
 
 private slots:
   void onDropdownChanged();

@@ -15,13 +15,13 @@ genPsWidgetSelection::genPsWidgetSelection( /* QWidget* arg_parent */ )
   // ui->setupUi(this);
 
   // setup cmb.
-  populateDropdown(ui->types_cmb);
+  // populateDropdown(ui->types_cmb);
   connect(ui->types_cmb, SIGNAL(currentTextChanged(const QString&)), this, SLOT(onDropdownChanged()));
 
   // init members.
-  _genSinePsWidget = _availableWidgets[std::string("Sine")];
-  _genSquarePsWidget = _availableWidgets[std::string("Square")];
-  _lastQWidget = ui->activeWidget;
+  // _genSinePsWidget = _availableWidgets[std::string("Sine")];
+  // _genSquarePsWidget = _availableWidgets[std::string("Square")];
+  // _lastQWidget = ui->activeWidget;
 
   // set a default active.
   ui->types_cmb->setCurrentText("Sine");
@@ -29,10 +29,10 @@ genPsWidgetSelection::genPsWidgetSelection( /* QWidget* arg_parent */ )
 
 genPsWidgetSelection::~genPsWidgetSelection()
 {
-  delete ui;
-
-  delete _genSinePsWidget;
-  delete _genSquarePsWidget;
+  // delete ui;
+  //
+  // delete _genSinePsWidget;
+  // delete _genSquarePsWidget;
 }
 
 void genPsWidgetSelection::onDropdownChanged()

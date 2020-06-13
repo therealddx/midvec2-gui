@@ -53,6 +53,7 @@ protected:
   nodePartPsWidget<T_nodePartPs>* _activeWidget;
   std::map<std::string, nodePartPsWidget<T_nodePartPs>*> _availableWidgets;
   Ui::nodePartPsWidgetSelection<T_nodePartPs>* ui;
+  QWidget* _lastQWidget;
 
 };
 
@@ -85,6 +86,9 @@ nodePartPsWidgetSelection<T_nodePartPs>::nodePartPsWidgetSelection
 
   // init members: qt.
   ui->setupUi(this);
+  ui->type_lbl->setText(QString(arg_nodePartName.c_str())); // init QLabel.
+  populateDropdown(ui->types_cmb); // init QComboBox.
+  _lastQWidget = ui->activeWidget;
 }
 
 template <class T_nodePartPs>
