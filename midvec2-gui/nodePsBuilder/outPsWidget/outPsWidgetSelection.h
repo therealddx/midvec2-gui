@@ -19,17 +19,10 @@ class outPsWidgetSelection : public nodePartPsWidgetSelection<outPs>
   Q_OBJECT
 
 public:
-  // explicit outPsWidgetSelection(QWidget *parent = nullptr);
   explicit outPsWidgetSelection();
   ~outPsWidgetSelection();
 
 private:
-
-  // gui-specific handles.
-  // Ui::outPsWidgetSelection* ui;
-  // QWidget* _lastQWidget;
-  // nodePartPsWidget<outPs>* _outFilePsWidget;
-  // nodePartPsWidget<outPs>* _outUdpPsWidget;
 
 private slots:
   void onDropdownChanged();

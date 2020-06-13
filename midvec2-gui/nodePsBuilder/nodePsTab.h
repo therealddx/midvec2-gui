@@ -9,6 +9,8 @@
 #include <nodePsBuilder/inPsWidget/inPsWidgetSelection.h>
 #include <nodePsBuilder/outPsWidget/outPsWidgetSelection.h>
 #include <nodePsBuilder/genPsWidget/genPsWidgetSelection.h>
+#include <nodePsBuilder/dispPsWidget/dispPsWidgetSelection.h>
+#include <nodePsBuilder/mixPsWidget/mixPsWidgetSelection.h>
 
 //
 // nodePsTab.
@@ -59,17 +61,6 @@ private:
 };
 
 //
-// coreNodePsTab.
-//
-class coreNodePsTab : public nodePsTab
-{
-public:
-  coreNodePsTab(QWidget* parent = nullptr);
-  ~coreNodePsTab();
-  nodePs* Make(); // returns coreNodePs
-};
-
-//
 // showNodePsTab.
 //
 class showNodePsTab : public nodePsTab
@@ -78,6 +69,9 @@ public:
   showNodePsTab(QWidget* parent = nullptr);
   ~showNodePsTab();
   nodePs* Make(); // returns showNodePs
+private:
+  inPsWidgetSelection* _inPsWidgetSelection;
+  dispPsWidgetSelection* _dispPsWidgetSelection;
 };
 
 //
@@ -89,6 +83,22 @@ public:
   mixNodePsTab(QWidget* parent = nullptr);
   ~mixNodePsTab();
   nodePs* Make(); // returns mixNodePs
+private:
+  inPsWidgetSelection* _inPsWidgetSelection_1;
+  inPsWidgetSelection* _inPsWidgetSelection_2;
+  mixPsWidgetSelection* _mixPsWidgetSelection;
+  outPsWidgetSelection* _outPsWidgetSelection;
+};
+
+//
+// coreNodePsTab.
+//
+class coreNodePsTab : public nodePsTab
+{
+public:
+  coreNodePsTab(QWidget* parent = nullptr);
+  ~coreNodePsTab();
+  nodePs* Make(); // returns coreNodePs
 };
 
 #endif // NODEPSTAB_H
