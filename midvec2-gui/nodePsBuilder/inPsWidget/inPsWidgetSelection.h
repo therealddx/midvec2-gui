@@ -1,42 +1,39 @@
-#ifndef INPIPEWIDGETSELECTION_H
-#define INPIPEWIDGETSELECTION_H
+#ifndef INPSWIDGETSELECTION_H
+#define INPSWIDGETSELECTION_H
 
 #include <QDebug>
 #include <QWidget>
 
-#include <inPsWidget/inPsWidget.h>
+#include <NodeBuilder/inPs.hpp>
+
 #include <inPsWidget/inFilePsWidget.h>
 #include <inPsWidget/inUdpPsWidget.h>
+#include <nodePartPsWidgetSelection.h>
 
 namespace Ui {
 class inPsWidgetSelection;
 }
 
-class inPsWidgetSelection : public QWidget
+class inPsWidgetSelection : public nodePartPsWidgetSelection<inPs>
 {
   Q_OBJECT
 
 public:
-  explicit inPsWidgetSelection(QWidget *parent = nullptr);
+  // explicit inPsWidgetSelection(QWidget *parent = nullptr);
+  explicit inPsWidgetSelection();
   ~inPsWidgetSelection();
-
-  inPs* Make();
 
 private:
 
-  Ui::inPsWidgetSelection *ui;
-
-  // members: pointers.
+  // gui-specific handles.
+  // Ui::nodePartPsWidgetSelection<inPs>* ui; // non-templated: Ui::inPsWidgetSelection* ui;
   QWidget* _lastQWidget;
-
-  inPsWidget* _activeWidget;
-  inFilePsWidget* _inFilePsWidget;
-  inUdpPsWidget* _inUdpPsWidget;
-  // inRamPsWidget* _inRamPsWidget;
+  nodePartPsWidget<inPs>* _inFilePsWidget;
+  nodePartPsWidget<inPs>* _inUdpPsWidget;
 
 private slots:
   void onDropdownChanged();
 
 };
 
-#endif // INPIPEWIDGETSELECTION_H
+#endif // INPSWIDGETSELECTION_H

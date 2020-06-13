@@ -4,35 +4,32 @@
 #include <QDebug>
 #include <QWidget>
 
-#include <outPsWidget/outPsWidget.h>
+#include <NodeBuilder/outPs.hpp>
+
 #include <outPsWidget/outFilePsWidget.h>
 #include <outPsWidget/outUdpPsWidget.h>
+#include <nodePartPsWidgetSelection.h>
 
 namespace Ui {
 class outPsWidgetSelection;
 }
 
-class outPsWidgetSelection : public QWidget
+class outPsWidgetSelection : public nodePartPsWidgetSelection<outPs>
 {
   Q_OBJECT
 
 public:
-  explicit outPsWidgetSelection(QWidget *parent = nullptr);
+  // explicit outPsWidgetSelection(QWidget *parent = nullptr);
+  explicit outPsWidgetSelection();
   ~outPsWidgetSelection();
-
-  outPs* Make();
 
 private:
 
-  Ui::outPsWidgetSelection *ui;
-
-  // members: pointers.
+  // gui-specific handles.
+  // Ui::outPsWidgetSelection* ui;
   QWidget* _lastQWidget;
-
-  outPsWidget* _activeWidget;
-  outFilePsWidget* _outFilePsWidget;
-  outUdpPsWidget* _outUdpPsWidget  ;
-  // inRamPsWidget* _inRamPsWidget;
+  nodePartPsWidget<outPs>* _outFilePsWidget;
+  nodePartPsWidget<outPs>* _outUdpPsWidget;
 
 private slots:
   void onDropdownChanged();

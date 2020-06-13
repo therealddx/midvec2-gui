@@ -3,13 +3,13 @@
 
 #include <QDebug>
 
-#include <inPsWidget/inPsWidget.h>
+#include <nodePartPsWidget.h>
 
 namespace Ui {
 class inFilePsWidget;
 }
 
-class inFilePsWidget : public QWidget, public inPsWidget
+class inFilePsWidget : public QWidget, public nodePartPsWidget<inPs>
 {
   Q_OBJECT
 

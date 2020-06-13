@@ -23,21 +23,27 @@ nodePsDialog::~nodePsDialog()
 
 void nodePsDialog::SetDialogType(nodePsDialog::NodeDialogType arg_ndt)
 {
-  qDebug() << "nodePsDialog::SetDialogType";
+  qDebug() << "nodePsDialog::SetDialogType: 1";
 
   // state check: disallow sets without destroy.
   if (_isDialogSet == true) { throw std::invalid_argument("nodePsDialog: already set"); }
 
+  qDebug() << "nodePsDialog::SetDialogType: 2";
+
   // delete the stock tab.
   delete ui->_tab;
+
+  qDebug() << "nodePsDialog::SetDialogType: 3";
 
   // set.
   switch (arg_ndt)
   {
     case NodeDialogType::Byte:
+      qDebug() << "nodePsDialog::SetDialogType: Byte";
       ui->_tab = new byteNodePsTab(this);
       break;
     case NodeDialogType::Source:
+      qDebug() << "nodePsDialog::SetDialogType: Source";
       ui->_tab = new sourceNodePsTab(this);
       break;
     case NodeDialogType::Mix:

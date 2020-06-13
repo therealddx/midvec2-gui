@@ -8,6 +8,7 @@
 
 #include <nodePsBuilder/inPsWidget/inPsWidgetSelection.h>
 #include <nodePsBuilder/outPsWidget/outPsWidgetSelection.h>
+#include <nodePsBuilder/genPsWidget/genPsWidgetSelection.h>
 
 //
 // nodePsTab.
@@ -44,6 +45,20 @@ private:
 };
 
 //
+// sourceNodePsTab.
+//
+class sourceNodePsTab : public nodePsTab
+{
+public:
+  sourceNodePsTab(QWidget* parent = nullptr);
+  ~sourceNodePsTab();
+  nodePs* Make(); // returns sourceNodePs
+private:
+  genPsWidgetSelection* _genPsWidgetSelection;
+  outPsWidgetSelection* _outPsWidgetSelection;
+};
+
+//
 // coreNodePsTab.
 //
 class coreNodePsTab : public nodePsTab
@@ -74,17 +89,6 @@ public:
   mixNodePsTab(QWidget* parent = nullptr);
   ~mixNodePsTab();
   nodePs* Make(); // returns mixNodePs
-};
-
-//
-// sourceNodePsTab.
-//
-class sourceNodePsTab : public nodePsTab
-{
-public:
-  sourceNodePsTab(QWidget* parent = nullptr);
-  ~sourceNodePsTab();
-  nodePs* Make(); // returns sourceNodePs
 };
 
 #endif // NODEPSTAB_H

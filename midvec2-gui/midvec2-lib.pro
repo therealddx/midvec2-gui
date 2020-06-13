@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
   nodePsBuilder/StockSelectWidget/SelectBlankDialog.cpp \
+  nodePsBuilder/genPsWidget/genPsWidgetSelection.cpp \
   nodePsBuilder/inPsWidget/inPsWidget.cpp \
   submodules/midvec2-lib/src/InputPipe/InputPipe.cpp       \
   submodules/midvec2-lib/src/InputPipe/InputPipeFile.cpp   \
@@ -32,6 +33,9 @@ SOURCES += \
 
 HEADERS += \
   nodePsBuilder/StockSelectWidget/SelectBlankDialog.h \
+  nodePsBuilder/genPsWidget/genPsWidgetSelection.h \
+  nodePsBuilder/nodePartPsWidget.h \
+  nodePsBuilder/nodePartPsWidgetSelection.h \
   submodules/midvec2-lib/src/Exception/ErrorCode.hpp \
   submodules/midvec2-lib/src/InputPipe/InputPipe.hpp \
   submodules/midvec2-lib/src/InputPipe/InputPipeBase.hpp \
@@ -77,4 +81,5 @@ INCLUDEPATH += \
   submodules/midvec2-lib/src/
 
 FORMS += \
-  nodePsBuilder/StockSelectWidget/SelectBlankDialog.ui
+  nodePsBuilder/StockSelectWidget/SelectBlankDialog.ui \
+  nodePsBuilder/genPsWidget/genPsWidgetSelection.ui

@@ -1,13 +1,13 @@
 #ifndef INUDPPSWIDGET_H
 #define INUDPPSWIDGET_H
 
-#include <inPsWidget/inPsWidget.h>
+#include <nodePartPsWidget.h>
 
 namespace Ui {
 class inUdpPsWidget;
 }
 
-class inUdpPsWidget : public QWidget, public inPsWidget
+class inUdpPsWidget : public QWidget, public nodePartPsWidget<inPs>
 {
   Q_OBJECT
 

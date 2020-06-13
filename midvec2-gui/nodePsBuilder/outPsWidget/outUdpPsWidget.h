@@ -1,13 +1,13 @@
 #ifndef OUTUDPPSWIDGET_H
 #define OUTUDPPSWIDGET_H
 
-#include <outPsWidget/outPsWidget.h>
+#include <nodePartPsWidget.h>
 
 namespace Ui {
 class outUdpPsWidget;
 }
 
-class outUdpPsWidget : public QWidget, public outPsWidget
+class outUdpPsWidget : public QWidget, public nodePartPsWidget<outPs>
 {
   Q_OBJECT
 

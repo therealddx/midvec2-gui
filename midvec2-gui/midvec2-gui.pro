@@ -29,6 +29,9 @@ SOURCES += \
   MvecUi/MvecGraphicsScene.cpp      \
   MvecUi/MvecGraphicsView.cpp       \
   MvecUi/MvecHoverArea.cpp          \
+  nodePsBuilder/genPsWidget/genPsWidgetSelection.cpp \
+  nodePsBuilder/genPsWidget/genSinePsWidget.cpp \
+  nodePsBuilder/genPsWidget/genSquarePsWidget.cpp \
   nodePsBuilder/inPsWidget/inPsWidgetSelection.cpp \
   nodePsBuilder/inPsWidget/inFilePsWidget.cpp \
   nodePsBuilder/inPsWidget/inUdpPsWidget.cpp  \
@@ -47,19 +50,26 @@ HEADERS += \
   MvecUi/MvecGraphicsScene.h      \
   MvecUi/MvecGraphicsView.h       \
   MvecUi/MvecHoverArea.h          \
-  nodePsBuilder/inPsWidget/inPsWidget.h \
+  nodePsBuilder/genPsWidget/genPsWidgetSelection.h \
+  nodePsBuilder/genPsWidget/genSinePsWidget.h \
+  nodePsBuilder/genPsWidget/genSquarePsWidget.h \
   nodePsBuilder/inPsWidget/inPsWidgetSelection.h \
   nodePsBuilder/inPsWidget/inFilePsWidget.h \
   nodePsBuilder/inPsWidget/inUdpPsWidget.h  \
   nodePsBuilder/outPsWidget/outPsWidgetSelection.h \
-  nodePsBuilder/outPsWidget/outPsWidget.h \
   nodePsBuilder/outPsWidget/outFilePsWidget.h \
   nodePsBuilder/outPsWidget/outUdpPsWidget.h \
+  nodePsBuilder/nodePartPsWidgetSelection.h \
+  nodePsBuilder/ui_nodePartPsWidgetSelection.h \
   nodePsBuilder/nodePsDialog.h \
-  nodePsBuilder/nodePsTab.h
+  nodePsBuilder/nodePsTab.h \
+  nodePsBuilder/nodePartPsWidget.h
 
 FORMS += \
   MainWindow.ui \
+  nodePsBuilder/genPsWidget/genPsWidgetSelection.ui \
+  nodePsBuilder/genPsWidget/genSinePsWidget.ui \
+  nodePsBuilder/genPsWidget/genSquarePsWidget.ui \
   nodePsBuilder/inPsWidget/inPsWidgetSelection.ui \
   nodePsBuilder/inPsWidget/inFilePsWidget.ui \
   nodePsBuilder/inPsWidget/inUdpPsWidget.ui \

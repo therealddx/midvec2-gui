@@ -11,8 +11,9 @@ outstanding issues:
 the rest of the possible options for node source dialog
   genPs, dispPs, mixPs, procPs
   after this^, we'll have GUI functionality for all of our nodes.
+  (don't forget advanced filter selection options for procPs)
 
-incorporation of templatization
+incorporation of i/o templatization
   type selection as a node-level parameter
   advanced-option-only
   double-values by default

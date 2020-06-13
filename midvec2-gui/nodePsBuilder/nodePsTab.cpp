@@ -31,6 +31,7 @@ byteNodePsTab::byteNodePsTab(QWidget* arg_parent)
   , _inPsWidgetSelection(new inPsWidgetSelection)
   , _outPsWidgetSelection(new outPsWidgetSelection)
 {
+  qDebug() << "byteNodePsTab::byteNodePsTab";
   this->addTab(this->_inPsWidgetSelection, "Input Pipe");
   this->addTab(this->_outPsWidgetSelection, "Output Pipe");
 }
@@ -44,10 +45,33 @@ nodePs* byteNodePsTab::Make()
 {
   qDebug() << "byteNodePsTab::Make";
 
-  return new byteNodePs<int>
+  return new byteNodePs<double>
     ( this->_inPsWidgetSelection->Make()
     , this->_outPsWidgetSelection->Make()
     );
+}
+
+//
+// sourceNodePsTab.
+//
+sourceNodePsTab::sourceNodePsTab(QWidget* arg_parent)
+  : nodePsTab(arg_parent)
+  , _genPsWidgetSelection(new genPsWidgetSelection)
+  , _outPsWidgetSelection(new outPsWidgetSelection)
+{
+  qDebug() << "sourceNodePsTab::sourceNodePsTab";
+  this->addTab(this->_genPsWidgetSelection, "Generator");
+  this->addTab(this->_outPsWidgetSelection, "Output Pipe");
+}
+
+sourceNodePsTab::~sourceNodePsTab()
+{
+  // delete everything
+}
+
+nodePs* sourceNodePsTab::Make()
+{
+  return nullptr;
 }
 
 //
@@ -111,27 +135,6 @@ mixNodePsTab::~mixNodePsTab()
 }
 
 nodePs* mixNodePsTab::Make()
-{
-  return nullptr;
-}
-
-//
-// sourceNodePsTab.
-//
-sourceNodePsTab::sourceNodePsTab(QWidget* arg_parent)
-  : nodePsTab(arg_parent)
-{
-  // the sw/c from nodePsDialog
-  this->addTab(new QWidget(), "Generator");
-  this->addTab(new outPsWidgetSelection(), "Output Pipe");
-}
-
-sourceNodePsTab::~sourceNodePsTab()
-{
-  // delete everything
-}
-
-nodePs* sourceNodePsTab::Make()
 {
   return nullptr;
 }
