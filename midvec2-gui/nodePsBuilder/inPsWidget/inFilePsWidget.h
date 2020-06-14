@@ -18,6 +18,7 @@ public:
   virtual ~inFilePsWidget();
   inPs* Make();
   inline QWidget* GetQWidget() { return this; }
+  inline bool IsValid() { return true; }
 
 private:
   Ui::inFilePsWidget* ui;

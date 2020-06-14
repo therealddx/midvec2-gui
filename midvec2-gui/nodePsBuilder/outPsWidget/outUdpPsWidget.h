@@ -16,6 +16,7 @@ public:
   virtual ~outUdpPsWidget();
   outPs* Make();
   inline QWidget* GetQWidget() { return this; }
+  bool IsValid();
 
 protected:
   Ui::outUdpPsWidget* ui;

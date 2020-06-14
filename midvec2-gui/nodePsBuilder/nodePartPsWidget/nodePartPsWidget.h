@@ -43,46 +43,17 @@ public:
   virtual ~nodePartPsWidget() { }
   virtual T_nodePartPs* Make() = 0;
   virtual QWidget* GetQWidget() = 0;
+  virtual bool IsValid() = 0;
 
 protected:
-  QDoubleValidator::State handleDoubleEdited(QLineEdit*, QString);
-  QIntValidator::State handleIntEdited(QLineEdit*, QString, int, int);
+  QDoubleValidator::State observeDoubleEdited(QLineEdit*, QString);
+  QIntValidator::State observeIntEdited(QLineEdit*, QString, int, int);
+  QDoubleValidator::State checkDoubleEdited(QString);
+  QIntValidator::State checkIntEdited(QString, int, int);
 };
 
 template <class T_nodePartPs>
-QDoubleValidator::State nodePartPsWidget<T_nodePartPs>::handleDoubleEdited
-  ( QLineEdit* arg_le
-  , QString arg_newText
-  )
-{
-  // arg check.
-  if (arg_le == nullptr)
-  {
-    throw std::invalid_argument("arg_le");
-  }
-
-  // make a double validator.
-  QDoubleValidator* myValidator = new QDoubleValidator(-1e10, 1e10, 12);
-  myValidator->setNotation(QDoubleValidator::StandardNotation);
-  myValidator->setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
-
-  // validate.
-  int rPos;
-  auto isValid = myValidator->validate(arg_newText, rPos);
-
-  // if is invalid:
-  if (isValid == QDoubleValidator::Invalid)
-  {
-    // delete last char entered.
-    arg_le->backspace();
-  }
-
-  // ret.
-  return isValid;
-}
-
-template <class T_nodePartPs>
-QIntValidator::State nodePartPsWidget<T_nodePartPs>::handleIntEdited
+QIntValidator::State nodePartPsWidget<T_nodePartPs>::observeIntEdited
   ( QLineEdit* arg_le
   , QString arg_newText
   , int arg_bottom
@@ -95,23 +66,81 @@ QIntValidator::State nodePartPsWidget<T_nodePartPs>::handleIntEdited
     throw std::invalid_argument("arg_le");
   }
 
+  // check.
+  QIntValidator::State vState = checkIntEdited(QString(arg_newText), arg_bottom, arg_top);
+
+  // send check to gui.
+  if (vState == QIntValidator::Acceptable)
+  {
+    arg_le->setStyleSheet("QLineEdit { background-color: #2000ff00; }");
+  }
+  else
+  {
+    arg_le->setStyleSheet("QLineEdit { background-color: #20ff0000 }");
+  }
+
+  // ret.
+  return vState;
+}
+
+template <class T_nodePartPs>
+QDoubleValidator::State nodePartPsWidget<T_nodePartPs>::observeDoubleEdited
+  ( QLineEdit* arg_le
+  , QString arg_newText
+  )
+{
+  // arg check.
+  if (arg_le == nullptr)
+  {
+    throw std::invalid_argument("arg_le");
+  }
+
+  // check.
+  QDoubleValidator::State vState = checkDoubleEdited(QString(arg_newText));
+
+  // send check to gui.
+  if (vState == QDoubleValidator::Acceptable)
+  {
+    arg_le->setStyleSheet("QLineEdit { background-color: #2000ff00; }");
+  }
+  else
+  {
+    arg_le->setStyleSheet("QLineEdit { background-color: #20ff0000 }");
+  }
+
+  // ret.
+  return vState;
+}
+
+template <class T_nodePartPs>
+QDoubleValidator::State nodePartPsWidget<T_nodePartPs>::checkDoubleEdited
+  ( QString arg_newText
+  )
+{
+  // make a double validator.
+  QDoubleValidator* myValidator = new QDoubleValidator(-1e10, 1e10, 12);
+  myValidator->setNotation(QDoubleValidator::StandardNotation);
+  myValidator->setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
+
+  // validate + ret.
+  int rPos;
+  return myValidator->validate(arg_newText, rPos);
+}
+
+template <class T_nodePartPs>
+QIntValidator::State nodePartPsWidget<T_nodePartPs>::checkIntEdited
+  ( QString arg_newText
+  , int arg_bottom
+  , int arg_top
+  )
+{
   // make validator.
   QIntValidator myValidator(arg_bottom, arg_top);
   myValidator.setLocale(QLocale(QLocale::English, QLocale::UnitedStates));
 
   // validate.
   int rPos;
-  auto isValid = myValidator.validate(arg_newText, rPos);
-
-  // if is invalid:
-  if (isValid == QIntValidator::Invalid)
-  {
-    // delete last char entered.
-    arg_le->backspace();
-  }
-
-  // ret.
-  return isValid;
+  return myValidator.validate(arg_newText, rPos);
 }
 
 #endif // NODEPARTPSWIDGET_H

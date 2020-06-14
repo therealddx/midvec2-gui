@@ -18,6 +18,7 @@ public:
   ~procConvPsWidget();
   procPs* Make();
   inline QWidget* GetQWidget() { return this; }
+  inline bool IsValid() { return true; }
 
 private:
   Ui::procConvPsWidget *ui;

@@ -16,9 +16,6 @@ class nodePsDialog : public QDialog
 
 public:
 
-  explicit nodePsDialog(QWidget* parent = nullptr);
-  ~nodePsDialog();
-
   enum class NodeDialogType
   {
     Byte,
@@ -28,8 +25,17 @@ public:
     Show
   };
 
+  explicit nodePsDialog(QWidget* parent = nullptr);
+  ~nodePsDialog();
+
   nodePs* Make();
   void SetDialogType(NodeDialogType);
+
+protected:
+  void closeEvent(QCloseEvent*);
+
+signals:
+  void validToRun(bool isValid);
 
 private:
   Ui::nodePsDialog *ui;

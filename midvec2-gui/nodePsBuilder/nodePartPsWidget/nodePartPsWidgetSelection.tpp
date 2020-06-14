@@ -82,6 +82,15 @@ T_nodePartPs* nodePartPsWidgetSelection<T_nodePartPs>::Make()
 }
 
 template <class T_nodePartPs>
+bool nodePartPsWidgetSelection<T_nodePartPs>::IsValid()
+{
+  // ret.
+  // only check the -active- nodePartPsWidget.
+  // an invalid configuration is fine... iff we're not using it.
+  return _activeWidget->IsValid();
+}
+
+template <class T_nodePartPs>
 void nodePartPsWidgetSelection<T_nodePartPs>::setActiveWidget(std::string arg_key)
 {
   if (_availableWidgets.find(arg_key) != _availableWidgets.end())

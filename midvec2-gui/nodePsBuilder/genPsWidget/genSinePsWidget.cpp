@@ -8,6 +8,13 @@ genSinePsWidget::genSinePsWidget(QWidget *parent) :
   // setup ui.
   ui->setupUi(this);
 
+  // setup placeholders.
+  ui->xShift_le->setPlaceholderText(QString("(floating point)"));
+  ui->xScale_le->setPlaceholderText(QString("(floating point)"));
+  ui->yShift_le->setPlaceholderText(QString("(floating point)"));
+  ui->yScale_le->setPlaceholderText(QString("(floating point)"));
+  ui->samplesPerPeriod_le->setPlaceholderText(QString("(positive integer)"));
+
   // connect validators.
   connect(ui->xShift_le, SIGNAL(textEdited(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
   connect(ui->xScale_le, SIGNAL(textEdited(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
@@ -15,7 +22,7 @@ genSinePsWidget::genSinePsWidget(QWidget *parent) :
   connect(ui->yScale_le, SIGNAL(textEdited(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
   connect(ui->samplesPerPeriod_le, SIGNAL(textEdited(const QString&)), this, SLOT(onIntEdited(const QString&)) );
 
-  // initiate non-Acceptable validator states.
+  // trigger validator defaults.
   emit ui->xShift_le->textEdited("");
   emit ui->xScale_le->textEdited("");
   emit ui->yShift_le->textEdited("");
@@ -30,12 +37,14 @@ genSinePsWidget::~genSinePsWidget()
 
 genPs* genSinePsWidget::Make()
 {
+  // read values.
   double xShift        = std::stod(ui->xShift_le->text().toStdString());
   double xScale        = std::stod(ui->xScale_le->text().toStdString());
   double yShift        = std::stod(ui->yShift_le->text().toStdString());
   double yScale        = std::stod(ui->yScale_le->text().toStdString());
   int samplesPerPeriod = std::stoi(ui->samplesPerPeriod_le->text().toStdString());
 
+  // ret.
   return new genSinePs<double>
     ( xShift
     , xScale
@@ -47,41 +56,46 @@ genPs* genSinePsWidget::Make()
 
 void genSinePsWidget::onDoubleEdited(const QString& arg_newText)
 {
-  // marshal args.
-  QLineEdit* my_le = dynamic_cast<QLineEdit*>(QObject::sender());
-
   // pass to parent.
-  QDoubleValidator::State vState =
-    handleDoubleEdited(my_le, QString(arg_newText));
-
-  // check.
-  if (checkDoubleEdited() == QDoubleValidator::Acceptable)
-  {
-  // prevent user from closing the form
-    my_le->setStyleSheet("QLineEdit { color: solid-gray; background-color: #4000ff00; }");
-  }
-  else
-  {
-    my_le->setStyleSheet("");
-  }
+  observeDoubleEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText));
 }
 
 void genSinePsWidget::onIntEdited(const QString& arg_newText)
 {
-  // marshal args.
-  QLineEdit* my_le = dynamic_cast<QLineEdit*>(QObject::sender());
-
   // pass to parent.
-  QIntValidator::State vState =
-    handleIntEdited(my_le, QString(arg_newText), 1, 0x1 << 24);
+  observeIntEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText), 1, 0x1 << 24);
+}
 
-  // check.
-  if (vState == QIntValidator::Intermediate)
+bool genSinePsWidget::IsValid()
+{
+  if ( checkDoubleEdited(ui->xShift_le->text()) == QDoubleValidator::Acceptable
+    && checkDoubleEdited(ui->xScale_le->text()) == QDoubleValidator::Acceptable
+    && checkDoubleEdited(ui->yShift_le->text()) == QDoubleValidator::Acceptable
+    && checkDoubleEdited(ui->yScale_le->text()) == QDoubleValidator::Acceptable
+    && checkIntEdited(ui->samplesPerPeriod_le->text(), 1, 0x1 << 24) == QIntValidator::Acceptable
+    )
   {
-    my_le->setStyleSheet("QLineEdit { background-color: #40ff0000; }");
+    return true;
   }
   else
   {
-    my_le->setStyleSheet("");
+    return false;
   }
 }
+
+//
+// Some more design notes on checking user-input.
+// Have a visual, easy-on-the-eyes, indicator for when input is GOOD, and a separate one for anything that is non-GOOD.
+//
+// There are GOOD inputs, and non-GOOD inputs.
+//   ALL inputs have to be GOOD (Acceptable) in order to be able to trigger 'Run' in the GraphicNodeContextMenu.
+//
+// It is impossible to 'correct' the user.
+// The most elegant option is to alert the user, and politely block them off.
+//
+// querying whether all systems are Acceptable should be a matter of hierarchical selection as you've already done.
+//     starting at the level of the nodePsDialog.
+// the stylesheet informs the USER.
+// the hierarchical query informs the GraphicNode.
+//
+

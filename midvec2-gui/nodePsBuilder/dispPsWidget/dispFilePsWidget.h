@@ -20,6 +20,7 @@ public:
   ~dispFilePsWidget();
   dispPs* Make();
   inline QWidget* GetQWidget() { return this; }
+  inline bool IsValid() { return true; }
 
 private:
   Ui::dispFilePsWidget *ui;

@@ -18,6 +18,7 @@ public:
   ~genSinePsWidget();
   genPs* Make();
   inline QWidget* GetQWidget() { return this; }
+  bool IsValid();
 
 private:
   Ui::genSinePsWidget *ui;

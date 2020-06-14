@@ -38,6 +38,7 @@ public:
     );
   virtual ~nodePartPsWidgetSelection<T_nodePartPs>();
   virtual T_nodePartPs* Make();
+  virtual bool IsValid();
 
 protected:
 

@@ -28,6 +28,7 @@ public:
   explicit nodePsTab(QWidget *parent = nullptr);
   virtual ~nodePsTab();
   virtual nodePs* Make(); // must be impl. by subclasses.
+  virtual bool IsValid(); // must be impl. by subclasses.
 
 protected:
   Ui::nodePsTab *ui;
@@ -42,6 +43,7 @@ public:
   byteNodePsTab(QWidget* parent = nullptr);
   ~byteNodePsTab();
   nodePs* Make(); // returns byteNodePs
+  bool IsValid();
 private:
   inPsWidgetSelection* _inPsWidgetSelection;
   outPsWidgetSelection* _outPsWidgetSelection;
@@ -56,6 +58,7 @@ public:
   sourceNodePsTab(QWidget* parent = nullptr);
   ~sourceNodePsTab();
   nodePs* Make(); // returns sourceNodePs
+  bool IsValid();
 private:
   genPsWidgetSelection* _genPsWidgetSelection;
   outPsWidgetSelection* _outPsWidgetSelection;
@@ -70,6 +73,7 @@ public:
   showNodePsTab(QWidget* parent = nullptr);
   ~showNodePsTab();
   nodePs* Make(); // returns showNodePs
+  bool IsValid();
 private:
   inPsWidgetSelection* _inPsWidgetSelection;
   dispPsWidgetSelection* _dispPsWidgetSelection;
@@ -84,6 +88,7 @@ public:
   mixNodePsTab(QWidget* parent = nullptr);
   ~mixNodePsTab();
   nodePs* Make(); // returns mixNodePs
+  bool IsValid();
 private:
   inPsWidgetSelection* _inPsWidgetSelection_1;
   inPsWidgetSelection* _inPsWidgetSelection_2;
@@ -100,6 +105,7 @@ public:
   coreNodePsTab(QWidget* parent = nullptr);
   ~coreNodePsTab();
   nodePs* Make(); // returns coreNodePs
+  bool IsValid();
 private:
   inPsWidgetSelection* _inPsWidgetSelection;
   procPsWidgetSelection* _procPsWidgetSelection;

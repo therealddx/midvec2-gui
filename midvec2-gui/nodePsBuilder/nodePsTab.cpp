@@ -18,9 +18,12 @@ nodePsTab::~nodePsTab()
 
 nodePs* nodePsTab::Make()
 {
-  qDebug() << "nodePsTab::Make";
-  // query the widget selection to get the right object out
   return nullptr;
+}
+
+bool nodePsTab::IsValid()
+{
+  return false;
 }
 
 //
@@ -52,6 +55,12 @@ nodePs* byteNodePsTab::Make()
     );
 }
 
+bool byteNodePsTab::IsValid()
+{
+  return _inPsWidgetSelection->IsValid() &&
+    _outPsWidgetSelection->IsValid();
+}
+
 //
 // sourceNodePsTab.
 //
@@ -79,6 +88,12 @@ nodePs* sourceNodePsTab::Make()
     );
 }
 
+bool sourceNodePsTab::IsValid()
+{
+  return _genPsWidgetSelection->IsValid() &&
+    _outPsWidgetSelection->IsValid();
+}
+
 //
 // showNodePsTab.
 //
@@ -103,6 +118,12 @@ nodePs* showNodePsTab::Make()
     ( _inPsWidgetSelection->Make()
     , _dispPsWidgetSelection->Make()
     );
+}
+
+bool showNodePsTab::IsValid()
+{
+  return _inPsWidgetSelection->IsValid() &&
+    _dispPsWidgetSelection->IsValid();
 }
 
 //
@@ -139,6 +160,14 @@ nodePs* mixNodePsTab::Make()
     );
 }
 
+bool mixNodePsTab::IsValid()
+{
+  return _inPsWidgetSelection_1->IsValid() &&
+    _inPsWidgetSelection_2->IsValid() &&
+    _mixPsWidgetSelection->IsValid() &&
+    _outPsWidgetSelection->IsValid();
+}
+
 //
 // coreNodePsTab.
 //
@@ -167,4 +196,11 @@ nodePs* coreNodePsTab::Make()
     , _procPsWidgetSelection->Make()
     , _outPsWidgetSelection->Make()
     );
+}
+
+bool coreNodePsTab::IsValid()
+{
+  return _inPsWidgetSelection->IsValid() &&
+      _procPsWidgetSelection->IsValid() &&
+    _outPsWidgetSelection->IsValid();
 }

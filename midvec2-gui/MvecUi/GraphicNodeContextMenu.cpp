@@ -21,8 +21,15 @@ GraphicNodeContextMenu::GraphicNodeContextMenu(nodePsDialog* arg_dialog)
   connect(_stopAction, SIGNAL(triggered()), this, SLOT(stop()));
   addAction(_stopAction);
 
+  // by default-- you are NOT allowed to run.
+  _isAllowedToRun = false;
+
+  // connect to context menu.
+  connect(this->_nodeBuilderForm, SIGNAL(validToRun(bool)), this, SLOT(enableRun(bool)));
+
   // set 'running' to false.
-  _setIsRunning(false);
+  startRunning(false);
+
 }
 
 GraphicNodeContextMenu::~GraphicNodeContextMenu()
@@ -37,41 +44,46 @@ GraphicNodeContextMenu::~GraphicNodeContextMenu()
 void GraphicNodeContextMenu::edit()
 {
   qDebug() << "GraphicNodeContextMenu::edit";
-
-  // expose the node's ticket for modification.
   _nodeBuilderForm->exec();
 }
 
 void GraphicNodeContextMenu::run()
 {
   qDebug() << "GraphicNodeContextMenu::run";
-  _setIsRunning(true);
+  startRunning(true);
 }
 
 void GraphicNodeContextMenu::stop()
 {
   qDebug() << "GraphicNodeContextMenu::stop";
-  _setIsRunning(false);
+  startRunning(false);
 }
 
-void GraphicNodeContextMenu::_setIsRunning(bool arg_isRunning)
+void GraphicNodeContextMenu::enableRun(bool arg_enableRun)
 {
-  if (arg_isRunning == true) // this node shall start:
+  qDebug() << "GraphicNodeContextMenu::disableRun";
+  _isAllowedToRun = arg_enableRun;
+  _runAction->setEnabled(arg_enableRun);
+}
+
+void GraphicNodeContextMenu::startRunning(bool arg_shouldStart)
+{
+  if (arg_shouldStart == true && _isAllowedToRun == true) // this node shall start:
   {
     // handle controls.
-    _runAction->setEnabled(false); // can't set to 'run', that's redundant.
-    _editAction->setEnabled(false); // can't edit while running; that makes no sense.
-    _stopAction->setEnabled(true); // can stop, if you like.
+    _runAction->setEnabled(false);
+    _editAction->setEnabled(false);
+    _stopAction->setEnabled(true);
 
     // handle node.
     _node = _nodeBuilderForm->Make()->Make();
   }
-  else // arg_isRunning == false
+  else // arg_shouldStart == false
   {
     // handle controls.
-    _runAction->setEnabled(true); // can start running if you like.
-    _editAction->setEnabled(true); // can edit while stopped.
-    _stopAction->setEnabled(false); // can't stop; that's redundant.
+    _runAction->setEnabled(_isAllowedToRun);
+    _editAction->setEnabled(true);
+    _stopAction->setEnabled(false);
 
     // handle node.
     if (_node != nullptr)
@@ -81,3 +93,27 @@ void GraphicNodeContextMenu::_setIsRunning(bool arg_isRunning)
     }
   }
 }
+
+//
+// startup conditions:
+//   internally, note that you (the GraphicNodeContextMenu) are NOT allowed to run.
+//   connect nodePsDialog::validToRun to GraphicNodeContextMenu::enableRun.
+//   again... remind yourself to NOT be running.
+//
+// then-- come down here.
+//   startRunning.
+//   if you should start, AND you're allowed to run:
+//     then all that should be available is the stop key.
+//     ok, go ahead and Make...
+//   if you should NOT start, then:
+//     edit is for-sure enabled since you're stopped.
+//     stopping is disabled since you're already stopped.
+//     run is enabled ONLY IF _isAllowedToRun is ON.
+//
+// and-- the kicker.
+//   _isAllowedToRun only ever gets turned ON when nodePsDialog closes, in a valid state.
+//   so every time you open up that 'edit...', that's a chance for you to emit an 'allowed-to-run' signal.
+//   otherwise you will always be stopped.
+//
+
+

@@ -13,6 +13,9 @@ nodePsDialog::nodePsDialog(QWidget *parent)
   // note.
   _isDialogSet = false;
 
+  // signal: never valid to run at first-construction.
+  emit validToRun(false);
+
   qDebug() << "nodePsDialog::nodePsDialog";
 }
 
@@ -67,4 +70,14 @@ void nodePsDialog::SetDialogType(nodePsDialog::NodeDialogType arg_ndt)
 nodePs* nodePsDialog::Make()
 {
   return ui->_tab->Make();
+}
+
+void nodePsDialog::closeEvent(QCloseEvent* arg_event)
+{
+  //
+  // every time the user considers himself 'done' with this form.
+  // inform any interested clients whether the Make() behind this instance
+  // will be available.
+  //
+  emit validToRun(ui->_tab->IsValid());
 }
