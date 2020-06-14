@@ -21,6 +21,10 @@ public:
 
 private:
   Ui::genSinePsWidget *ui;
+
+private slots:
+  void onDoubleEdited(const QString&);
+  void onIntEdited(const QString&);
 };
 
 #endif // GENSINEPSWIDGET_H

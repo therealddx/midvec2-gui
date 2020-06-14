@@ -21,6 +21,10 @@ public:
 
 private:
   Ui::genSquarePsWidget *ui;
+
+private slots:
+  void onDoubleEdited(const QString&);
+  void onIntEdited(const QString&);
 };
 
 #endif // GENSQUAREPSWIDGET_H

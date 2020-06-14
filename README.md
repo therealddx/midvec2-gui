@@ -7,16 +7,40 @@ solid design from the top-level form, nodePsDialog...
 
 incorporation of midvec2-lib source as a static lib
 
-outstanding issues:
 the rest of the possible options for node source dialog
   genPs, dispPs, mixPs, procPs
   after this^, we'll have GUI functionality for all of our nodes.
-  (don't forget advanced filter selection options for procPs)
 
-incorporation of i/o templatization
+**
+
+outstanding issues:
+
+smarter nodePartPsWidget instances.
+tasklist:
+ - procPsWidget:
+  - Convolution: still need advanced filter selection options for procPs.
+  - Dc: parsing scheme of double
+ - inPsWidget:
+  - File: offer an explorer window, and a smart-search textbox.
+  - Udp: port has a parsing scheme (uint16)
+  - Ram: develop a way to point to other Node's RingBuffers.
+ - outPsWidget:
+  - File: explorer window and smart-search for directory navigation.
+  - Udp: ip address has a parsing scheme, port has a parsing scheme
+ - genPsWidget:
+  - Sine / Square: int / double parsing schemes respectively.
+ - dispPsWidget: offer an explorer window, and a smart-search textbox.
+collated tasklist:
+ - parsing scheme of double
+ - parsing scheme of uint32, decimal
+ - parsing scheme of uint16, decimal
+ - offer an explorer window, and a smart-search textbox.
+ - parsing scheme for dotted-decimal ip address
+
+incorporation of i/o type templatization
   type selection as a node-level parameter
   advanced-option-only
-  double-values by default
+  double values by default
 
 time-executive functionality
   real-time simulation, controlling of a sample rate 
@@ -36,11 +60,6 @@ save / load
   being able to re-use that load / save system in a CLI tool
 
 gui robustifications
-  eat some taco bell before you go to bed, helps keep you regular
-  string-argument checking for any file
-  allow Node Configuration Dialog to close on invalid...
-    but ensure that GraphicNode knows that it's in a non-runnable state
-  input-file-select dialog, rather than just 'type the path'
 
 gui beautifications
 new tools:

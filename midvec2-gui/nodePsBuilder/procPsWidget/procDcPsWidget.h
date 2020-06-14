@@ -21,6 +21,9 @@ public:
 
 private:
   Ui::procDcPsWidget *ui;
+
+private slots:
+  void onDoubleEdited(const QString&);
 };
 
 #endif // PROCDCPSWIDGET_H

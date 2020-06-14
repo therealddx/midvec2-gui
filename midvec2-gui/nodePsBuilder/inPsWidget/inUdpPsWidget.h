@@ -20,6 +20,8 @@ public:
 protected:
   Ui::inUdpPsWidget* ui;
 
+private slots:
+  void onPortEdited(const QString&);
 };
 
 #endif // INUDPPSWIDGET_H
