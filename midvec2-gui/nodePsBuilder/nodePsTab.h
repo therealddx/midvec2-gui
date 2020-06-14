@@ -11,6 +11,7 @@
 #include <nodePsBuilder/genPsWidget/genPsWidgetSelection.h>
 #include <nodePsBuilder/dispPsWidget/dispPsWidgetSelection.h>
 #include <nodePsBuilder/mixPsWidget/mixPsWidgetSelection.h>
+#include <nodePsBuilder/procPsWidget/procPsWidgetSelection.h>
 
 //
 // nodePsTab.
@@ -99,6 +100,11 @@ public:
   coreNodePsTab(QWidget* parent = nullptr);
   ~coreNodePsTab();
   nodePs* Make(); // returns coreNodePs
+private:
+  inPsWidgetSelection* _inPsWidgetSelection;
+  procPsWidgetSelection* _procPsWidgetSelection;
+  outPsWidgetSelection* _outPsWidgetSelection;
+
 };
 
 #endif // NODEPSTAB_H

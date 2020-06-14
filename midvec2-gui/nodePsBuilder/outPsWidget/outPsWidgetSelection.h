@@ -8,7 +8,7 @@
 
 #include <outPsWidget/outFilePsWidget.h>
 #include <outPsWidget/outUdpPsWidget.h>
-#include <nodePartPsWidgetSelection.h>
+#include <nodePartPsWidget/nodePartPsWidgetSelection.h>
 
 namespace Ui {
 class outPsWidgetSelection;

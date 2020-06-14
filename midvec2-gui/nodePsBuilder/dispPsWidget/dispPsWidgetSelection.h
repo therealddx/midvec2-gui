@@ -7,7 +7,7 @@
 #include <NodeBuilder/dispPs.hpp>
 
 #include <dispPsWidget/dispFilePsWidget.h>
-#include <nodePartPsWidgetSelection.h>
+#include <nodePartPsWidget/nodePartPsWidgetSelection.h>
 
 class dispPsWidgetSelection : public nodePartPsWidgetSelection<dispPs>
 {

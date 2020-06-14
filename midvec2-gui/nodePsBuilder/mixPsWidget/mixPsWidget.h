@@ -5,7 +5,7 @@
 
 #include <NodeBuilder/mixPs.hpp>
 
-#include <nodePartPsWidget.h>
+#include <nodePartPsWidget/nodePartPsWidget.h>
 
 namespace Ui {
 class mixPsWidget;

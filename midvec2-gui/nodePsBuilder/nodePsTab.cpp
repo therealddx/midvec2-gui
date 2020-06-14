@@ -144,20 +144,27 @@ nodePs* mixNodePsTab::Make()
 //
 coreNodePsTab::coreNodePsTab(QWidget* arg_parent)
   : nodePsTab(arg_parent)
+  , _inPsWidgetSelection(new inPsWidgetSelection)
+  , _procPsWidgetSelection(new procPsWidgetSelection)
+  , _outPsWidgetSelection(new outPsWidgetSelection)
 {
-  // the sw/c from nodePsDialog
-  this->addTab(new inPsWidgetSelection(), "Input Pipe");
-  this->addTab(new QWidget(), "Processor");
-  this->addTab(new outPsWidgetSelection(), "Output Pipe");
+  this->addTab(_inPsWidgetSelection  , "Input Pipe");
+  this->addTab(_procPsWidgetSelection, "Processor");
+  this->addTab(_outPsWidgetSelection , "Output Pipe");
 }
 
 coreNodePsTab::~coreNodePsTab()
 {
-  // delete everything
+  delete _inPsWidgetSelection;
+  delete _procPsWidgetSelection;
+  delete _outPsWidgetSelection;
 }
 
 nodePs* coreNodePsTab::Make()
 {
-  return nullptr;
+  return new coreNodePs<double, double>
+    ( _inPsWidgetSelection->Make()
+    , _procPsWidgetSelection->Make()
+    , _outPsWidgetSelection->Make()
+    );
 }
-

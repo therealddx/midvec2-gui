@@ -12,8 +12,6 @@ genPsWidgetSelection::genPsWidgetSelection()
 {
   // setup cmb.
   connect(ui->types_cmb, SIGNAL(currentTextChanged(const QString&)), this, SLOT(onDropdownChanged()));
-
-  // trigger slot default.
   emit ui->types_cmb->currentTextChanged(QString("Sine"));
 }
 

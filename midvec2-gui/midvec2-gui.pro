@@ -29,6 +29,9 @@ SOURCES += \
   MvecUi/MvecGraphicsScene.cpp      \
   MvecUi/MvecGraphicsView.cpp       \
   MvecUi/MvecHoverArea.cpp          \
+  nodePsBuilder/procPsWidget/procPsWidgetSelection.cpp \
+  nodePsBuilder/procPsWidget/procConvPsWidget.cpp \
+  nodePsBuilder/procPsWidget/procDcPsWidget.cpp \
   nodePsBuilder/mixPsWidget/mixPsWidgetSelection.cpp \
   nodePsBuilder/mixPsWidget/mixPsWidget.cpp \
   nodePsBuilder/dispPsWidget/dispPsWidgetSelection.cpp \
@@ -54,6 +57,9 @@ HEADERS += \
   MvecUi/MvecGraphicsScene.h      \
   MvecUi/MvecGraphicsView.h       \
   MvecUi/MvecHoverArea.h          \
+  nodePsBuilder/procPsWidget/procPsWidgetSelection.h \
+  nodePsBuilder/procPsWidget/procConvPsWidget.h \
+  nodePsBuilder/procPsWidget/procDcPsWidget.h \
   nodePsBuilder/mixPsWidget/mixPsWidgetSelection.h \
   nodePsBuilder/mixPsWidget/mixPsWidget.h \
   nodePsBuilder/dispPsWidget/dispPsWidgetSelection.h \
@@ -67,11 +73,11 @@ HEADERS += \
   nodePsBuilder/outPsWidget/outPsWidgetSelection.h \
   nodePsBuilder/outPsWidget/outFilePsWidget.h \
   nodePsBuilder/outPsWidget/outUdpPsWidget.h \
-  nodePsBuilder/nodePartPsWidgetSelection.h \
-  nodePsBuilder/ui_nodePartPsWidgetSelection.h \
+  nodePsBuilder/nodePartPsWidget/nodePartPsWidget.h \
+  nodePsBuilder/nodePartPsWidget/nodePartPsWidgetSelection.h \
+  nodePsBuilder/nodePartPsWidget/ui_nodePartPsWidgetSelection.h \
   nodePsBuilder/nodePsDialog.h \
   nodePsBuilder/nodePsTab.h \
-  nodePsBuilder/nodePartPsWidget.h
 
 FORMS += \
   MainWindow.ui \
@@ -84,7 +90,9 @@ FORMS += \
   nodePsBuilder/outPsWidget/outFilePsWidget.ui \
   nodePsBuilder/outPsWidget/outUdpPsWidget.ui \
   nodePsBuilder/nodePsDialog.ui \
-  nodePsBuilder/nodePsTab.ui
+  nodePsBuilder/nodePsTab.ui \
+  nodePsBuilder/procPsWidget/procConvPsWidget.ui \
+  nodePsBuilder/procPsWidget/procDcPsWidget.ui
 
 INCLUDEPATH += \
   submodules/midvec2-lib/src/ \

@@ -22,7 +22,7 @@
 #include <QComboBox>
 #include <QVBoxLayout>
 
-#include <nodePartPsWidget.h>
+#include <nodePartPsWidget/nodePartPsWidget.h>
 
 #include "ui_nodePartPsWidgetSelection.h"
 

@@ -17,8 +17,6 @@
 #include <QComboBox>
 #include <QVBoxLayout>
 
-#include <nodePartPsWidget.h>
-
 #include "ui_nodePartPsWidgetSelection.h"
 
 template <class T_nodePartPs>

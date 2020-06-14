@@ -8,7 +8,7 @@
 
 #include <genPsWidget/genSinePsWidget.h>
 #include <genPsWidget/genSquarePsWidget.h>
-#include <nodePartPsWidgetSelection.h>
+#include <nodePartPsWidget/nodePartPsWidgetSelection.h>
 
 namespace Ui {
 class genPsWidgetSelection;

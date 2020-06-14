@@ -7,7 +7,7 @@
 #include <NodeBuilder/mixPs.hpp>
 
 #include <mixPsWidget/mixPsWidget.h>
-#include <nodePartPsWidgetSelection.h>
+#include <nodePartPsWidget/nodePartPsWidgetSelection.h>
 
 class mixPsWidgetSelection : public nodePartPsWidgetSelection<mixPs>
 {
