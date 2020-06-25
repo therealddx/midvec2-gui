@@ -11,10 +11,6 @@ the rest of the possible options for node source dialog
   genPs, dispPs, mixPs, procPs
   after this^, we'll have GUI functionality for all of our nodes.
 
-**
-
-outstanding issues:
-
 smarter nodePartPsWidget instances.
 tasklist:
  - procPsWidget:
@@ -31,11 +27,14 @@ tasklist:
   - Sine / Square: int / double parsing schemes respectively.
  - dispPsWidget: offer an explorer window, and a smart-search textbox.
 collated tasklist:
- - parsing scheme of double
- - parsing scheme of uint32, decimal
- - parsing scheme of uint16, decimal
- - offer an explorer window, and a smart-search textbox.
- - parsing scheme for dotted-decimal ip address
+ - parsing scheme of double -done
+ - parsing scheme of int -done
+ - parsing scheme for dotted-decimal ip address -done
+ - offer a validator for filename selections. -done
+
+**
+
+outstanding issues:
 
 incorporation of i/o type templatization
   type selection as a node-level parameter

@@ -18,10 +18,13 @@ public:
   virtual ~inFilePsWidget();
   inPs* Make();
   inline QWidget* GetQWidget() { return this; }
-  inline bool IsValid() { return true; }
+  bool IsValid();
 
 private:
   Ui::inFilePsWidget* ui;
+
+private slots:
+  void onFqFileEdited(const QString&);
 
 };
 

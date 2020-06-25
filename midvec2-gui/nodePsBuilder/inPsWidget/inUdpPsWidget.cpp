@@ -32,12 +32,12 @@ inPs* inUdpPsWidget::Make()
 void inUdpPsWidget::onPortEdited(const QString& arg_newText)
 {
   // pass to parent.
-  observeIntEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText), 1, 65536);
+  observeIntEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText), 1, 65535);
 }
 
 bool inUdpPsWidget::IsValid()
 {
-  if (checkDoubleEdited(ui->port_le->text()) == QDoubleValidator::Acceptable)
+  if (checkIntEdited(ui->port_le->text(), 1, 65535) == QDoubleValidator::Acceptable)
   {
     return true;
   }

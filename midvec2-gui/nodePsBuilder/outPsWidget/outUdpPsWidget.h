@@ -23,6 +23,7 @@ protected:
 
 private slots:
   void onPortEdited(const QString&);
+  void onIPv4Edited(const QString&);
 };
 
 #endif // OUTUDPPSWIDGET_H

@@ -20,7 +20,10 @@ public:
   ~dispFilePsWidget();
   dispPs* Make();
   inline QWidget* GetQWidget() { return this; }
-  inline bool IsValid() { return true; }
+  bool IsValid();
+
+private slots:
+  void onFqFileEdited();
 
 private:
   Ui::dispFilePsWidget *ui;
