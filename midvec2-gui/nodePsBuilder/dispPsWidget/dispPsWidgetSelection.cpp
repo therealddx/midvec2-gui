@@ -4,8 +4,8 @@
 
 dispPsWidgetSelection::dispPsWidgetSelection()
   : nodePartPsWidgetSelection<dispPs>
-    ( std::vector<std::string>( { "File" } )
-    , std::vector<nodePartPsWidget<dispPs>*>( { new dispFilePsWidget() } )
+    ( std::vector<std::string>( { "File", "Graph" } )
+    , std::vector<nodePartPsWidget<dispPs>*>( { new dispFilePsWidget(), new dispGraphPsWidget() } )
     , std::string("Display")
     )
 {

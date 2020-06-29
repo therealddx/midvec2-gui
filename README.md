@@ -36,17 +36,22 @@ collated tasklist:
 
 outstanding issues:
 
-incorporation of i/o type templatization
-  type selection as a node-level parameter
-  advanced-option-only
-  double values by default
+real-time graphing
+  taking advantage of real-time simulation
+  provide a visual of the available values
+  make your own Display for this framework
+
+implement 'Ram' option for InputPipe and OutputPipe
+
+implement 'Conv' option for making a Processor
 
 time-executive functionality
   real-time simulation, controlling of a sample rate 
 
-real-time graphing
-  taking advantage of real-time simulation
-  provide a visual of the available values
+incorporation of i/o type templatization
+  type selection as a node-level parameter
+  advanced-option-only
+  double values by default
 
 modular flow systems
   group of nodes operating in a functional block, with one name

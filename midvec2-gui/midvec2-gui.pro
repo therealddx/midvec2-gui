@@ -29,6 +29,7 @@ SOURCES += \
   MvecUi/MvecGraphicsScene.cpp      \
   MvecUi/MvecGraphicsView.cpp       \
   MvecUi/MvecHoverArea.cpp          \
+  nodePsBuilder/dispPsWidget/dispGraphPsWidget.cpp \
   nodePsBuilder/procPsWidget/procPsWidgetSelection.cpp \
   nodePsBuilder/procPsWidget/procConvPsWidget.cpp \
   nodePsBuilder/procPsWidget/procDcPsWidget.cpp \
@@ -46,7 +47,8 @@ SOURCES += \
   nodePsBuilder/outPsWidget/outFilePsWidget.cpp \
   nodePsBuilder/outPsWidget/outUdpPsWidget.cpp   \
   nodePsBuilder/nodePsDialog.cpp        \
-  nodePsBuilder/nodePsTab.cpp
+  nodePsBuilder/nodePsTab.cpp           \
+  lib-derived/QtDiscreteTimeViewer.cpp
 
 HEADERS += \
   MainWindow.h \
@@ -57,6 +59,7 @@ HEADERS += \
   MvecUi/MvecGraphicsScene.h      \
   MvecUi/MvecGraphicsView.h       \
   MvecUi/MvecHoverArea.h          \
+  nodePsBuilder/dispPsWidget/dispGraphPsWidget.h \
   nodePsBuilder/procPsWidget/procPsWidgetSelection.h \
   nodePsBuilder/procPsWidget/procConvPsWidget.h \
   nodePsBuilder/procPsWidget/procDcPsWidget.h \
@@ -78,9 +81,12 @@ HEADERS += \
   nodePsBuilder/nodePartPsWidget/ui_nodePartPsWidgetSelection.h \
   nodePsBuilder/nodePsDialog.h \
   nodePsBuilder/nodePsTab.h \
+  lib-derived/QtDiscreteTimeViewer.h \
+  lib-derived/Axis.hpp
 
 FORMS += \
   MainWindow.ui \
+  nodePsBuilder/dispPsWidget/dispGraphPsWidget.ui \
   nodePsBuilder/mixPsWidget/mixPsWidget.ui \
   nodePsBuilder/dispPsWidget/dispFilePsWidget.ui \
   nodePsBuilder/genPsWidget/genSinePsWidget.ui \
@@ -92,7 +98,8 @@ FORMS += \
   nodePsBuilder/nodePsDialog.ui \
   nodePsBuilder/nodePsTab.ui \
   nodePsBuilder/procPsWidget/procConvPsWidget.ui \
-  nodePsBuilder/procPsWidget/procDcPsWidget.ui
+  nodePsBuilder/procPsWidget/procDcPsWidget.ui \
+  lib-derived/QtDiscreteTimeViewer.ui
 
 INCLUDEPATH += \
   submodules/midvec2-lib/src/ \
