@@ -1,7 +1,7 @@
 #ifndef INUDPPSWIDGET_H
 #define INUDPPSWIDGET_H
 
-#include <nodePartPsWidget/nodePartPsWidget.h>
+#include <nodePartPsWidget/nodePartPsWidget_UserIf.h>
 
 namespace Ui {
 class inUdpPsWidget;

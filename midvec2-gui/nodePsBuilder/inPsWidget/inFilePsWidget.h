@@ -1,15 +1,21 @@
 #ifndef INFILEPSWIDGET_H
 #define INFILEPSWIDGET_H
 
+// include: Qt.
 #include <QDebug>
+#include <QWidget>
 
-#include <nodePartPsWidget/nodePartPsWidget.h>
+// include: GUI application.
+#include <nodePartPsWidget/nodePartPs_UserIf.h>
+
+// include: midvec2 library.
+#include <NodePartBuilder/inPs.hpp>
 
 namespace Ui {
 class inFilePsWidget;
 }
 
-class inFilePsWidget : public QWidget, public nodePartPsWidget<inPs>
+class inFilePsWidget : public QWidget, public nodePartPs_UserIf
 {
   Q_OBJECT
 

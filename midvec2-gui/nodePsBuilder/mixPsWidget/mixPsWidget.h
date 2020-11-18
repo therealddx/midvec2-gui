@@ -3,9 +3,9 @@
 
 #include <QWidget>
 
-#include <NodeBuilder/mixPs.hpp>
+#include <NodePartBuilder/mixPs.hpp>
 
-#include <nodePartPsWidget/nodePartPsWidget.h>
+#include <nodePartPsWidget/nodePartPsWidget_UserIf.h>
 
 namespace Ui {
 class mixPsWidget;

@@ -2,63 +2,110 @@
  * reference LICENSE file provided.
  *
  * nodePartPsWidgetSelection.h.
- * Handles non-graphical aspect of selecting between nodePartPs elements in a
- * selection interface. nodePartPs elements being defined as, e.g., 'inPs',
- * 'outPs', 'genPs', etc.
  *
- * Allows standardized mechanical operation for selection of any
- * NodeBuilder elements.
+ * Implements a standardized GUI mechanic for selecting which node part
+ * the user would like to work on.
+ *
+ * Inheriting classes need only describe what node-parts they have.
  *
  */
 
 #ifndef NODEPARTPSWIDGETSELECTION_H
 #define NODEPARTPSWIDGETSELECTION_H
 
+// include: C++ standard library.
+//
 #include <map>
 #include <string>
 #include <vector>
 
+// include: Qt GUI essentials.
+//
 #include <QWidget>
 #include <QComboBox>
 #include <QVBoxLayout>
 
-#include <nodePartPsWidget/nodePartPsWidget.h>
+// include: midvec2 library.
+//
+#include <NodeBuilder/nodePs.hpp>
 
-#include "ui_nodePartPsWidgetSelection.h"
+// include: user-interface object.
+//
+#include <nodePartPsWidget/nodePartPs_UserIf.h>
+#include <nodePartPsWidget/nodePartPs_Make.h>
 
-template <class T_nodePartPs>
+namespace Ui {
+class nodePartPsWidgetSelection;
+}
+
 class nodePartPsWidgetSelection : public QWidget
 {
+  Q_OBJECT
+
 public:
-  nodePartPsWidgetSelection<T_nodePartPs>
+
+  //
+  // ctor.
+  //
+  nodePartPsWidgetSelection
     ( std::vector<std::string> arg_keys
-    , std::vector<nodePartPsWidget<T_nodePartPs>*> arg_nodePartPsWidgets
+    , std::vector<nodePartPs_UserIf*> arg_nodePartPsWidgets
+    , std::vector<InodePartPs_Make*>
     , std::string arg_nodePartName
-    , QWidget* arg_parent = nullptr
+    , QWidget *parent = nullptr
     );
-  virtual ~nodePartPsWidgetSelection<T_nodePartPs>();
-  virtual T_nodePartPs* Make();
+
+  //
+  // dtor.
+  //
+  ~nodePartPsWidgetSelection();
+
+  //
+  // IsValid.
+  // Returns 'true' if the currently-selected widget for the nodePartPs has valid user-input, false otherwise.
+  //
   virtual bool IsValid();
 
 protected:
 
-  // members: functions.
+  //
+  // common functions for this GUI.
+  //
+  void populateDropdown(QComboBox*& arg_comboBox);
   void setActiveWidget(std::string arg_key);
   void setVisibleWidget(QWidget*& arg_oldWidget, QVBoxLayout*& arg_vLayout);
-  void populateDropdown(QComboBox*& arg_comboBox);
   void updateVisibleWidget(std::string arg_key);
 
-  nodePartPsWidget<T_nodePartPs>* _getPsWidget(std::string arg_name)
-    { return _availableWidgets[arg_name]; }
+  //
+  // getPsWidget.
+  // accessor to get a widget within the available collection.
+  //
+  nodePartPs_UserIf* getPsWidget(std::string arg_name)
+  {
+    return _availableWidgets[arg_name];
+  }
 
-  // members: data.
-  nodePartPsWidget<T_nodePartPs>* _activeWidget;
-  std::map<std::string, nodePartPsWidget<T_nodePartPs>*> _availableWidgets;
-  Ui::nodePartPsWidgetSelection<T_nodePartPs>* ui;
+  //
+  // application-specific fields describing available widgets in the selection.
+  //
+  nodePartPs_UserIf* _activeWidget;
+  std::map<std::string, nodePartPs_UserIf*> _availableWidgets;
   QWidget* _lastQWidget;
 
+private:
+  Ui::nodePartPsWidgetSelection *ui;
 };
 
-#include "nodePartPsWidgetSelection.tpp"
+class inPsWidgetSelection : public nodePartPsWidgetSelection, nodePartPs_Make<inPs>
+{
+  //
+  // Make.
+  // Returns node paramset object.
+  //
+  inPs* Make()
+  {
+    return _activeWidget->Make();
+  }
+};
 
 #endif // NODEPARTPSWIDGETSELECTION_H

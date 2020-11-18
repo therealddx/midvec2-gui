@@ -1,7 +1,7 @@
 #ifndef OUTUDPPSWIDGET_H
 #define OUTUDPPSWIDGET_H
 
-#include <nodePartPsWidget/nodePartPsWidget.h>
+#include <nodePartPsWidget/nodePartPsWidget_UserIf.h>
 
 namespace Ui {
 class outUdpPsWidget;

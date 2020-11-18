@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include <nodePartPsWidget/nodePartPsWidget.h>
+#include <nodePartPsWidget/nodePartPsWidget_UserIf.h>
 
 namespace Ui {
 class genSquarePsWidget;
