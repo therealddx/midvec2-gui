@@ -1,15 +1,22 @@
 #ifndef PROCDCPSWIDGET_H
 #define PROCDCPSWIDGET_H
 
+// include: Qt.
+#include <QDebug>
 #include <QWidget>
 
-#include <nodePartPsWidget/nodePartPsWidget_UserIf.h>
+// include: GUI application.
+#include <nodePartPsWidget/nodePartPsWidgetBase.h>
+#include <nodePartPsWidget/GuiValidators.h>
+
+// include: midvec2 library.
+#include <NodePartBuilder/procPs.hpp>
 
 namespace Ui {
 class procDcPsWidget;
 }
 
-class procDcPsWidget : public QWidget, public nodePartPsWidget<procPs>
+class procDcPsWidget : public QWidget, public nodePartPsWidgetBase<procPs>
 {
   Q_OBJECT
 
@@ -22,6 +29,7 @@ public:
 
 private:
   Ui::procDcPsWidget *ui;
+  GuiValidators _guiValidators;
 
 private slots:
   void onDoubleEdited(const QString&);

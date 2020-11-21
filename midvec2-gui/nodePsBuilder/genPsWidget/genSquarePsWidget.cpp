@@ -1,9 +1,9 @@
 #include "genSquarePsWidget.h"
 #include "ui_genSquarePsWidget.h"
 
-genSquarePsWidget::genSquarePsWidget(QWidget *parent) :
-  QWidget(parent),
-  ui(new Ui::genSquarePsWidget)
+genSquarePsWidget::genSquarePsWidget(QWidget *parent)
+  : QWidget(parent)
+  , ui(new Ui::genSquarePsWidget)
 {
   // setup ui.
   ui->setupUi(this);
@@ -17,26 +17,20 @@ genSquarePsWidget::genSquarePsWidget(QWidget *parent) :
   ui->numSamplesDuty_le->setPlaceholderText("(positive integer, NMT above)");
 
   // connect validators.
-  connect(ui->xShift_le, SIGNAL(textEdited(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
-  connect(ui->xScale_le, SIGNAL(textEdited(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
-  connect(ui->yShift_le, SIGNAL(textEdited(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
-  connect(ui->yScale_le, SIGNAL(textEdited(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
-  connect
-    ( ui->samplesPerPeriod_le, SIGNAL(textEdited(const QString&))
-    , this, SLOT(onIntEdited(const QString&))
-    );
-  connect
-    ( ui->numSamplesDuty_le, SIGNAL(textEdited(const QString&))
-    , this, SLOT(onIntEdited(const QString&))
-    );
+  connect(ui->xShift_le, SIGNAL(textChanged(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
+  connect(ui->xScale_le, SIGNAL(textChanged(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
+  connect(ui->yShift_le, SIGNAL(textChanged(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
+  connect(ui->yScale_le, SIGNAL(textChanged(const QString&)), this, SLOT(onDoubleEdited(const QString&)) );
+  connect( ui->samplesPerPeriod_le, SIGNAL(textChanged(const QString&)), this, SLOT(onIntEdited(const QString&)));
+  connect( ui->numSamplesDuty_le, SIGNAL(textChanged(const QString&)), this, SLOT(onIntEdited(const QString&)));
 
   // trigger validator defaults.
-  emit ui->xShift_le          ->textEdited("");
-  emit ui->xScale_le          ->textEdited("");
-  emit ui->yShift_le          ->textEdited("");
-  emit ui->yScale_le          ->textEdited("");
-  emit ui->samplesPerPeriod_le->textEdited("");
-  emit ui->numSamplesDuty_le  ->textEdited("");
+  ui->xShift_le          ->setText("");
+  ui->xScale_le          ->setText("");
+  ui->yShift_le          ->setText("");
+  ui->yScale_le          ->setText("");
+  ui->samplesPerPeriod_le->setText("");
+  ui->numSamplesDuty_le  ->setText("");
 }
 
 genSquarePsWidget::~genSquarePsWidget()
@@ -47,12 +41,12 @@ genSquarePsWidget::~genSquarePsWidget()
 genPs* genSquarePsWidget::Make()
 {
   // read values.
-  double xShift        = std::stod(ui->xShift_le->text().toStdString()) ;
-  double xScale        = std::stod(ui->xScale_le->text().toStdString()) ;
-  double yShift        = std::stod(ui->yShift_le->text().toStdString()) ;
-  double yScale        = std::stod(ui->yScale_le->text().toStdString()) ;
-  int samplesPerPeriod = std::stoi(ui->samplesPerPeriod_le->text().toStdString()) ;
-  int numSamplesDuty   = std::stoi(ui->numSamplesDuty_le->text().toStdString()) ;
+  double xShift        = ui->xShift_le->text().toDouble();
+  double xScale        = ui->xScale_le->text().toDouble();
+  double yShift        = ui->yShift_le->text().toDouble();
+  double yScale        = ui->yScale_le->text().toDouble();
+  int samplesPerPeriod = ui->samplesPerPeriod_le->text().toDouble();
+  int numSamplesDuty   = ui->numSamplesDuty_le->text().toDouble();
 
   // ret.
   return new genSquarePs<double>
@@ -67,24 +61,23 @@ genPs* genSquarePsWidget::Make()
 
 void genSquarePsWidget::onDoubleEdited(const QString& arg_newText)
 {
-  // pass to parent.
-  observeDoubleEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText));
+  _guiValidators.observeDoubleEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText));
 }
 
 void genSquarePsWidget::onIntEdited(const QString& arg_newText)
 {
   // pass to parent.
-  observeIntEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText), 1, 0x1 << 20);
+  _guiValidators.observeIntEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText), 1, 0x1 << 20);
 }
 
 bool genSquarePsWidget::IsValid()
 {
-  if ( checkDoubleEdited(ui->xShift_le->text()) == QDoubleValidator::Acceptable
-    && checkDoubleEdited(ui->xScale_le->text()) == QDoubleValidator::Acceptable
-    && checkDoubleEdited(ui->yShift_le->text()) == QDoubleValidator::Acceptable
-    && checkDoubleEdited(ui->yScale_le->text()) == QDoubleValidator::Acceptable
-    && checkIntEdited(ui->samplesPerPeriod_le->text(), 1, 0x1 << 20) == QIntValidator::Acceptable
-    && checkIntEdited(ui->numSamplesDuty_le->text(), 1, 0x1 << 20) == QIntValidator::Acceptable
+  if ( _guiValidators.checkDoubleEdited(ui->xShift_le->text()) == QDoubleValidator::Acceptable
+    && _guiValidators.checkDoubleEdited(ui->xScale_le->text()) == QDoubleValidator::Acceptable
+    && _guiValidators.checkDoubleEdited(ui->yShift_le->text()) == QDoubleValidator::Acceptable
+    && _guiValidators.checkDoubleEdited(ui->yScale_le->text()) == QDoubleValidator::Acceptable
+    && _guiValidators.checkIntEdited(ui->samplesPerPeriod_le->text(), 1, 0x1 << 20) == QIntValidator::Acceptable
+    && _guiValidators.checkIntEdited(ui->numSamplesDuty_le->text(), 1, 0x1 << 20) == QIntValidator::Acceptable
     )
   {
     return true;

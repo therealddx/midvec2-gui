@@ -1,17 +1,25 @@
+/*
+ * reference LICENSE file provided.
+ *
+ * Provides the tab-page front-end in which every node part has its construction choices
+ * presented to the user.
+ *
+ * Installs the node part selection blocks and widgets underneath it.
+ *
+ */
+
 #ifndef NODEPSTAB_H
 #define NODEPSTAB_H
 
+// include: Qt.
 #include <QTabWidget>
 #include <QDebug>
 
-#include <NodeBuilder/nodePs.hpp>
+// include: GUI application.
+#include <nodePartPsWidget/psWidgetSelector.h>
 
-#include <nodePsBuilder/inPsWidget/inPsWidgetSelection.h>
-#include <nodePsBuilder/outPsWidget/outPsWidgetSelection.h>
-#include <nodePsBuilder/genPsWidget/genPsWidgetSelection.h>
-#include <nodePsBuilder/dispPsWidget/dispPsWidgetSelection.h>
-#include <nodePsBuilder/mixPsWidget/mixPsWidgetSelection.h>
-#include <nodePsBuilder/procPsWidget/procPsWidgetSelection.h>
+// include: midvec2-lib.
+#include <NodeBuilder/nodePs.hpp>
 
 //
 // nodePsTab.
@@ -25,12 +33,27 @@ class nodePsTab : public QTabWidget
   Q_OBJECT
 
 public:
+
   explicit nodePsTab(QWidget *parent = nullptr);
   virtual ~nodePsTab();
   virtual nodePs* Make(); // must be impl. by subclasses.
   virtual bool IsValid(); // must be impl. by subclasses.
 
 protected:
+
+  // Make-functions that take the generalized psWidgetSelector GUI and build it for
+  // showing the specific interface choices by which the different NodeParts
+  // may be built.
+  //
+  psWidgetSelector<inPs>*   Make_inPsGui();
+  psWidgetSelector<outPs>*  Make_outPsGui();
+  psWidgetSelector<procPs>* Make_procPsGui();
+  psWidgetSelector<dispPs>* Make_dispPsGui();
+  psWidgetSelector<genPs>*  Make_genPsGui();
+  psWidgetSelector<mixPs>*  Make_mixPsGui();
+
+  // ui object.
+  //
   Ui::nodePsTab *ui;
 };
 
@@ -44,9 +67,10 @@ public:
   ~byteNodePsTab();
   nodePs* Make(); // returns byteNodePs
   bool IsValid();
+
 private:
-  inPsWidgetSelection* _inPsWidgetSelection;
-  outPsWidgetSelection* _outPsWidgetSelection;
+  psWidgetSelector<inPs>*  _inPsWidgetSelection;
+  psWidgetSelector<outPs>* _outPsWidgetSelection;
 };
 
 //
@@ -59,9 +83,10 @@ public:
   ~sourceNodePsTab();
   nodePs* Make(); // returns sourceNodePs
   bool IsValid();
+
 private:
-  genPsWidgetSelection* _genPsWidgetSelection;
-  outPsWidgetSelection* _outPsWidgetSelection;
+  psWidgetSelector<genPs>* _genPsWidgetSelection;
+  psWidgetSelector<outPs>* _outPsWidgetSelection;
 };
 
 //
@@ -74,9 +99,10 @@ public:
   ~showNodePsTab();
   nodePs* Make(); // returns showNodePs
   bool IsValid();
+
 private:
-  inPsWidgetSelection* _inPsWidgetSelection;
-  dispPsWidgetSelection* _dispPsWidgetSelection;
+  psWidgetSelector<inPs>*   _inPsWidgetSelection;
+  psWidgetSelector<dispPs>* _dispPsWidgetSelection;
 };
 
 //
@@ -89,11 +115,12 @@ public:
   ~mixNodePsTab();
   nodePs* Make(); // returns mixNodePs
   bool IsValid();
+
 private:
-  inPsWidgetSelection* _inPsWidgetSelection_1;
-  inPsWidgetSelection* _inPsWidgetSelection_2;
-  mixPsWidgetSelection* _mixPsWidgetSelection;
-  outPsWidgetSelection* _outPsWidgetSelection;
+  psWidgetSelector<inPs>*  _inPsWidgetSelection_1;
+  psWidgetSelector<inPs>*  _inPsWidgetSelection_2;
+  psWidgetSelector<mixPs>* _mixPsWidgetSelection;
+  psWidgetSelector<outPs>* _outPsWidgetSelection;
 };
 
 //
@@ -106,10 +133,11 @@ public:
   ~coreNodePsTab();
   nodePs* Make(); // returns coreNodePs
   bool IsValid();
+
 private:
-  inPsWidgetSelection* _inPsWidgetSelection;
-  procPsWidgetSelection* _procPsWidgetSelection;
-  outPsWidgetSelection* _outPsWidgetSelection;
+  psWidgetSelector<inPs>*   _inPsWidgetSelection;
+  psWidgetSelector<procPs>* _procPsWidgetSelection;
+  psWidgetSelector<outPs>*  _outPsWidgetSelection;
 
 };
 

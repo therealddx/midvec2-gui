@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>nodePartPsWidgetSelection</class>
- <widget class="QWidget" name="nodePartPsWidgetSelection">
+ <class>WidgetSelector</class>
+ <widget class="QWidget" name="WidgetSelector">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>375</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,8 +18,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>500</width>
-     <height>375</height>
+     <width>400</width>
+     <height>300</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -60,7 +60,7 @@
      </spacer>
     </item>
     <item>
-     <widget class="QWidget" name="activeWidget" native="true">
+     <widget class="QWidget" name="defaultWidget" native="true">
       <property name="minimumSize">
        <size>
         <width>400</width>

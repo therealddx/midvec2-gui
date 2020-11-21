@@ -1,17 +1,22 @@
 #ifndef MIXPSWIDGET_H
 #define MIXPSWIDGET_H
 
+// include: Qt.
+#include <QDebug>
 #include <QWidget>
 
-#include <NodePartBuilder/mixPs.hpp>
+// include: GUI application.
+#include <nodePartPsWidget/nodePartPsWidgetBase.h>
+#include <nodePartPsWidget/GuiValidators.h>
 
-#include <nodePartPsWidget/nodePartPsWidget_UserIf.h>
+// include: midvec2 library.
+#include <NodePartBuilder/mixPs.hpp>
 
 namespace Ui {
 class mixPsWidget;
 }
 
-class mixPsWidget : public QWidget, public nodePartPsWidget<mixPs>
+class mixPsWidget : public QWidget, public nodePartPsWidgetBase<mixPs>
 {
   Q_OBJECT
 
@@ -24,6 +29,7 @@ public:
 
 private:
   Ui::mixPsWidget *ui;
+  GuiValidators _guiValidators;
 };
 
 #endif // MIXPSWIDGET_H

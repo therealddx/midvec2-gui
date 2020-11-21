@@ -5,16 +5,17 @@ outFilePsWidget::outFilePsWidget(QWidget* parent)
   : QWidget(parent)
   , ui(new Ui::outFilePsWidget)
 {
+  // setup ui.
   ui->setupUi(this);
 
   // placeholder.
   ui->selectFile_le->setPlaceholderText(QString("(abs. path to file in writable dir.)"));
 
   // connect.
-  connect(ui->selectFile_le, SIGNAL(textEdited(const QString&)), this, SLOT(onFqFileEdited(const QString&)));
+  connect(ui->selectFile_le, SIGNAL(textChanged(const QString&)), this, SLOT(onFqFileEdited(const QString&)));
 
   // emit.
-  emit ui->selectFile_le->textEdited("");
+  ui->selectFile_le->setText("");
 }
 
 outFilePsWidget::~outFilePsWidget()
@@ -29,7 +30,7 @@ outPs* outFilePsWidget::Make()
 
 bool outFilePsWidget::IsValid()
 {
-  if (checkFqFileEdited(ui->selectFile_le->text(), QFile::WriteUser))
+  if (_guiValidators.checkFqFileEdited(ui->selectFile_le->text(), QFile::WriteUser))
   {
     return true;
   }
@@ -41,5 +42,6 @@ bool outFilePsWidget::IsValid()
 
 void outFilePsWidget::onFqFileEdited(const QString& arg_newText)
 {
-  observeFqFileEdited(ui->selectFile_le, QString(arg_newText), QFile::WriteUser);
+  _guiValidators.observeFqFileEdited(
+    ui->selectFile_le, QString(arg_newText), QFile::WriteUser);
 }

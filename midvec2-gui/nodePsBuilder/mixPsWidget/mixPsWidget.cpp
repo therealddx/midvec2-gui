@@ -1,9 +1,9 @@
 #include "mixPsWidget.h"
 #include "ui_mixPsWidget.h"
 
-mixPsWidget::mixPsWidget(QWidget *parent) :
-  QWidget(parent),
-  ui(new Ui::mixPsWidget)
+mixPsWidget::mixPsWidget(QWidget *parent)
+  : QWidget(parent)
+  , ui(new Ui::mixPsWidget)
 {
   // setup ui.
   ui->setupUi(this);

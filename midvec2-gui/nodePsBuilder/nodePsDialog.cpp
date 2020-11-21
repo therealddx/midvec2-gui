@@ -21,6 +21,8 @@ nodePsDialog::nodePsDialog(QWidget *parent)
 
 nodePsDialog::~nodePsDialog()
 {
+  // delete Qt form elements.
+  //   cascades down to nodePsDialog::ui::_tab.
   delete ui;
 }
 

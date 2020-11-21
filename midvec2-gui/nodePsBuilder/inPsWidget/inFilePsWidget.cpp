@@ -5,16 +5,17 @@ inFilePsWidget::inFilePsWidget(QWidget* parent)
   : QWidget(parent)
   , ui(new Ui::inFilePsWidget)
 {
+  // setup ui.
   ui->setupUi(this);
 
   // placeholder.
   ui->selectFile_le->setPlaceholderText(QString("(abs. path to file in readable dir.)"));
 
   // connect.
-  connect(ui->selectFile_le, SIGNAL(textEdited(const QString&)), this, SLOT(onFqFileEdited(const QString&)));
+  connect(ui->selectFile_le, SIGNAL(textChanged(const QString&)), this, SLOT(onFqFileEdited(const QString&)));
 
   // emit.
-  emit ui->selectFile_le->textEdited("");
+  ui->selectFile_le->setText("");
 }
 
 inFilePsWidget::~inFilePsWidget()
@@ -29,7 +30,7 @@ inPs* inFilePsWidget::Make()
 
 bool inFilePsWidget::IsValid()
 {
-  if (checkFqFileEdited(ui->selectFile_le->text(), QFile::ReadUser))
+  if (_guiValidators.checkFqFileEdited(ui->selectFile_le->text(), QFile::ReadUser))
   {
     return true;
   }
@@ -41,5 +42,6 @@ bool inFilePsWidget::IsValid()
 
 void inFilePsWidget::onFqFileEdited(const QString& arg_newText)
 {
-  observeFqFileEdited(ui->selectFile_le, QString(arg_newText), QFile::ReadUser);
+  _guiValidators.observeFqFileEdited(
+    ui->selectFile_le, QString(arg_newText), QFile::ReadUser);
 }

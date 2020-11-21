@@ -1,9 +1,9 @@
 #include "procDcPsWidget.h"
 #include "ui_procDcPsWidget.h"
 
-procDcPsWidget::procDcPsWidget(QWidget *parent) :
-  QWidget(parent),
-  ui(new Ui::procDcPsWidget)
+procDcPsWidget::procDcPsWidget(QWidget *parent)
+  : QWidget(parent)
+  , ui(new Ui::procDcPsWidget)
 {
   // setup ui.
   ui->setupUi(this);
@@ -32,12 +32,12 @@ procPs* procDcPsWidget::Make()
 void procDcPsWidget::onDoubleEdited(const QString& arg_newText)
 {
   // pass to parent.
-  observeDoubleEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText));
+  _guiValidators.observeDoubleEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText));
 }
 
 bool procDcPsWidget::IsValid()
 {
-  if (checkDoubleEdited(ui->dcOffset_le->text()) == QDoubleValidator::Acceptable)
+  if (_guiValidators.checkDoubleEdited(ui->dcOffset_le->text()) == QDoubleValidator::Acceptable)
   {
     return true;
   }

@@ -1,13 +1,22 @@
 #ifndef OUTUDPPSWIDGET_H
 #define OUTUDPPSWIDGET_H
 
-#include <nodePartPsWidget/nodePartPsWidget_UserIf.h>
+// include: Qt.
+#include <QDebug>
+#include <QWidget>
+
+// include: GUI application.
+#include <nodePartPsWidget/nodePartPsWidgetBase.h>
+#include <nodePartPsWidget/GuiValidators.h>
+
+// include: midvec2 library.
+#include <NodePartBuilder/outPs.hpp>
 
 namespace Ui {
 class outUdpPsWidget;
 }
 
-class outUdpPsWidget : public QWidget, public nodePartPsWidget<outPs>
+class outUdpPsWidget : public QWidget, public nodePartPsWidgetBase<outPs>
 {
   Q_OBJECT
 
@@ -20,6 +29,7 @@ public:
 
 protected:
   Ui::outUdpPsWidget* ui;
+  GuiValidators _guiValidators;
 
 private slots:
   void onPortEdited(const QString&);

@@ -1,5 +1,39 @@
+/*
+ * reference LICENSE file provided.
+ *
+ * Implements nodePsTab.hpp.
+ *
+ * File map:
+ *  - nodePsTab.
+ *  - Make_* Functions for psWidgetSelector<T>.
+ *  - byteNodePsTab.
+ *  - sourceNodePsTab.
+ *  - showNodePsTab.
+ *  - mixNodePsTab.
+ *  - coreNodePsTab.
+ *
+ */
+
+// include: Qt auto-gen, GUI application.
 #include "nodePsTab.h"
 #include "ui_nodePsTab.h"
+
+// include: standard library.
+#include <map>
+
+// include: GUI application.
+#include <inPsWidget/inFilePsWidget.h>
+#include <inPsWidget/inUdpPsWidget.h>
+
+#include <outPsWidget/outFilePsWidget.h>
+#include <outPsWidget/outUdpPsWidget.h>
+
+#include <genPsWidget/genSinePsWidget.h>
+#include <genPsWidget/genSquarePsWidget.h>
+
+#include <procPsWidget/procDcPsWidget.h>
+#include <dispPsWidget/dispFilePsWidget.h>
+#include <mixPsWidget/mixPsWidget.h>
 
 //
 // nodePsTab.
@@ -8,22 +42,148 @@ nodePsTab::nodePsTab(QWidget *parent) :
   QTabWidget(parent),
   ui(new Ui::nodePsTab)
 {
+  // setup ui.
   ui->setupUi(this);
 }
 
 nodePsTab::~nodePsTab()
 {
+  // delete the ui elements of this tabpage.
+  // subclasses of this tab class will have deleted their elements first.
+  //
   delete ui;
 }
 
 nodePs* nodePsTab::Make()
 {
+  // class is abstract by protected ctor, but these functions
+  // can't built when left as pure-virtual.
+  //
   return nullptr;
 }
 
 bool nodePsTab::IsValid()
 {
+  // class is abstract by protected ctor, but these functions
+  // can't built when left as pure-virtual.
+  //
   return false;
+}
+
+//
+// Make_* Functions for psWidgetSelector<T>.
+//
+psWidgetSelector<inPs>* nodePsTab::Make_inPsGui()
+{
+  qDebug() << "nodePsTab::Make_inPsGui: 1";
+
+  // make the tuple mapping.
+  std::vector<psWidgetSelector<inPs>::ArgumentTuple> argVector;
+
+  inFilePsWidget* i1 = new inFilePsWidget;
+  argVector.push_back(psWidgetSelector<inPs>::ArgumentTuple("File", i1, i1));
+
+  inUdpPsWidget* i2 = new inUdpPsWidget;
+  argVector.push_back(psWidgetSelector<inPs>::ArgumentTuple("UDP", i2, i2));
+
+  qDebug() << "nodePsTab::Make_inPsGui: 2";
+
+  // make the psWidgetSelector.
+  return new psWidgetSelector<inPs>
+    ( argVector
+    , "Input Pipe"
+    , this
+    );
+}
+
+psWidgetSelector<outPs>* nodePsTab::Make_outPsGui()
+{
+  // make the tuple mapping.
+  std::vector<psWidgetSelector<outPs>::ArgumentTuple> argVector;
+
+  outFilePsWidget* o1 = new outFilePsWidget;
+  argVector.push_back(psWidgetSelector<outPs>::ArgumentTuple("File", o1, o1));
+
+  outUdpPsWidget* o2= new outUdpPsWidget;
+  argVector.push_back(psWidgetSelector<outPs>::ArgumentTuple("UDP", o2, o2));
+
+  // make the psWidgetSelector.
+  return new psWidgetSelector<outPs>
+    ( argVector
+    , "Output Pipe"
+    , this
+    );
+}
+
+psWidgetSelector<genPs>* nodePsTab::Make_genPsGui()
+{
+  // make the tuple mapping.
+  std::vector<psWidgetSelector<genPs>::ArgumentTuple> argVector;
+
+  genSquarePsWidget* g1 = new genSquarePsWidget;
+  argVector.push_back(psWidgetSelector<genPs>::ArgumentTuple("Square", g1, g1));
+
+  genSinePsWidget* g2 = new genSinePsWidget;
+  argVector.push_back(psWidgetSelector<genPs>::ArgumentTuple("Sine", g2, g2));
+
+  // make the psWidgetSelector.
+  return new psWidgetSelector<genPs>
+    ( argVector
+    , "Generator"
+    , this
+    );
+}
+
+psWidgetSelector<procPs>* nodePsTab::Make_procPsGui()
+{
+  // make the tuple mapping.
+  std::vector<psWidgetSelector<procPs>::ArgumentTuple> argVector;
+
+  procDcPsWidget* p1 = new procDcPsWidget;
+  argVector.push_back(psWidgetSelector<procPs>::ArgumentTuple("DC Offset", p1, p1));
+  
+  // procConvPsWidget* p2 = new ProcConvPsWidget;
+  // argVector.push_back(psWidgetSelector<procPs>::ArgumentTuple("Convolution", p2, p2));
+  // ^todo^: must implement convolution system for procPs.
+
+  // make the WidgetSelector.
+  return new psWidgetSelector<procPs>
+    ( argVector
+    , "Processor"
+    , this
+    );
+}
+
+psWidgetSelector<dispPs>* nodePsTab::Make_dispPsGui()
+{
+  // make the tuple mapping.
+  std::vector<psWidgetSelector<dispPs>::ArgumentTuple> argVector;
+
+  dispFilePsWidget* d1 = new dispFilePsWidget;
+  argVector.push_back(psWidgetSelector<dispPs>::ArgumentTuple("File", d1, d1));
+
+  // make the WidgetSelector.
+  return new psWidgetSelector<dispPs>
+    ( argVector
+    , "Display"
+    , this
+    );
+}
+
+psWidgetSelector<mixPs>* nodePsTab::Make_mixPsGui()
+{
+  // make the tuple mapping.
+  std::vector<psWidgetSelector<mixPs>::ArgumentTuple> argVector;
+
+  mixPsWidget* m1 = new mixPsWidget;
+  argVector.push_back(psWidgetSelector<mixPs>::ArgumentTuple("Op-type", m1, m1));
+
+  // make the WidgetSelector.
+  return new psWidgetSelector<mixPs>
+    ( argVector
+    , "Mixer"
+    , this
+    );
 }
 
 //
@@ -31,16 +191,22 @@ bool nodePsTab::IsValid()
 //
 byteNodePsTab::byteNodePsTab(QWidget* arg_parent)
   : nodePsTab(arg_parent)
-  , _inPsWidgetSelection(new inPsWidgetSelection)
-  , _outPsWidgetSelection(new outPsWidgetSelection)
+  , _inPsWidgetSelection(Make_inPsGui())
+  , _outPsWidgetSelection(Make_outPsGui())
 {
   qDebug() << "byteNodePsTab::byteNodePsTab";
-  this->addTab(this->_inPsWidgetSelection, "Input Pipe");
-  this->addTab(this->_outPsWidgetSelection, "Output Pipe");
+
+  this->addTab(
+    this->_inPsWidgetSelection->GetQWidget(), "Input Pipe");
+
+  this->addTab(
+    this->_outPsWidgetSelection->GetQWidget(), "Output Pipe");
 }
 
 byteNodePsTab::~byteNodePsTab()
 {
+  // delete the psWidgetSelection<T> objects that comprise each tab-page.
+  //
   delete _inPsWidgetSelection;
   delete _outPsWidgetSelection;
 }
@@ -66,12 +232,16 @@ bool byteNodePsTab::IsValid()
 //
 sourceNodePsTab::sourceNodePsTab(QWidget* arg_parent)
   : nodePsTab(arg_parent)
-  , _genPsWidgetSelection(new genPsWidgetSelection)
-  , _outPsWidgetSelection(new outPsWidgetSelection)
+  , _genPsWidgetSelection(Make_genPsGui())
+  , _outPsWidgetSelection(Make_outPsGui())
 {
   qDebug() << "sourceNodePsTab::sourceNodePsTab";
-  this->addTab(this->_genPsWidgetSelection, "Generator");
-  this->addTab(this->_outPsWidgetSelection, "Output Pipe");
+
+  this->addTab(
+    this->_genPsWidgetSelection->GetQWidget(), "Generator");
+
+  this->addTab(
+    this->_outPsWidgetSelection->GetQWidget(), "Output Pipe");
 }
 
 sourceNodePsTab::~sourceNodePsTab()
@@ -99,11 +269,14 @@ bool sourceNodePsTab::IsValid()
 //
 showNodePsTab::showNodePsTab(QWidget* arg_parent)
   : nodePsTab(arg_parent)
-  , _inPsWidgetSelection(new inPsWidgetSelection)
-  , _dispPsWidgetSelection(new dispPsWidgetSelection)
+  , _inPsWidgetSelection(Make_inPsGui())
+  , _dispPsWidgetSelection(Make_dispPsGui())
 {
-  this->addTab(_inPsWidgetSelection, "Input Pipe");
-  this->addTab(_dispPsWidgetSelection, "Display");
+  this->addTab(
+    _inPsWidgetSelection->GetQWidget(), "Input Pipe");
+
+  this->addTab(
+    _dispPsWidgetSelection->GetQWidget(), "Display");
 }
 
 showNodePsTab::~showNodePsTab()
@@ -131,15 +304,22 @@ bool showNodePsTab::IsValid()
 //
 mixNodePsTab::mixNodePsTab(QWidget* arg_parent)
   : nodePsTab(arg_parent)
-  , _inPsWidgetSelection_1(new inPsWidgetSelection)
-  , _inPsWidgetSelection_2(new inPsWidgetSelection)
-  , _mixPsWidgetSelection(new mixPsWidgetSelection)
-  , _outPsWidgetSelection(new outPsWidgetSelection)
+  , _inPsWidgetSelection_1(Make_inPsGui())
+  , _inPsWidgetSelection_2(Make_inPsGui())
+  , _mixPsWidgetSelection (Make_mixPsGui())
+  , _outPsWidgetSelection(Make_outPsGui())
 {
-  this->addTab(_inPsWidgetSelection_1, "Input Pipe 1");
-  this->addTab(_inPsWidgetSelection_2, "Input Pipe 2");
-  this->addTab(_mixPsWidgetSelection, "Mixer");
-  this->addTab(_outPsWidgetSelection, "Output Pipe");
+  this->addTab(
+    _inPsWidgetSelection_1->GetQWidget(), "Input Pipe 1");
+
+  this->addTab(
+    _inPsWidgetSelection_2->GetQWidget(), "Input Pipe 2");
+
+  this->addTab(
+    _mixPsWidgetSelection->GetQWidget(), "Mixer");
+
+  this->addTab(
+    _outPsWidgetSelection->GetQWidget(), "Output Pipe");
 }
 
 mixNodePsTab::~mixNodePsTab()
@@ -173,13 +353,19 @@ bool mixNodePsTab::IsValid()
 //
 coreNodePsTab::coreNodePsTab(QWidget* arg_parent)
   : nodePsTab(arg_parent)
-  , _inPsWidgetSelection(new inPsWidgetSelection)
-  , _procPsWidgetSelection(new procPsWidgetSelection)
-  , _outPsWidgetSelection(new outPsWidgetSelection)
+  , _inPsWidgetSelection(Make_inPsGui())
+  , _procPsWidgetSelection(Make_procPsGui())
+  , _outPsWidgetSelection(Make_outPsGui())
 {
-  this->addTab(_inPsWidgetSelection  , "Input Pipe");
-  this->addTab(_procPsWidgetSelection, "Processor");
-  this->addTab(_outPsWidgetSelection , "Output Pipe");
+
+  this->addTab(
+    _inPsWidgetSelection->GetQWidget(), "Input Pipe");
+
+  this->addTab(
+    _procPsWidgetSelection->GetQWidget(), "Processor");
+
+  this->addTab(
+    _outPsWidgetSelection->GetQWidget(), "Output Pipe");
 }
 
 coreNodePsTab::~coreNodePsTab()

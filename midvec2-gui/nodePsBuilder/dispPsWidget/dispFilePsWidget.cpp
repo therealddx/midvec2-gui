@@ -1,20 +1,21 @@
 #include "dispFilePsWidget.h"
 #include "ui_dispFilePsWidget.h"
 
-dispFilePsWidget::dispFilePsWidget(QWidget *parent) :
-  QWidget(parent),
-  ui(new Ui::dispFilePsWidget)
+dispFilePsWidget::dispFilePsWidget(QWidget *parent)
+  : QWidget(parent)
+  , ui(new Ui::dispFilePsWidget)
 {
+  // setup ui.
   ui->setupUi(this);
 
   // placeholder.
   ui->tableFile_le->setPlaceholderText(QString("(abs. path to file in writable dir.)"));
 
   // connect.
-  connect(ui->tableFile_le, SIGNAL(textEdited(const QString&)), this, SLOT(onFqFileEdited()));
+  connect(ui->tableFile_le, SIGNAL(textChanged(const QString&)), this, SLOT(onFqFileEdited()));
 
   // emit.
-  emit ui->tableFile_le->textEdited("");
+  ui->tableFile_le->setText("");
 }
 
 dispFilePsWidget::~dispFilePsWidget()
@@ -29,7 +30,8 @@ dispPs* dispFilePsWidget::Make()
 
 bool dispFilePsWidget::IsValid()
 {
-  if (checkFqFileEdited(ui->tableFile_le->text(), QFile::Permission::WriteUser) == QRegularExpressionValidator::Acceptable)
+  if (_guiValidators.checkFqFileEdited(
+      ui->tableFile_le->text(), QFile::Permission::WriteUser) == QRegularExpressionValidator::Acceptable)
   {
     return true;
   }
@@ -41,5 +43,6 @@ bool dispFilePsWidget::IsValid()
 
 void dispFilePsWidget::onFqFileEdited()
 {
-  observeFqFileEdited(ui->tableFile_le, ui->tableFile_le->text(), QFile::Permission::WriteUser);
+  _guiValidators.observeFqFileEdited(
+    ui->tableFile_le, ui->tableFile_le->text(), QFile::Permission::WriteUser);
 }

@@ -12,10 +12,10 @@ inUdpPsWidget::inUdpPsWidget(QWidget* parent)
   ui->port_le->setPlaceholderText(QString("(available port, 1-65535)"));
 
   // connect validators.
-  connect(ui->port_le, SIGNAL(textEdited(const QString&)), this, SLOT(onPortEdited(const QString&)));
+  connect(ui->port_le, SIGNAL(textChanged(const QString&)), this, SLOT(onPortEdited(const QString&)));
 
   // trigger validator defaults.
-  emit ui->port_le->textEdited("");
+  ui->port_le->setText("");
 }
 
 inUdpPsWidget::~inUdpPsWidget()
@@ -29,15 +29,9 @@ inPs* inUdpPsWidget::Make()
   return new inUdpPs(std::stoi(ui->port_le->text().toStdString()));
 }
 
-void inUdpPsWidget::onPortEdited(const QString& arg_newText)
-{
-  // pass to parent.
-  observeIntEdited(dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText), 1, 65535);
-}
-
 bool inUdpPsWidget::IsValid()
 {
-  if (checkIntEdited(ui->port_le->text(), 1, 65535) == QDoubleValidator::Acceptable)
+  if (_guiValidators.checkIntEdited(ui->port_le->text(), 1, 65535) == QDoubleValidator::Acceptable)
   {
     return true;
   }
@@ -45,4 +39,11 @@ bool inUdpPsWidget::IsValid()
   {
     return false;
   }
+}
+
+void inUdpPsWidget::onPortEdited(const QString& arg_newText)
+{
+  // pass to parent.
+  _guiValidators.observeIntEdited(
+      dynamic_cast<QLineEdit*>(QObject::sender()), QString(arg_newText), 1, 65535);
 }

@@ -6,7 +6,8 @@
 #include <QWidget>
 
 // include: GUI application.
-#include <nodePartPsWidget/nodePartPs_UserIf.h>
+#include <nodePartPsWidget/nodePartPsWidgetBase.h>
+#include <nodePartPsWidget/GuiValidators.h>
 
 // include: midvec2 library.
 #include <NodePartBuilder/inPs.hpp>
@@ -15,7 +16,7 @@ namespace Ui {
 class inFilePsWidget;
 }
 
-class inFilePsWidget : public QWidget, public nodePartPs_UserIf
+class inFilePsWidget : public QWidget, public nodePartPsWidgetBase<inPs>
 {
   Q_OBJECT
 
@@ -28,6 +29,7 @@ public:
 
 private:
   Ui::inFilePsWidget* ui;
+  GuiValidators _guiValidators;
 
 private slots:
   void onFqFileEdited(const QString&);
