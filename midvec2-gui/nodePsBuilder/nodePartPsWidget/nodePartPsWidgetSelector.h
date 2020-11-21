@@ -18,7 +18,7 @@
 #include <nodePartPsWidget/WidgetSelector.h>
 
 template <class T_nodePartPs>
-class psWidgetSelector : public nodePartPsWidgetBase<T_nodePartPs>
+class nodePartPsWidgetSelector : public nodePartPsWidgetBase<T_nodePartPs>
 {
 public:
 
@@ -44,15 +44,15 @@ public:
 
   // ctor.
   //
-  psWidgetSelector
-    ( std::vector<psWidgetSelector::ArgumentTuple> arg_components
+  nodePartPsWidgetSelector
+    ( std::vector<nodePartPsWidgetSelector::ArgumentTuple> arg_components
     , QString arg_name
     , QWidget* arg_parent = nullptr
     );
 
   // dtor.
   //
-  ~psWidgetSelector();
+  ~nodePartPsWidgetSelector();
 
   // Make.
   // Guarantees return of T_nodePartPs.
@@ -81,8 +81,8 @@ private:
 };
 
 template <class T_nodePartPs>
-psWidgetSelector<T_nodePartPs>::psWidgetSelector
-  ( std::vector<psWidgetSelector::ArgumentTuple> arg_components
+nodePartPsWidgetSelector<T_nodePartPs>::nodePartPsWidgetSelector
+  ( std::vector<nodePartPsWidgetSelector::ArgumentTuple> arg_components
   , QString arg_name
   , QWidget* arg_parent
   )
@@ -120,7 +120,7 @@ psWidgetSelector<T_nodePartPs>::psWidgetSelector
 }
 
 template <class T_nodePartPs>
-psWidgetSelector<T_nodePartPs>::~psWidgetSelector()
+nodePartPsWidgetSelector<T_nodePartPs>::~nodePartPsWidgetSelector()
 {
   // delete the '_widgetSelector'.
   //
@@ -135,7 +135,7 @@ psWidgetSelector<T_nodePartPs>::~psWidgetSelector()
 }
 
 template <class T_nodePartPs>
-T_nodePartPs* psWidgetSelector<T_nodePartPs>::Make()
+T_nodePartPs* nodePartPsWidgetSelector<T_nodePartPs>::Make()
 {
   // access member WidgetSelector::_activeWidget.
   // this is the active, visible QWidget under the WidgetSelector.
@@ -152,7 +152,7 @@ T_nodePartPs* psWidgetSelector<T_nodePartPs>::Make()
 }
 
 template <class T_nodePartPs>
-bool psWidgetSelector<T_nodePartPs>::IsValid()
+bool nodePartPsWidgetSelector<T_nodePartPs>::IsValid()
 {
   // access member WidgetSelector::_activeWidget.
   // this is the active, visible QWidget under the WidgetSelector.

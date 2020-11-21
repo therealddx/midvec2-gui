@@ -1,0 +1,109 @@
+Commit ddc8110.
+
+This commit was a big deal because I finally found a sustainable and clean way to keep the user-interface clean and extensible for making and user-input-validating different types of node part parameter-sets.
+
+1. Summary.
+
+Eliminated the old-method of parameter-set selector widget, which:
+ - required more source files than needed as derived classes
+ - required me to write my own Qt ui_*.h and *.ui files as a templated GUI implementation
+  - ^was an issue of course because this makes those files untunable using the Qt Designer
+
+Instantiated a new design for the parameter-set selector widget, which:
+
+ - nodePartPsWidgetBase<T>: applied templating to an isolated, pure-virtual interface of the code, that whose job is to stamp out an interface for saying, "Yes, I am a GUI, and when you call 'Make' on me, I will give you <this type> of parameter-set object for building a node part."
+
+ - WidgetSelector: eliminated the need for subclassing the selector widget; each type of node part only needs to implement their own specific GUI selections for their own specific type of node part.
+
+ - WidgetSelector: isolated the reusable, Qt-specific graphical elements of "here's a dropdown, let me trade widgets in and out" to this class.
+
+ - GuiValidators: cut all user-input validation functions into class 'GuiValidators', creating a highly-reusable function-only class. said class provides isolated checking (is this string good or bad) and observe-checking (is this string good or bad, and here's a GUI control to reflect that to).
+
+ - psWidgetSelector<T_nodePartPs>: developed a class that aggregates WidgetSelector, (Graphical, Qt-specific interface) and implements nodePartPsWidgetBase<T>, (interface guaranteeing ability to produce a node part).
+
+2. Explicit Naming Convention.
+
+2a. Explicit Naming Convention - midvec2-lib.
+
+Node:
+ # anything that can operate as a Node within the concept of the midvec2 library.
+ - Byte Node
+ - Show Node
+ - Mix Node
+ - Source Node
+ - Core Node
+
+Node Part / NodePart:
+ # anything that goes into a Node, that the user picks.
+ # listed below as Colloquial Name (Class Name in Codebase)
+ # anything under midvec2-lib/.../NodePart/.
+ - Input Pipe (InputPipeBase)
+ - Output Pipe (OutputPipeBase)
+ - Display (DisplayBase)
+ - Generator (GeneratorBase)
+ - Processor (ProcessorBase)
+
+nodePartPs:
+ # anything where I construct it with some set of parameters, and then it'll return some concrete instantiation of a Node Part when I want it to.
+ # anything under midvec2-lib/.../NodePartBuilder/.
+ - dispPs
+ - genPs
+ - inPs
+ - mixPs
+ - outPs
+ - procPs
+
+2b. Explicit Naming Convention - midvec2-gui.
+
+Concrete psWidgets:
+ # anything where a user punches in concrete information to make a specific type of nodePartPs.
+ # anything under any of these directories:
+ - dispPsWidget/
+ - genPsWidget/
+ - inPsWidget/
+ - outPsWidget/
+ - mixPsWidget/
+ - procPsWidget/
+
+nodePartPsWidget/: (ref. doc/commit-notes-ddc8110.txt)
+ # a folder, named as such, so that the substring "nodePart" within the name denotes that abstract, generalized, and reproducible code is to live in this directory, for the benefit of the Concrete psWidgets directory.
+ # any of these source files.
+ - GuiValidators: functions for user-input validation.
+ - WidgetSelector: Qt GUI for rotating among QWidgets.
+ - nodePartPsWidgetBase: Contract for any class that is to produce a nodePartPs.
+ - nodePartPsWidgetSelector: Client to the two above classes.
+
+nodePsTab:
+ # each subclass of nodePsTab represents a different type of Node that can be built.
+ # on each tab, holds a psWidgetSelector<T_nodePartPs>, where 'T_nodePartPs' is one of the types specified under the "nodePartPs:" header above.
+ # the psWidgetSelector<> on each tab then shows the available, selectable means by which its node part can be built.
+
+nodePsDialog:
+ # holds a nodePsTab.
+
+3. Object Model Diagram.
+
+# again, T_nodePartPs is anything from { dispPs, genPs, inPs, mixPs, outPs, procPs }.
+
+              nodePartPsWidgetBase<T_nodePartPs>
+                              ^
+                              |
+                              |
+           /* support queries for midvec2 specifics */
+                              |
+                              |
+                              |
+(5) nodePsTab <>-(1)-> nodePartPsWidgetSelector<T_nodePartPs> <>---(2)---> WidgetSelector
+                        |   ^                                                       |  ^
+                        |   |                                                       |  |
+                        |   |__________________________psWidget<---(4)<---QWidget*__|  |
+                        |                                                              |
+                        |__________________________________________(3)_________________|
+
+
+(1): top-level construction, occurs once for each node part that the nodePsTab needs.
+(2): Qt is how we get data from the user
+(3): QWidgets, plus dropdown names tied to those QWidgets
+(4): Concrete psWidget that is currently active; mapped to a nodePartPsWidgetBase 
+(5): Can now call 'Make' / 'IsValid' on nodePartPsWidgetBase without dynamic_cast from QWidget*.
+

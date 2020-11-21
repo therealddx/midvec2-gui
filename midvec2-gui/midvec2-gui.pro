@@ -56,7 +56,7 @@ HEADERS += \
   MvecUi/MvecGraphicsView.h       \
   MvecUi/MvecHoverArea.h          \
   nodePsBuilder/nodePartPsWidget/WidgetSelector.h \
-  nodePsBuilder/nodePartPsWidget/psWidgetSelector.h \
+    nodePsBuilder/nodePartPsWidget/nodePartPsWidgetSelector.h \
   nodePsBuilder/nodePsDialog.h \
   nodePsBuilder/nodePsTab.h \
   nodePsBuilder/nodePartPsWidget/nodePartPsWidgetBase.h \

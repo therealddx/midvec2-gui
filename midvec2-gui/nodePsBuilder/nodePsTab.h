@@ -16,7 +16,7 @@
 #include <QDebug>
 
 // include: GUI application.
-#include <nodePartPsWidget/psWidgetSelector.h>
+#include <nodePartPsWidget/nodePartPsWidgetSelector.h>
 
 // include: midvec2-lib.
 #include <NodeBuilder/nodePs.hpp>
@@ -45,12 +45,12 @@ protected:
   // showing the specific interface choices by which the different NodeParts
   // may be built.
   //
-  psWidgetSelector<inPs>*   Make_inPsGui();
-  psWidgetSelector<outPs>*  Make_outPsGui();
-  psWidgetSelector<procPs>* Make_procPsGui();
-  psWidgetSelector<dispPs>* Make_dispPsGui();
-  psWidgetSelector<genPs>*  Make_genPsGui();
-  psWidgetSelector<mixPs>*  Make_mixPsGui();
+  nodePartPsWidgetSelector<inPs>*   Make_inPsGui();
+  nodePartPsWidgetSelector<outPs>*  Make_outPsGui();
+  nodePartPsWidgetSelector<procPs>* Make_procPsGui();
+  nodePartPsWidgetSelector<dispPs>* Make_dispPsGui();
+  nodePartPsWidgetSelector<genPs>*  Make_genPsGui();
+  nodePartPsWidgetSelector<mixPs>*  Make_mixPsGui();
 
   // ui object.
   //
@@ -69,8 +69,8 @@ public:
   bool IsValid();
 
 private:
-  psWidgetSelector<inPs>*  _inPsWidgetSelection;
-  psWidgetSelector<outPs>* _outPsWidgetSelection;
+  nodePartPsWidgetSelector<inPs>*  _inPsWidgetSelection;
+  nodePartPsWidgetSelector<outPs>* _outPsWidgetSelection;
 };
 
 //
@@ -85,8 +85,8 @@ public:
   bool IsValid();
 
 private:
-  psWidgetSelector<genPs>* _genPsWidgetSelection;
-  psWidgetSelector<outPs>* _outPsWidgetSelection;
+  nodePartPsWidgetSelector<genPs>* _genPsWidgetSelection;
+  nodePartPsWidgetSelector<outPs>* _outPsWidgetSelection;
 };
 
 //
@@ -101,8 +101,8 @@ public:
   bool IsValid();
 
 private:
-  psWidgetSelector<inPs>*   _inPsWidgetSelection;
-  psWidgetSelector<dispPs>* _dispPsWidgetSelection;
+  nodePartPsWidgetSelector<inPs>*   _inPsWidgetSelection;
+  nodePartPsWidgetSelector<dispPs>* _dispPsWidgetSelection;
 };
 
 //
@@ -117,10 +117,10 @@ public:
   bool IsValid();
 
 private:
-  psWidgetSelector<inPs>*  _inPsWidgetSelection_1;
-  psWidgetSelector<inPs>*  _inPsWidgetSelection_2;
-  psWidgetSelector<mixPs>* _mixPsWidgetSelection;
-  psWidgetSelector<outPs>* _outPsWidgetSelection;
+  nodePartPsWidgetSelector<inPs>*  _inPsWidgetSelection_1;
+  nodePartPsWidgetSelector<inPs>*  _inPsWidgetSelection_2;
+  nodePartPsWidgetSelector<mixPs>* _mixPsWidgetSelection;
+  nodePartPsWidgetSelector<outPs>* _outPsWidgetSelection;
 };
 
 //
@@ -135,9 +135,9 @@ public:
   bool IsValid();
 
 private:
-  psWidgetSelector<inPs>*   _inPsWidgetSelection;
-  psWidgetSelector<procPs>* _procPsWidgetSelection;
-  psWidgetSelector<outPs>*  _outPsWidgetSelection;
+  nodePartPsWidgetSelector<inPs>*   _inPsWidgetSelection;
+  nodePartPsWidgetSelector<procPs>* _procPsWidgetSelection;
+  nodePartPsWidgetSelector<outPs>*  _outPsWidgetSelection;
 
 };
 

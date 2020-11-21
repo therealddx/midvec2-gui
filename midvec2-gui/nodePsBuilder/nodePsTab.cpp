@@ -73,113 +73,113 @@ bool nodePsTab::IsValid()
 //
 // Make_* Functions for psWidgetSelector<T>.
 //
-psWidgetSelector<inPs>* nodePsTab::Make_inPsGui()
+nodePartPsWidgetSelector<inPs>* nodePsTab::Make_inPsGui()
 {
   qDebug() << "nodePsTab::Make_inPsGui: 1";
 
   // make the tuple mapping.
-  std::vector<psWidgetSelector<inPs>::ArgumentTuple> argVector;
+  std::vector<nodePartPsWidgetSelector<inPs>::ArgumentTuple> argVector;
 
   inFilePsWidget* i1 = new inFilePsWidget;
-  argVector.push_back(psWidgetSelector<inPs>::ArgumentTuple("File", i1, i1));
+  argVector.push_back(nodePartPsWidgetSelector<inPs>::ArgumentTuple("File", i1, i1));
 
   inUdpPsWidget* i2 = new inUdpPsWidget;
-  argVector.push_back(psWidgetSelector<inPs>::ArgumentTuple("UDP", i2, i2));
+  argVector.push_back(nodePartPsWidgetSelector<inPs>::ArgumentTuple("UDP", i2, i2));
 
   qDebug() << "nodePsTab::Make_inPsGui: 2";
 
   // make the psWidgetSelector.
-  return new psWidgetSelector<inPs>
+  return new nodePartPsWidgetSelector<inPs>
     ( argVector
     , "Input Pipe"
     , this
     );
 }
 
-psWidgetSelector<outPs>* nodePsTab::Make_outPsGui()
+nodePartPsWidgetSelector<outPs>* nodePsTab::Make_outPsGui()
 {
   // make the tuple mapping.
-  std::vector<psWidgetSelector<outPs>::ArgumentTuple> argVector;
+  std::vector<nodePartPsWidgetSelector<outPs>::ArgumentTuple> argVector;
 
   outFilePsWidget* o1 = new outFilePsWidget;
-  argVector.push_back(psWidgetSelector<outPs>::ArgumentTuple("File", o1, o1));
+  argVector.push_back(nodePartPsWidgetSelector<outPs>::ArgumentTuple("File", o1, o1));
 
   outUdpPsWidget* o2= new outUdpPsWidget;
-  argVector.push_back(psWidgetSelector<outPs>::ArgumentTuple("UDP", o2, o2));
+  argVector.push_back(nodePartPsWidgetSelector<outPs>::ArgumentTuple("UDP", o2, o2));
 
   // make the psWidgetSelector.
-  return new psWidgetSelector<outPs>
+  return new nodePartPsWidgetSelector<outPs>
     ( argVector
     , "Output Pipe"
     , this
     );
 }
 
-psWidgetSelector<genPs>* nodePsTab::Make_genPsGui()
+nodePartPsWidgetSelector<genPs>* nodePsTab::Make_genPsGui()
 {
   // make the tuple mapping.
-  std::vector<psWidgetSelector<genPs>::ArgumentTuple> argVector;
+  std::vector<nodePartPsWidgetSelector<genPs>::ArgumentTuple> argVector;
 
   genSquarePsWidget* g1 = new genSquarePsWidget;
-  argVector.push_back(psWidgetSelector<genPs>::ArgumentTuple("Square", g1, g1));
+  argVector.push_back(nodePartPsWidgetSelector<genPs>::ArgumentTuple("Square", g1, g1));
 
   genSinePsWidget* g2 = new genSinePsWidget;
-  argVector.push_back(psWidgetSelector<genPs>::ArgumentTuple("Sine", g2, g2));
+  argVector.push_back(nodePartPsWidgetSelector<genPs>::ArgumentTuple("Sine", g2, g2));
 
   // make the psWidgetSelector.
-  return new psWidgetSelector<genPs>
+  return new nodePartPsWidgetSelector<genPs>
     ( argVector
     , "Generator"
     , this
     );
 }
 
-psWidgetSelector<procPs>* nodePsTab::Make_procPsGui()
+nodePartPsWidgetSelector<procPs>* nodePsTab::Make_procPsGui()
 {
   // make the tuple mapping.
-  std::vector<psWidgetSelector<procPs>::ArgumentTuple> argVector;
+  std::vector<nodePartPsWidgetSelector<procPs>::ArgumentTuple> argVector;
 
   procDcPsWidget* p1 = new procDcPsWidget;
-  argVector.push_back(psWidgetSelector<procPs>::ArgumentTuple("DC Offset", p1, p1));
+  argVector.push_back(nodePartPsWidgetSelector<procPs>::ArgumentTuple("DC Offset", p1, p1));
   
   // procConvPsWidget* p2 = new ProcConvPsWidget;
   // argVector.push_back(psWidgetSelector<procPs>::ArgumentTuple("Convolution", p2, p2));
   // ^todo^: must implement convolution system for procPs.
 
   // make the WidgetSelector.
-  return new psWidgetSelector<procPs>
+  return new nodePartPsWidgetSelector<procPs>
     ( argVector
     , "Processor"
     , this
     );
 }
 
-psWidgetSelector<dispPs>* nodePsTab::Make_dispPsGui()
+nodePartPsWidgetSelector<dispPs>* nodePsTab::Make_dispPsGui()
 {
   // make the tuple mapping.
-  std::vector<psWidgetSelector<dispPs>::ArgumentTuple> argVector;
+  std::vector<nodePartPsWidgetSelector<dispPs>::ArgumentTuple> argVector;
 
   dispFilePsWidget* d1 = new dispFilePsWidget;
-  argVector.push_back(psWidgetSelector<dispPs>::ArgumentTuple("File", d1, d1));
+  argVector.push_back(nodePartPsWidgetSelector<dispPs>::ArgumentTuple("File", d1, d1));
 
   // make the WidgetSelector.
-  return new psWidgetSelector<dispPs>
+  return new nodePartPsWidgetSelector<dispPs>
     ( argVector
     , "Display"
     , this
     );
 }
 
-psWidgetSelector<mixPs>* nodePsTab::Make_mixPsGui()
+nodePartPsWidgetSelector<mixPs>* nodePsTab::Make_mixPsGui()
 {
   // make the tuple mapping.
-  std::vector<psWidgetSelector<mixPs>::ArgumentTuple> argVector;
+  std::vector<nodePartPsWidgetSelector<mixPs>::ArgumentTuple> argVector;
 
   mixPsWidget* m1 = new mixPsWidget;
-  argVector.push_back(psWidgetSelector<mixPs>::ArgumentTuple("Op-type", m1, m1));
+  argVector.push_back(nodePartPsWidgetSelector<mixPs>::ArgumentTuple("Op-type", m1, m1));
 
   // make the WidgetSelector.
-  return new psWidgetSelector<mixPs>
+  return new nodePartPsWidgetSelector<mixPs>
     ( argVector
     , "Mixer"
     , this
