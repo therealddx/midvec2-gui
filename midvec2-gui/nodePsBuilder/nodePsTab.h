@@ -47,9 +47,9 @@ protected:
   //
   nodePartPsWidgetSelector<inPs>*   Make_inPsGui();
   nodePartPsWidgetSelector<outPs>*  Make_outPsGui();
-  nodePartPsWidgetSelector<procPs>* Make_procPsGui();
-  nodePartPsWidgetSelector<dispPs>* Make_dispPsGui();
-  nodePartPsWidgetSelector<genPs>*  Make_genPsGui();
+  nodePartPsWidgetSelector<procPs<double, double>>* Make_procPsGui();
+  nodePartPsWidgetSelector<dispPs<double>>* Make_dispPsGui();
+  nodePartPsWidgetSelector<genPs<double>>*  Make_genPsGui();
   nodePartPsWidgetSelector<mixPs>*  Make_mixPsGui();
 
   // ui object.
@@ -85,7 +85,7 @@ public:
   bool IsValid();
 
 private:
-  nodePartPsWidgetSelector<genPs>* _genPsWidgetSelection;
+  nodePartPsWidgetSelector<genPs<double>>* _genPsWidgetSelection;
   nodePartPsWidgetSelector<outPs>* _outPsWidgetSelection;
 };
 
@@ -102,7 +102,7 @@ public:
 
 private:
   nodePartPsWidgetSelector<inPs>*   _inPsWidgetSelection;
-  nodePartPsWidgetSelector<dispPs>* _dispPsWidgetSelection;
+  nodePartPsWidgetSelector<dispPs<double>>* _dispPsWidgetSelection;
 };
 
 //
@@ -136,7 +136,7 @@ public:
 
 private:
   nodePartPsWidgetSelector<inPs>*   _inPsWidgetSelection;
-  nodePartPsWidgetSelector<procPs>* _procPsWidgetSelection;
+  nodePartPsWidgetSelector<procPs<double, double>>* _procPsWidgetSelection;
   nodePartPsWidgetSelector<outPs>*  _outPsWidgetSelection;
 
 };

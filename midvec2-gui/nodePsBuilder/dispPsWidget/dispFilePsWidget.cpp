@@ -23,7 +23,7 @@ dispFilePsWidget::~dispFilePsWidget()
   delete ui;
 }
 
-dispPs* dispFilePsWidget::Make()
+dispPs<double>* dispFilePsWidget::Make()
 {
   return new dispFilePs<double>(ui->tableFile_le->text().toStdString());
 }

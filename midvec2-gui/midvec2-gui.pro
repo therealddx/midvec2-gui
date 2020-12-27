@@ -23,6 +23,9 @@ LIBS += -L$$PWD/../build-midvec2-lib-Desktop_Qt_5_15_0_GCC_64bit-Debug/ -lmidvec
   -L/usr/lib/x86_64-linux-gnu/
 
 SOURCES += \
+    QtGraph/GraphFrame.cpp \
+    QtGraph/GraphFrameBuffer.cpp \
+    QtGraph/QtGraphGlui.cpp \
   main.cpp       \
   MainWindow.cpp \
   MvecUi/Cursor.cpp                 \
@@ -31,6 +34,7 @@ SOURCES += \
   MvecUi/MvecGraphicsScene.cpp      \
   MvecUi/MvecGraphicsView.cpp       \
   MvecUi/MvecHoverArea.cpp          \
+    nodePsBuilder/dispPsWidget/dispGraphPsWidget.cpp \
   nodePsBuilder/nodePartPsWidget/WidgetSelector.cpp \
   nodePsBuilder/nodePsDialog.cpp        \
   nodePsBuilder/nodePsTab.cpp \
@@ -55,6 +59,10 @@ HEADERS += \
   MvecUi/MvecGraphicsScene.h      \
   MvecUi/MvecGraphicsView.h       \
   MvecUi/MvecHoverArea.h          \
+    QtGraph/GraphFrame.h \
+    QtGraph/GraphFrameBuffer.h \
+    QtGraph/QtGraphGlui.h \
+    nodePsBuilder/dispPsWidget/dispGraphPsWidget.h \
   nodePsBuilder/nodePartPsWidget/WidgetSelector.h \
     nodePsBuilder/nodePartPsWidget/nodePartPsWidgetSelector.h \
   nodePsBuilder/nodePsDialog.h \
@@ -74,6 +82,8 @@ HEADERS += \
 
 FORMS += \
   MainWindow.ui \
+    QtGraph/QtGraphGlui.ui \
+    nodePsBuilder/dispPsWidget/dispGraphPsWidget.ui \
   nodePsBuilder/nodePartPsWidget/WidgetSelector.ui \
   nodePsBuilder/nodePsDialog.ui \
   nodePsBuilder/nodePsTab.ui \

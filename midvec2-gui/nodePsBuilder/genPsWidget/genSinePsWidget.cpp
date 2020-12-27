@@ -35,7 +35,7 @@ genSinePsWidget::~genSinePsWidget()
   delete ui;
 }
 
-genPs* genSinePsWidget::Make()
+genPs<double>* genSinePsWidget::Make()
 {
   // read values.
   double xShift        = ui->xShift_le->text().toDouble();

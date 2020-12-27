@@ -32,7 +32,10 @@
 #include <genPsWidget/genSquarePsWidget.h>
 
 #include <procPsWidget/procDcPsWidget.h>
+
 #include <dispPsWidget/dispFilePsWidget.h>
+#include <dispPsWidget/dispGraphPsWidget.h>
+
 #include <mixPsWidget/mixPsWidget.h>
 
 //
@@ -115,55 +118,58 @@ nodePartPsWidgetSelector<outPs>* nodePsTab::Make_outPsGui()
     );
 }
 
-nodePartPsWidgetSelector<genPs>* nodePsTab::Make_genPsGui()
+nodePartPsWidgetSelector<genPs<double>>* nodePsTab::Make_genPsGui()
 {
   // make the tuple mapping.
-  std::vector<nodePartPsWidgetSelector<genPs>::ArgumentTuple> argVector;
+  std::vector<nodePartPsWidgetSelector<genPs<double>>::ArgumentTuple> argVector;
 
   genSquarePsWidget* g1 = new genSquarePsWidget;
-  argVector.push_back(nodePartPsWidgetSelector<genPs>::ArgumentTuple("Square", g1, g1));
+  argVector.push_back(nodePartPsWidgetSelector<genPs<double>>::ArgumentTuple("Square", g1, g1));
 
   genSinePsWidget* g2 = new genSinePsWidget;
-  argVector.push_back(nodePartPsWidgetSelector<genPs>::ArgumentTuple("Sine", g2, g2));
+  argVector.push_back(nodePartPsWidgetSelector<genPs<double>>::ArgumentTuple("Sine", g2, g2));
 
   // make the psWidgetSelector.
-  return new nodePartPsWidgetSelector<genPs>
+  return new nodePartPsWidgetSelector<genPs<double>>
     ( argVector
     , "Generator"
     , this
     );
 }
 
-nodePartPsWidgetSelector<procPs>* nodePsTab::Make_procPsGui()
+nodePartPsWidgetSelector<procPs<double, double>>* nodePsTab::Make_procPsGui()
 {
   // make the tuple mapping.
-  std::vector<nodePartPsWidgetSelector<procPs>::ArgumentTuple> argVector;
+  std::vector<nodePartPsWidgetSelector<procPs<double, double>>::ArgumentTuple> argVector;
 
   procDcPsWidget* p1 = new procDcPsWidget;
-  argVector.push_back(nodePartPsWidgetSelector<procPs>::ArgumentTuple("DC Offset", p1, p1));
+  argVector.push_back(nodePartPsWidgetSelector<procPs<double, double>>::ArgumentTuple("DC Offset", p1, p1));
   
   // procConvPsWidget* p2 = new ProcConvPsWidget;
   // argVector.push_back(psWidgetSelector<procPs>::ArgumentTuple("Convolution", p2, p2));
   // ^todo^: must implement convolution system for procPs.
 
   // make the WidgetSelector.
-  return new nodePartPsWidgetSelector<procPs>
+  return new nodePartPsWidgetSelector<procPs<double, double>>
     ( argVector
     , "Processor"
     , this
     );
 }
 
-nodePartPsWidgetSelector<dispPs>* nodePsTab::Make_dispPsGui()
+nodePartPsWidgetSelector<dispPs<double>>* nodePsTab::Make_dispPsGui()
 {
   // make the tuple mapping.
-  std::vector<nodePartPsWidgetSelector<dispPs>::ArgumentTuple> argVector;
+  std::vector<nodePartPsWidgetSelector<dispPs<double>>::ArgumentTuple> argVector;
 
   dispFilePsWidget* d1 = new dispFilePsWidget;
-  argVector.push_back(nodePartPsWidgetSelector<dispPs>::ArgumentTuple("File", d1, d1));
+  argVector.push_back(nodePartPsWidgetSelector<dispPs<double>>::ArgumentTuple("File", d1, d1));
+
+  dispGraphPsWidget* d2 = new dispGraphPsWidget;
+  argVector.push_back(nodePartPsWidgetSelector<dispPs<double>>::ArgumentTuple("Graph", d2, d2));
 
   // make the WidgetSelector.
-  return new nodePartPsWidgetSelector<dispPs>
+  return new nodePartPsWidgetSelector<dispPs<double>>
     ( argVector
     , "Display"
     , this

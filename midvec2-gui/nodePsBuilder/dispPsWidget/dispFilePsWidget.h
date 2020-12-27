@@ -16,14 +16,14 @@ namespace Ui {
 class dispFilePsWidget;
 }
 
-class dispFilePsWidget : public QWidget, public nodePartPsWidgetBase<dispPs>
+class dispFilePsWidget : public QWidget, public nodePartPsWidgetBase<dispPs<double>>
 {
   Q_OBJECT
 
 public:
   explicit dispFilePsWidget(QWidget *parent = nullptr);
   ~dispFilePsWidget();
-  dispPs* Make();
+  dispPs<double>* Make();
   inline QWidget* GetQWidget() { return this; }
   bool IsValid();
 

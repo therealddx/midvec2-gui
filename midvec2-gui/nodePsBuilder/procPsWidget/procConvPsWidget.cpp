@@ -13,7 +13,7 @@ procConvPsWidget::~procConvPsWidget()
   delete ui;
 }
 
-procPs* procConvPsWidget::Make()
+procPs<double, double>* procConvPsWidget::Make()
 {
   // serious options for how we can bring a convolution filter into this application:
   //  - *.dat file that holds the numerical values we care about. parse that file to get your values.

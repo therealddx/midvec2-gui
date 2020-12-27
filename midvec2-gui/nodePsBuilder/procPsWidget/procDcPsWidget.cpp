@@ -23,7 +23,7 @@ procDcPsWidget::~procDcPsWidget()
   delete ui;
 }
 
-procPs* procDcPsWidget::Make()
+procPs<double, double>* procDcPsWidget::Make()
 {
   return new procDcPs<double, double>(
     std::stod(ui->dcOffset_le->text().toStdString()));

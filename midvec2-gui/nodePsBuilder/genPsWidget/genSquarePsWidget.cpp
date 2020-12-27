@@ -38,7 +38,7 @@ genSquarePsWidget::~genSquarePsWidget()
   delete ui;
 }
 
-genPs* genSquarePsWidget::Make()
+genPs<double>* genSquarePsWidget::Make()
 {
   // read values.
   double xShift        = ui->xShift_le->text().toDouble();

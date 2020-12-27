@@ -16,14 +16,14 @@ namespace Ui {
 class procDcPsWidget;
 }
 
-class procDcPsWidget : public QWidget, public nodePartPsWidgetBase<procPs>
+class procDcPsWidget : public QWidget, public nodePartPsWidgetBase<procPs<double, double>>
 {
   Q_OBJECT
 
 public:
   explicit procDcPsWidget(QWidget *parent = nullptr);
   ~procDcPsWidget();
-  procPs* Make();
+  procPs<double, double>* Make();
   inline QWidget* GetQWidget() { return this; }
   bool IsValid();
 

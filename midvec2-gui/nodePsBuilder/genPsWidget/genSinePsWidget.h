@@ -16,14 +16,14 @@ namespace Ui {
 class genSinePsWidget;
 }
 
-class genSinePsWidget : public QWidget, public nodePartPsWidgetBase<genPs>
+class genSinePsWidget : public QWidget, public nodePartPsWidgetBase<genPs<double>>
 {
   Q_OBJECT
 
 public:
   explicit genSinePsWidget(QWidget *parent = nullptr);
   ~genSinePsWidget();
-  genPs* Make();
+  genPs<double>* Make();
   inline QWidget* GetQWidget() { return this; }
   bool IsValid();
 
