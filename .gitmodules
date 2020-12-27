@@ -1,6 +1,6 @@
 [submodule "midvec2-lib"]
 	path = midvec2-gui/submodules/midvec2-lib
-        url = git@github.com:therealddx/midvec2.git
+        url = git@github.com:therealddx/midvec2-lib.git
 [submodule "graph-opengl"]
 	path = midvec2-gui/submodules/graph-opengl
 	url = git@github.com:therealddx/graph-opengl

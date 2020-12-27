@@ -1,4 +1,4 @@
-QT       += core gui network
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,92 +15,87 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-# LIBS tag. kinda goofy.
-#   -L[dir]  : the *.a file lives here.
-#   -l[filename] : the *.a file is named as: "lib" + [filename] + ".a".
+# libraries.
 #
 LIBS += -L$$PWD/../build-midvec2-lib-Desktop_Qt_5_15_0_GCC_64bit-Debug/ -lmidvec2 \
   -L/usr/lib/x86_64-linux-gnu/
 
 SOURCES += \
-    QtGraph/GraphFrame.cpp \
-    QtGraph/GraphFrameBuffer.cpp \
-    QtGraph/QtGraphGlui.cpp \
-  main.cpp       \
+  main.cpp \
   MainWindow.cpp \
-  MvecUi/Cursor.cpp                 \
+  MvecUi/Cursor.cpp \
   MvecUi/GraphicNodeContextMenu.cpp \
-  MvecUi/GraphicNode.cpp            \
-  MvecUi/MvecGraphicsScene.cpp      \
-  MvecUi/MvecGraphicsView.cpp       \
-  MvecUi/MvecHoverArea.cpp          \
-    nodePsBuilder/dispPsWidget/dispGraphPsWidget.cpp \
-  nodePsBuilder/nodePartPsWidget/WidgetSelector.cpp \
-  nodePsBuilder/nodePsDialog.cpp        \
+  MvecUi/GraphicNode.cpp \
+  MvecUi/MvecGraphicsScene.cpp \
+  MvecUi/MvecGraphicsView.cpp \
+  MvecUi/MvecHoverArea.cpp \
+  nodePsBuilder/nodePsDialog.cpp \
   nodePsBuilder/nodePsTab.cpp \
-  nodePsBuilder/nodePartPsWidget/GuiValidators.cpp \
-  nodePsBuilder/procPsWidget/procConvPsWidget.cpp \
-  nodePsBuilder/procPsWidget/procDcPsWidget.cpp \
-  nodePsBuilder/mixPsWidget/mixPsWidget.cpp \
   nodePsBuilder/dispPsWidget/dispFilePsWidget.cpp \
+  nodePsBuilder/dispPsWidget/dispGraphPsWidget.cpp \
   nodePsBuilder/genPsWidget/genSinePsWidget.cpp \
   nodePsBuilder/genPsWidget/genSquarePsWidget.cpp \
   nodePsBuilder/inPsWidget/inFilePsWidget.cpp \
   nodePsBuilder/inPsWidget/inUdpPsWidget.cpp  \
+  nodePsBuilder/mixPsWidget/mixPsWidget.cpp \
+  nodePsBuilder/procPsWidget/procConvPsWidget.cpp \
+  nodePsBuilder/procPsWidget/procDcPsWidget.cpp \
   nodePsBuilder/outPsWidget/outFilePsWidget.cpp \
-  nodePsBuilder/outPsWidget/outUdpPsWidget.cpp   \
+  nodePsBuilder/outPsWidget/outUdpPsWidget.cpp \
+  nodePsBuilder/nodePartPsWidget/GuiValidators.cpp \
+  nodePsBuilder/nodePartPsWidget/WidgetSelector.cpp \
+  QtGraph/QtGraphGlui.cpp
 
 HEADERS += \
   MainWindow.h \
-  MvecUi/Cursor.h                 \
-  MvecUi/EventEnums.h             \
+  MvecUi/Cursor.h \
+  MvecUi/EventEnums.h \
   MvecUi/GraphicNodeContextMenu.h \
-  MvecUi/GraphicNode.h            \
-  MvecUi/MvecGraphicsScene.h      \
-  MvecUi/MvecGraphicsView.h       \
-  MvecUi/MvecHoverArea.h          \
-    QtGraph/GraphFrame.h \
-    QtGraph/GraphFrameBuffer.h \
-    QtGraph/QtGraphGlui.h \
-    nodePsBuilder/dispPsWidget/dispGraphPsWidget.h \
-  nodePsBuilder/nodePartPsWidget/WidgetSelector.h \
-    nodePsBuilder/nodePartPsWidget/nodePartPsWidgetSelector.h \
+  MvecUi/GraphicNode.h \
+  MvecUi/MvecGraphicsScene.h \
+  MvecUi/MvecGraphicsView.h \
+  MvecUi/MvecHoverArea.h \
   nodePsBuilder/nodePsDialog.h \
   nodePsBuilder/nodePsTab.h \
-  nodePsBuilder/nodePartPsWidget/nodePartPsWidgetBase.h \
-  nodePsBuilder/nodePartPsWidget/GuiValidators.h \
-  nodePsBuilder/procPsWidget/procConvPsWidget.h \
-  nodePsBuilder/procPsWidget/procDcPsWidget.h \
-  nodePsBuilder/mixPsWidget/mixPsWidget.h \
   nodePsBuilder/dispPsWidget/dispFilePsWidget.h \
+  nodePsBuilder/dispPsWidget/dispGraphPsWidget.h \
   nodePsBuilder/genPsWidget/genSinePsWidget.h \
   nodePsBuilder/genPsWidget/genSquarePsWidget.h \
   nodePsBuilder/inPsWidget/inFilePsWidget.h \
-  nodePsBuilder/inPsWidget/inUdpPsWidget.h  \
+  nodePsBuilder/inPsWidget/inUdpPsWidget.h \
+  nodePsBuilder/mixPsWidget/mixPsWidget.h \
+  nodePsBuilder/procPsWidget/procConvPsWidget.h \
+  nodePsBuilder/procPsWidget/procDcPsWidget.h \
   nodePsBuilder/outPsWidget/outFilePsWidget.h \
   nodePsBuilder/outPsWidget/outUdpPsWidget.h \
+  nodePsBuilder/nodePartPsWidget/GuiValidators.h \
+  nodePsBuilder/nodePartPsWidget/WidgetSelector.h \
+  nodePsBuilder/nodePartPsWidget/nodePartPsWidgetSelector.h \
+  nodePsBuilder/nodePartPsWidget/nodePartPsWidgetBase.h \
+  QtGraph/QtGraphGlui.h
 
 FORMS += \
   MainWindow.ui \
-    QtGraph/QtGraphGlui.ui \
-    nodePsBuilder/dispPsWidget/dispGraphPsWidget.ui \
-  nodePsBuilder/nodePartPsWidget/WidgetSelector.ui \
   nodePsBuilder/nodePsDialog.ui \
   nodePsBuilder/nodePsTab.ui \
-  nodePsBuilder/mixPsWidget/mixPsWidget.ui \
   nodePsBuilder/dispPsWidget/dispFilePsWidget.ui \
+  nodePsBuilder/dispPsWidget/dispGraphPsWidget.ui \
   nodePsBuilder/genPsWidget/genSinePsWidget.ui \
   nodePsBuilder/genPsWidget/genSquarePsWidget.ui \
   nodePsBuilder/inPsWidget/inFilePsWidget.ui \
   nodePsBuilder/inPsWidget/inUdpPsWidget.ui \
-  nodePsBuilder/outPsWidget/outFilePsWidget.ui \
-  nodePsBuilder/outPsWidget/outUdpPsWidget.ui \
+  nodePsBuilder/mixPsWidget/mixPsWidget.ui \
   nodePsBuilder/procPsWidget/procConvPsWidget.ui \
   nodePsBuilder/procPsWidget/procDcPsWidget.ui \
+  nodePsBuilder/outPsWidget/outFilePsWidget.ui \
+  nodePsBuilder/outPsWidget/outUdpPsWidget.ui \
+  nodePsBuilder/nodePartPsWidget/WidgetSelector.ui \
+  QtGraph/QtGraphGlui.ui
 
 INCLUDEPATH += \
   submodules/midvec2-lib/src/ \
-  MvecUi/                     \
+  submodules/graph-opengl/ \
+  MvecUi/ \
   nodePsBuilder/
 
 # Default rules for deployment.

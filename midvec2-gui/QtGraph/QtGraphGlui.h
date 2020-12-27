@@ -10,10 +10,6 @@
 #include <QGraphicsItem>
 #include <QGraphicsEllipseItem>
 
-// include: Qt GUI application.
-#include <QtGraph/GraphFrame.h>
-#include <QtGraph/GraphFrameBuffer.h>
-
 // include: c/c++ library.
 #include <vector>
 #include <map>
@@ -40,26 +36,7 @@ public:
 
   void NotifyOverflow();
 
-  int GetGraphWidth();
-
-  int GetGraphHeight();
-
 private:
-
-  static const int PIX_DOT_SIZE = 5;
-
-  void _drawGraphFrame(const GraphFrame&);
-
-  void _drawPoint(const QPoint&);
-
-  bool _canDraw = true;
-
-  GraphFrameBuffer _frameBuffer;
-
-  QPen _pen;
-  QBrush _brush;
-  QGraphicsScene* _scene;
-
   Ui::QtGraphGlui *ui;
 };
 

@@ -22,16 +22,19 @@
      <item>
       <layout class="QGridLayout" name="graphLayout">
        <property name="leftMargin">
-        <number>20</number>
+        <number>6</number>
        </property>
        <property name="topMargin">
-        <number>0</number>
+        <number>6</number>
        </property>
        <property name="rightMargin">
-        <number>20</number>
+        <number>6</number>
        </property>
        <property name="bottomMargin">
-        <number>20</number>
+        <number>6</number>
+       </property>
+       <property name="horizontalSpacing">
+        <number>6</number>
        </property>
        <item row="0" column="0">
         <widget class="Line" name="yMarkers">
@@ -40,32 +43,20 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QGraphicsView" name="graphView">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>500</width>
-           <height>375</height>
-          </size>
-         </property>
-         <property name="verticalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-         <property name="horizontalScrollBarPolicy">
-          <enum>Qt::ScrollBarAlwaysOff</enum>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="1">
         <widget class="Line" name="xMarkers">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QOpenGLWidget" name="openGLWidget">
+         <property name="minimumSize">
+          <size>
+           <width>700</width>
+           <height>525</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -89,7 +80,7 @@
    <item>
     <widget class="QToolBox" name="axesSettings">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -102,12 +93,12 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>376</width>
+        <width>204</width>
         <height>483</height>
        </rect>
       </property>
       <attribute name="label">
-       <string>Help / About</string>
+       <string>About</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -136,7 +127,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>376</width>
+        <width>204</width>
         <height>483</height>
        </rect>
       </property>
@@ -196,7 +187,7 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>376</width>
+        <width>204</width>
         <height>483</height>
        </rect>
       </property>
