@@ -16,11 +16,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # libraries.
+# First line: todo: remove this and just union the submodule source into this *.pro file.
+# Second line: todo: see if you can get away with just not having this and Qt still finds the dll's.
 #
 LIBS += -L$$PWD/../build-midvec2-lib-Desktop_Qt_5_15_0_GCC_64bit-Debug/ -lmidvec2 \
-  -L/usr/lib/x86_64-linux-gnu/
+  -L/home/dev/.local/Qt/5.15.0/gcc_64/lib
 
 SOURCES += \
+  QtGraph/QtOpenGlGraph.cpp \
   main.cpp \
   MainWindow.cpp \
   MvecUi/Cursor.cpp \
@@ -55,6 +58,7 @@ HEADERS += \
   MvecUi/MvecGraphicsScene.h \
   MvecUi/MvecGraphicsView.h \
   MvecUi/MvecHoverArea.h \
+  QtGraph/QtOpenGlGraph.h \
   nodePsBuilder/nodePsDialog.h \
   nodePsBuilder/nodePsTab.h \
   nodePsBuilder/dispPsWidget/dispFilePsWidget.h \

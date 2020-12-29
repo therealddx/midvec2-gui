@@ -9,6 +9,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsItem>
 #include <QGraphicsEllipseItem>
+#include <QtGraph/QtOpenGlGraph.h>
 
 // include: c/c++ library.
 #include <vector>
@@ -38,6 +39,7 @@ public:
 
 private:
   Ui::QtGraphGlui *ui;
+  QtOpenGlGraph* _qtGraph;
 };
 
 #endif // QTGRAPHGLUI_H

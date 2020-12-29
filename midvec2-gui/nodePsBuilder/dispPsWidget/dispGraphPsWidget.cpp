@@ -22,8 +22,8 @@ dispPs<double>* dispGraphPsWidget::Make()
   //
 
   QtGraphGlui* qtGraph = new QtGraphGlui;
-  Axis<unsigned int>* xAxis = new Axis<unsigned int>(qtGraph->GetGraphWidth(), 0, 1000, false);
-  Axis<double>* yAxis = new Axis<double>(qtGraph->GetGraphHeight(), -1.0, 1.0, true);
+  Axis<unsigned int>* xAxis = new Axis<unsigned int>(700, 0, 1000, false);
+  Axis<double>* yAxis = new Axis<double>(525, -1.0, 1.0, true);
 
   return new dispGraphPs<double>(qtGraph, xAxis, yAxis);
 }
