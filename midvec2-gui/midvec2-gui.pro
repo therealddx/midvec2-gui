@@ -17,10 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 # libraries.
 # First line: todo: remove this and just union the submodule source into this *.pro file.
-# Second line: todo: see if you can get away with just not having this and Qt still finds the dll's.
 #
-LIBS += -L$$PWD/../build-midvec2-lib-Desktop_Qt_5_15_0_GCC_64bit-Debug/ -lmidvec2 \
-  -L/home/dev/.local/Qt/5.15.0/gcc_64/lib
+LIBS += -L$$PWD/../build-midvec2-lib-Desktop_Qt_5_15_0_GCC_64bit-Debug/ -lmidvec2
 
 SOURCES += \
   QtGraph/QtOpenGlGraph.cpp \
