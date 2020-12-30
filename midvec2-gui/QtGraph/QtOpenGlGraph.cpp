@@ -4,14 +4,103 @@ QtOpenGlGraph::QtOpenGlGraph(QWidget* arg_parent, Qt::WindowFlags arg_f)
   : QOpenGLWidget(arg_parent, arg_f)
 {
   qDebug() << "QtOpenGlGraph::QtOpenGlGraph";
+
+  QSurfaceFormat format;
+  format.setProfile(QSurfaceFormat::CoreProfile);
+  format.setVersion(3,3);
+
+  this->setFormat(format);
+
+  _baseShader = new QOpenGLShaderProgram;
 }
 
 void QtOpenGlGraph::initializeGL()
 {
-  qDebug() << "QtOpenGlGraph::initializeGL";
+  // i'm upset.
+  // yes i have OpenGLFunctions but I should be able to call my C code.
+  // this is where, graph-opengl has trouble continuing to help you.
+  //
+  // At best you can do some template magic with C++ to have the compiler stamp in the right
+  // class to call the functions you want.
+  //
+  // So this is as good as it gets. You might as well take advantage of Qt's weird object-oriented
+  // system around OpenGL because you sure as hell have no option, after all, to bring in your own
+  // code.
+  //
+
+  // get functions.
+  //
+  _glFunc = this->context()->functions();
+
+  // build shader.
+  //
+  _baseShader->create();
+
+  _baseShader->addShaderFromSourceCode(QOpenGLShader::Vertex,
+  "#version 330 core\n"
+  "layout (location = 0) in vec3 arg_pos;\n"
+  "void main() { gl_Position = vec4(arg_pos, 1.0f); }\n"
+  );
+
+  _baseShader->addShaderFromSourceCode(QOpenGLShader::Fragment,
+  "#version 330 core\n"
+  "out vec4 rtn_fragColor;\n"
+  "void main() { rtn_fragColor = vec4(1.0f, 0.0f, 0.0f, 0.5f); }\n"
+  );
+
+  _baseShader->link();
+
+  // setup that vertex data.
+  //
+  _triVertices[0] = 0.0f;
+  _triVertices[1] = 0.0f;
+  _triVertices[2] = 0.0f;
+
+  _triVertices[3] = -0.5f;
+  _triVertices[4] = -0.5f;
+  _triVertices[5] = 0.0f;
+
+  _triVertices[6] = 0.5f;
+  _triVertices[7] = -0.5f;
+  _triVertices[8] = 0.0f;
+
+  // build vao.
+  //
+  _vao = new QOpenGLVertexArrayObject;
+  _vao->create();
+  _vao->bind();
+
+  // build vbo.
+  //
+  _vbo = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+  _vbo->create();
+  _vbo->setUsagePattern(QOpenGLBuffer::DynamicDraw);
+  _vbo->bind();
+  _vbo->allocate(_triVertices, TRIANGLE_NUM_FLOATS * sizeof(GLfloat));
+
+  _vao->release();
 }
 
-void QtOpenGlGraph::paintGL()
+// void QtOpenGlGraph::paintGL()
+// {
+//
+// }
+
+void QtOpenGlGraph::paintEvent(QPaintEvent* arg_p)
 {
-  qDebug() << "QtOpenGlGraph::paintGL()";
+  Q_UNUSED(arg_p);
+  _glFunc->glViewport(0, 0, width(), height());
+  // _glFunc->glClearColor(0.39f, 0.58f, 0.93f, 1.0f);
+  _glFunc->glClear(GL_COLOR_BUFFER_BIT);
+
+  _vao->bind();
+  _baseShader->bind();
+  _baseShader->bindAttributeLocation("arg_pos", 0);
+  _baseShader->enableAttributeArray(0);
+  _baseShader->setAttributeBuffer(0, GL_FLOAT, 0, 3);
+
+  _glFunc->glDrawArrays(GL_TRIANGLES, 0, 3);
+
+  _baseShader->release();
+  _vao->release();
 }

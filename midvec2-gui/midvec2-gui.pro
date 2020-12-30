@@ -17,6 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 # libraries.
 # First line: todo: remove this and just union the submodule source into this *.pro file.
+# no, don't 'remove' the first line.. having that separate library build helps because
+# you save buildtime on what's already coded. Plus bringing in all these 'submodule/x/y/z.cpp' lines
+# will kludge up this file.
+#
+# What I would like to do is go to midvec2-lib and on top of all those .hpp and .tpp,
+# define .cpp files that instantiate templated-double classes for everything that is currently just template-only.
+# That way libmidvec2.a will have more backing code in it, and I can save more on compile-time in this project.
 #
 LIBS += -L$$PWD/../build-midvec2-lib-Desktop_Qt_5_15_0_GCC_64bit-Debug/ -lmidvec2
 

@@ -4,6 +4,11 @@
 #include <QDebug>
 #include <QWidget>
 #include <QOpenGLWidget>
+#include <QOpenGLContext>
+#include <QOpenGLFunctions>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
+#include <QOpenGLBuffer>
 
 class QtOpenGlGraph : public QOpenGLWidget
 {
@@ -12,10 +17,19 @@ public:
 
 protected:
   void initializeGL();
-  void paintGL();
+  void paintEvent(QPaintEvent*);
+  // void paintGL();
 
 private:
 
+  static const int TRIANGLE_NUM_FLOATS = 9;
+  GLfloat _triVertices[TRIANGLE_NUM_FLOATS];
+
+  QOpenGLFunctions* _glFunc;
+  QOpenGLShaderProgram* _baseShader;
+
+  QOpenGLVertexArrayObject* _vao;
+  QOpenGLBuffer* _vbo;
 };
 
 #endif // QTOPENGLGRAPH_H
