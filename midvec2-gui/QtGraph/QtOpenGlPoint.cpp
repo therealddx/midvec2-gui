@@ -70,5 +70,6 @@ void QtOpenGlPoint::setLocation(float arg_x, float arg_y)
 
   // push to vbo.
   //
+  _vbo->bind();
   _vbo->write(0, _vertices.data(), _vertices.size() * sizeof(GLfloat));
 }

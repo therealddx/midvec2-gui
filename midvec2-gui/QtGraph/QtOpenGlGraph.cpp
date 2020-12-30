@@ -64,33 +64,38 @@ void QtOpenGlGraph::initializeGL()
 
   _shadProg->link();
 
-  // set initial locations for plottable points.
-  //
-  for (int n = 0; n < _glPoints->size(); n++)
-  {
-    GLfloat v = (GLfloat)n / (GLfloat)(_glPoints->size()) * 2.0f - 1.0f;
-
-    (*_glPoints)[n] = new QtOpenGlPoint
-    ( v // 0.0f
-    , v // 0.0f
-    );
-  }
-
   // fixed viewport, fixed shader.
   //
   this->context()->functions()->glViewport(0, 0, width(), height());
   _shadProg->bind();
   _shadProg->bindAttributeLocation("arg_pos", 0);
+
+  // allocate memory for plottable points.
+  //
+  for (int n = 0; n < _glPoints->size(); n++)
+  {
+    (*_glPoints)[n] = new QtOpenGlPoint;
+  }
 }
 
 void QtOpenGlGraph::paintGL()
 {
+  // pre setup.
+  //
   QOpenGLFunctions* pGlFunc = this->context()->functions();
-
   pGlFunc->glClear(GL_COLOR_BUFFER_BIT);
 
+  // set locations for plottable points.
+  //
+  int n = 0;
   for (QtOpenGlPoint* eachPoint : *_glPoints)
   {
+    GLfloat v = (GLfloat)(n++) / (GLfloat)(_glPoints->size()) * 2.0f - 1.0f;
+    eachPoint->setLocation
+      ( v + (GLfloat)m * 0.01f // 0.0f
+      , v + (GLfloat)m * 0.01f // 0.0f
+      );
+
     eachPoint->getVbo()->bind();
     eachPoint->getVao()->bind();
     _shadProg->enableAttributeArray(0);
@@ -100,9 +105,10 @@ void QtOpenGlGraph::paintGL()
 
     eachPoint->getVbo()->release();
     eachPoint->getVao()->release();
-
   }
+  m++;
 
+  qDebug() << "QtOpenGlGraph::paintGL" ;
 /*
  *   // get functions.
  *   //

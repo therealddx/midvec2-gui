@@ -37,9 +37,11 @@ public:
 
   void NotifyOverflow();
 
+private slots:
+  void on_manualRefresh_btn_clicked();
+
 private:
   Ui::QtGraphGlui *ui;
-  QtOpenGlGraph* _qtGraph;
 };
 
 #endif // QTGRAPHGLUI_H

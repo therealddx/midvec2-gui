@@ -1,6 +1,8 @@
 #ifndef QTOPENGLGRAPH_H
 #define QTOPENGLGRAPH_H
 
+#include <mutex>
+
 #include <QDebug>
 #include <QWidget>
 #include <QOpenGLWidget>
@@ -32,6 +34,7 @@ private:
   QOpenGLFunctions* _glFunc;
   QOpenGLShaderProgram* _shadProg;
 
+  int m = 0;
 
   /* relics of old triangle test.
    *
