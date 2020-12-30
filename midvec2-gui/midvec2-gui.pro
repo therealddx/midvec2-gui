@@ -29,6 +29,7 @@ LIBS += -L$$PWD/../build-midvec2-lib-Desktop_Qt_5_15_0_GCC_64bit-Debug/ -lmidvec
 
 SOURCES += \
   QtGraph/QtOpenGlGraph.cpp \
+  QtGraph/QtOpenGlPoint.cpp \
   main.cpp \
   MainWindow.cpp \
   MvecUi/Cursor.cpp \
@@ -64,6 +65,7 @@ HEADERS += \
   MvecUi/MvecGraphicsView.h \
   MvecUi/MvecHoverArea.h \
   QtGraph/QtOpenGlGraph.h \
+  QtGraph/QtOpenGlPoint.h \
   nodePsBuilder/nodePsDialog.h \
   nodePsBuilder/nodePsTab.h \
   nodePsBuilder/dispPsWidget/dispFilePsWidget.h \

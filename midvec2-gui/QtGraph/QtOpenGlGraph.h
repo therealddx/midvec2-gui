@@ -10,26 +10,34 @@
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLBuffer>
 
+#include <QtGraph/QtOpenGlPoint.h>
+
 class QtOpenGlGraph : public QOpenGLWidget
 {
 public:
   QtOpenGlGraph(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
+  virtual ~QtOpenGlGraph();
 
 protected:
   void initializeGL();
-  void paintEvent(QPaintEvent*);
-  // void paintGL();
+  void paintGL();
 
 private:
 
-  static const int TRIANGLE_NUM_FLOATS = 9;
+  constexpr static const int TRIANGLE_NUM_FLOATS = 9;
+  constexpr static const int MAX_NUM_POINTS = 1024;
   GLfloat _triVertices[TRIANGLE_NUM_FLOATS];
 
+  std::vector<QtOpenGlPoint*>* _glPoints;
   QOpenGLFunctions* _glFunc;
-  QOpenGLShaderProgram* _baseShader;
+  QOpenGLShaderProgram* _shadProg;
 
-  QOpenGLVertexArrayObject* _vao;
-  QOpenGLBuffer* _vbo;
+
+  /* relics of old triangle test.
+   *
+   * QOpenGLVertexArrayObject* _vao;
+   * QOpenGLBuffer* _vbo;
+   */
 };
 
 #endif // QTOPENGLGRAPH_H
