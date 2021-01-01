@@ -72,7 +72,7 @@ void QtOpenGlGraph::initializeGL()
 
   // allocate memory for plottable points.
   //
-  for (int n = 0; n < _glPoints->size(); n++)
+  for (unsigned int n = 0; n < _glPoints->size(); n++)
   {
     (*_glPoints)[n] = new QtOpenGlPoint;
   }

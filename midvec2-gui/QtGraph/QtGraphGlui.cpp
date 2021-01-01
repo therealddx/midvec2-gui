@@ -5,8 +5,15 @@
 #include "QtGraphGlui.h"
 #include "ui_QtGraphGlui.h"
 
+/*
+QtGraphGlui::QtGraphGlui(QWidget *parent)
+  : GraphGluiBase(512)
+  , QWidget(parent)
+  , ui(new Ui::QtGraphGlui)
+ */
 QtGraphGlui::QtGraphGlui(QWidget *parent)
   : QWidget(parent)
+  , GraphGluiBase(512)
   , ui(new Ui::QtGraphGlui)
 {
   // setup.
@@ -21,12 +28,7 @@ QtGraphGlui::~QtGraphGlui()
   delete ui;
 }
 
-void QtGraphGlui::UpdateGraph(std::vector<int>& arg_xPixels, std::vector<int>& arg_yPixels)
-{
-  // todo: implement this.
-}
-
-void QtGraphGlui::NotifyOverflow()
+void QtGraphGlui::UpdateGraph(unsigned int arg_newX, double arg_newY)
 {
   // todo: implement this.
 }

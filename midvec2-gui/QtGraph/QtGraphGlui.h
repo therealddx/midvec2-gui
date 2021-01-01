@@ -24,7 +24,7 @@ namespace Ui {
 class QtGraphGlui;
 }
 
-class QtGraphGlui : public QWidget, public GraphGluiBase<double>
+class QtGraphGlui : public QWidget, public GraphGluiBase<unsigned int, double>
 {
   Q_OBJECT
 
@@ -32,10 +32,7 @@ public:
   explicit QtGraphGlui(QWidget *parent = nullptr);
   ~QtGraphGlui();
 
-  void UpdateGraph(
-    std::vector<int>& arg_xPixels, std::vector<int>& arg_yPixels);
-
-  void NotifyOverflow();
+  void UpdateGraph(unsigned int, double);
 
 private slots:
   void on_manualRefresh_btn_clicked();
