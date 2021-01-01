@@ -1,10 +1,18 @@
-TARGET = midvec2 # lib.
+TARGET = midvec2 # output binary name becomes libmidvec.[a|so]
 
-TEMPLATE = lib # *.a file
+# TEMPLATE.
+# 'lib': pretty self-explanatory.
+#
+TEMPLATE = lib
 
+# CONFIG.
+# 'staticlib': output a static library file.
+# 'dll' would give a shared-object file.
+# 'plugin' would give a plugin file.
+#
 CONFIG += \
   c++11 \
-  staticlib
+  dll
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -31,16 +39,13 @@ HEADERS += \
   submodules/midvec2-lib/src/NodePartBuilder/mixPs.hpp \
   submodules/midvec2-lib/src/NodePartBuilder/outPs.hpp \
   submodules/midvec2-lib/src/NodePartBuilder/procPs.hpp \
-  submodules/midvec2-lib/src/NodePart/Display/Axis.hpp \
   submodules/midvec2-lib/src/NodePart/Display/DisplayBase.hpp \
   submodules/midvec2-lib/src/NodePart/Display/DisplayFile.hpp \
-  submodules/midvec2-lib/src/NodePart/Display/DisplayGraphGlui.hpp \
   submodules/midvec2-lib/src/NodePart/Display/DisplayGraph.hpp \
-  submodules/midvec2-lib/src/NodePart/Display/IDisplay.hpp \
+  submodules/midvec2-lib/src/NodePart/Display/GraphGluiBase.hpp \
   submodules/midvec2-lib/src/NodePart/Generator/GeneratorBase.hpp \
   submodules/midvec2-lib/src/NodePart/Generator/GeneratorSine.hpp \
   submodules/midvec2-lib/src/NodePart/Generator/GeneratorSquare.hpp \
-  submodules/midvec2-lib/src/NodePart/Generator/IGenerator.hpp \
   submodules/midvec2-lib/src/NodePart/InputPipe/InputPipeBase.hpp \
   submodules/midvec2-lib/src/NodePart/InputPipe/InputPipeFile.hpp \
   submodules/midvec2-lib/src/NodePart/InputPipe/InputPipe.hpp \
@@ -50,7 +55,6 @@ HEADERS += \
   submodules/midvec2-lib/src/NodePart/OutputPipe/OutputPipeFile.hpp \
   submodules/midvec2-lib/src/NodePart/OutputPipe/OutputPipeRam.hpp \
   submodules/midvec2-lib/src/NodePart/OutputPipe/OutputPipeUdp.hpp \
-  submodules/midvec2-lib/src/NodePart/Processor/IProcessor.hpp \
   submodules/midvec2-lib/src/NodePart/Processor/ProcessorBase.hpp \
   submodules/midvec2-lib/src/NodePart/Processor/ProcessorConv.hpp \
   submodules/midvec2-lib/src/NodePart/Processor/ProcessorDc.hpp \
@@ -60,7 +64,7 @@ HEADERS += \
   submodules/midvec2-lib/src/PipeFramer/Message.hpp \
   submodules/midvec2-lib/src/PipeFramer/PipeFramerIn.hpp \
   submodules/midvec2-lib/src/PipeFramer/PipeFramerOut.hpp \
-  submodules/midvec2-lib/src/PipeFramer/RingBuffer.hpp \
+  submodules/midvec2-lib/src/PipeFramer/RingBuffer.hpp
 
 SOURCES += \
   submodules/midvec2-lib/src/NodePartBuilder/inPs.cpp \
@@ -72,6 +76,12 @@ SOURCES += \
   submodules/midvec2-lib/src/NodePart/OutputPipe/OutputPipeFile.cpp \
   submodules/midvec2-lib/src/NodePart/OutputPipe/OutputPipeRam.cpp \
   submodules/midvec2-lib/src/NodePart/OutputPipe/OutputPipeUdp.cpp \
+  submodules/midvec2-lib/src/NodeBuilder/TimplsNodeBuilder.cpp \
+  submodules/midvec2-lib/src/NodePartBuilder/TimplsNodePartBuilder.cpp \
+  submodules/midvec2-lib/src/NodePart/Display/TimplsDisplay.cpp \
+  submodules/midvec2-lib/src/NodePart/Generator/TimplsGenerator.cpp \
+  submodules/midvec2-lib/src/NodePart/Processor/TimplsProcessor.cpp \
+  submodules/midvec2-lib/src/Node/TimplsNode.cpp
 
 INCLUDEPATH += \
   submodules/midvec2-lib/src/

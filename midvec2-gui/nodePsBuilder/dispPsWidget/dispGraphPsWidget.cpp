@@ -16,14 +16,7 @@ dispGraphPsWidget::~dispGraphPsWidget()
 
 dispPs<double>* dispGraphPsWidget::Make()
 {
-  // make a new GraphGlui for Qt.
-  // make a new dummy x-Axis.
-  // make a new dummy y-Axis.
-  //
-
   QtGraphGlui* qtGraph = new QtGraphGlui;
-  Axis<unsigned int>* xAxis = new Axis<unsigned int>(700, 0, 1000, false);
-  Axis<double>* yAxis = new Axis<double>(525, -1.0, 1.0, true);
 
-  return new dispGraphPs<double>(qtGraph, xAxis, yAxis);
+  return new dispGraphPs<double>(qtGraph);
 }
