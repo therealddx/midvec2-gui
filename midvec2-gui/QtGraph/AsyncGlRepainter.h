@@ -4,19 +4,17 @@
 #include <QThread>
 
 class QOpenGLWidget;
+class QtOpenGlGraph;
 
 class AsyncGlRepainter : public QThread
 {
 public:
-  AsyncGlRepainter(QOpenGLWidget*, QThread*);
+  AsyncGlRepainter(QtOpenGlGraph*, QThread*);
   ~AsyncGlRepainter();
 
 private:
-  QOpenGLWidget* _glWidget;
+  QtOpenGlGraph* _glWidget;
   QThread* _origThread;
-
-signals:
-  void finishedRepaint(bool done);
 
 private slots:
   void doRepaint();

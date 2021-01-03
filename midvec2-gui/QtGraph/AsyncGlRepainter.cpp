@@ -1,8 +1,9 @@
 #include <QOpenGLWidget>
+#include <QtGraph/QtOpenGlGraph.h>
 
 #include "AsyncGlRepainter.h"
 
-AsyncGlRepainter::AsyncGlRepainter(QOpenGLWidget* arg_glWidget, QThread* arg_origThread)
+AsyncGlRepainter::AsyncGlRepainter(QtOpenGlGraph* arg_glWidget, QThread* arg_origThread)
   : _glWidget(arg_glWidget)
   , _origThread(arg_origThread)
 {
@@ -10,7 +11,8 @@ AsyncGlRepainter::AsyncGlRepainter(QOpenGLWidget* arg_glWidget, QThread* arg_ori
 
 AsyncGlRepainter::~AsyncGlRepainter()
 {
-  moveToThread(_origThread);
+  quit();
+  _glWidget->moveToThread(_origThread);
 }
 
 void AsyncGlRepainter::doRepaint()

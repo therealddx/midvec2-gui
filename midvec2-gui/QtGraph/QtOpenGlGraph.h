@@ -24,10 +24,11 @@ public:
   QtOpenGlGraph(QWidget *parent = nullptr, Qt::WindowFlags f = Qt::WindowFlags());
   virtual ~QtOpenGlGraph();
 
-  void BeginRepaint();
-
   template <class Tx, class Ty>
   void SetGlPoints(const std::vector<Tx>&, const std::vector<Ty>&);
+
+signals:
+  void BeginRepaint();
 
 protected:
   void initializeGL();

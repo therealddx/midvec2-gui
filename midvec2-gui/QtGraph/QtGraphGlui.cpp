@@ -44,9 +44,8 @@ void QtGraphGlui::UpdateGraph(unsigned int arg_newX, double arg_newY)
 
   // todo: innovate here, do OpenGL repaints asycnhronously and honor the context.
   //
-  // ui->openGLWidget->AsyncRepaint();
-  // while (ui->openGLWidget->IsRepaintDone() == false);
-  // usleep(10000);
+  ui->openGLWidget->BeginRepaint();
+  usleep(10000); // todo: optimize by trimming out the sleep.
 }
 
 void QtGraphGlui::on_manualRefresh_btn_clicked()

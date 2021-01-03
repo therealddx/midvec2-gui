@@ -18,7 +18,7 @@ QtOpenGlGraph::QtOpenGlGraph(QWidget* arg_parent, Qt::WindowFlags arg_f)
   _glPoints = new std::vector<QtOpenGlPoint*>(MAX_NUM_POINTS);
 
   _asyncRepainter = new AsyncGlRepainter(this, QThread::currentThread());
-  connect(this, SIGNAL(BeginRepaint), _asyncRepainter, SLOT(doRepaint));
+  connect(this, SIGNAL(BeginRepaint()), _asyncRepainter, SLOT(AsyncGlRepainter::doRepaint()));
   moveToThread(_asyncRepainter);
   _asyncRepainter->start();
 }
@@ -42,6 +42,11 @@ QtOpenGlGraph::~QtOpenGlGraph()
    * delete _vao;
    * delete _vbo;
    */
+}
+
+void QtOpenGlGraph::BeginRepaint()
+{
+
 }
 
 void QtOpenGlGraph::initializeGL()
