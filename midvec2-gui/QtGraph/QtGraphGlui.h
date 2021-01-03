@@ -39,6 +39,9 @@ private slots:
 
 private:
   Ui::QtGraphGlui *ui;
+
+  std::vector<unsigned int> _xPoints;
+  std::vector<double> _yPoints;
 };
 
 #endif // QTGRAPHGLUI_H

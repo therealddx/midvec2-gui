@@ -5,17 +5,16 @@
 #include "QtGraphGlui.h"
 #include "ui_QtGraphGlui.h"
 
-/*
-QtGraphGlui::QtGraphGlui(QWidget *parent)
-  : GraphGluiBase(512)
-  , QWidget(parent)
-  , ui(new Ui::QtGraphGlui)
- */
 QtGraphGlui::QtGraphGlui(QWidget *parent)
   : QWidget(parent)
-  , GraphGluiBase(512)
+  , GraphGluiBase(512) // super-graph.
   , ui(new Ui::QtGraphGlui)
 {
+  // allocate axes view.
+  //
+  _xPoints = std::vector<unsigned int>(_xAxis->GetSize());
+  _yPoints = std::vector<double>(_yAxis->GetSize());
+
   // setup.
   ui->setupUi(this);
 
@@ -30,7 +29,24 @@ QtGraphGlui::~QtGraphGlui()
 
 void QtGraphGlui::UpdateGraph(unsigned int arg_newX, double arg_newY)
 {
-  // todo: implement this.
+  // super-graph.
+  //
+  GraphGluiBase::UpdateGraph(arg_newX, arg_newY);
+
+  // update all-points view.
+  //
+  _xAxis->ReadObjects(_xPoints);
+  _yAxis->ReadObjects(_yPoints);
+
+  // send to graph widget.
+  //
+  ui->openGLWidget->SetGlPoints(_xPoints, _yPoints);
+
+  // todo: innovate here, do OpenGL repaints asycnhronously and honor the context.
+  //
+  // ui->openGLWidget->AsyncRepaint();
+  // while (ui->openGLWidget->IsRepaintDone() == false);
+  // usleep(10000);
 }
 
 void QtGraphGlui::on_manualRefresh_btn_clicked()

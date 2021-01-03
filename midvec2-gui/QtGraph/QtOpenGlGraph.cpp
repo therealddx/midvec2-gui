@@ -1,3 +1,5 @@
+#include <unistd.h>
+
 #include "QtOpenGlGraph.h"
 
 QtOpenGlGraph::QtOpenGlGraph(QWidget* arg_parent, Qt::WindowFlags arg_f)
@@ -12,6 +14,10 @@ QtOpenGlGraph::QtOpenGlGraph(QWidget* arg_parent, Qt::WindowFlags arg_f)
 
   _shadProg = new QOpenGLShaderProgram;
   _glPoints = new std::vector<QtOpenGlPoint*>(MAX_NUM_POINTS);
+
+  _repaintThread = new QThread;
+  // todo: _repaintThread->Start(&AsyncRepaintManager);
+  moveToThread(_repaintThread);
 }
 
 QtOpenGlGraph::~QtOpenGlGraph()
@@ -27,11 +33,51 @@ QtOpenGlGraph::~QtOpenGlGraph()
   _shadProg->release();
   delete _shadProg;
 
+  _shouldCheckRepaints = false;
+  // todo: _repaintThread->Join();
+  delete _repaintThread;
+
   /* relics of old triangle test.
    *
    * delete _vao;
    * delete _vbo;
    */
+}
+
+void QtOpenGlGraph::AsyncRepaintManager()
+{
+  _shouldCheckRepaints = true;
+
+  while (_shouldCheckRepaints)
+  {
+    if (_queuedRepaint)
+    {
+      AsyncRepaint();
+    }
+  }
+}
+
+void QtOpenGlGraph::QueueRepaint()
+{
+  _queuedRepaint = true;
+}
+
+void QtOpenGlGraph::AsyncRepaint()
+{
+  _repaintBusy = true;
+
+  _lockGlPoints.lock();
+
+  repaint();
+
+  _lockGlPoints.unlock();
+
+  _repaintBusy = false;
+}
+
+bool QtOpenGlGraph::IsRepaintDone()
+{
+  return !_repaintBusy;
 }
 
 void QtOpenGlGraph::initializeGL()
@@ -85,17 +131,10 @@ void QtOpenGlGraph::paintGL()
   QOpenGLFunctions* pGlFunc = this->context()->functions();
   pGlFunc->glClear(GL_COLOR_BUFFER_BIT);
 
-  // set locations for plottable points.
+  // plot the points you have.
   //
-  int n = 0;
   for (QtOpenGlPoint* eachPoint : *_glPoints)
   {
-    GLfloat v = (GLfloat)(n++) / (GLfloat)(_glPoints->size()) * 2.0f - 1.0f;
-    eachPoint->setLocation
-      ( v + (GLfloat)m * 0.01f // 0.0f
-      , v + (GLfloat)m * 0.01f // 0.0f
-      );
-
     eachPoint->getVbo()->bind();
     eachPoint->getVao()->bind();
     _shadProg->enableAttributeArray(0);
@@ -106,7 +145,33 @@ void QtOpenGlGraph::paintGL()
     eachPoint->getVbo()->release();
     eachPoint->getVao()->release();
   }
-  m++;
+
+  /* relic of animation test.
+   *
+   * // set locations for plottable points.
+   * //
+   * int n = 0;
+   * for (QtOpenGlPoint* eachPoint : *_glPoints)
+   * {
+   *   GLfloat v = (GLfloat)(n++) / (GLfloat)(_glPoints->size()) * 2.0f - 1.0f;
+   *   eachPoint->setLocation
+   *     ( v + (GLfloat)m * 0.01f // 0.0f
+   *     , v + (GLfloat)m * 0.01f // 0.0f
+   *     );
+   *
+   *   eachPoint->getVbo()->bind();
+   *   eachPoint->getVao()->bind();
+   *   _shadProg->enableAttributeArray(0);
+   *   _shadProg->setAttributeBuffer(0, GL_FLOAT, 0, 3);
+   *
+   *   pGlFunc->glDrawArrays(GL_TRIANGLES, 0, 3);
+   *
+   *   eachPoint->getVbo()->release();
+   *   eachPoint->getVao()->release();
+   * }
+   * m++;
+   *
+   */
 
   qDebug() << "QtOpenGlGraph::paintGL" ;
 /*
