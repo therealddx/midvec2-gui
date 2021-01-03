@@ -45,7 +45,8 @@ SOURCES += \
   nodePsBuilder/outPsWidget/outUdpPsWidget.cpp \
   nodePsBuilder/nodePartPsWidget/GuiValidators.cpp \
   nodePsBuilder/nodePartPsWidget/WidgetSelector.cpp \
-  QtGraph/QtGraphGlui.cpp
+  QtGraph/QtGraphGlui.cpp \
+    QtGraph/AsyncGlRepainter.cpp
 
 HEADERS += \
   MainWindow.h \
@@ -75,7 +76,8 @@ HEADERS += \
   nodePsBuilder/nodePartPsWidget/WidgetSelector.h \
   nodePsBuilder/nodePartPsWidget/nodePartPsWidgetSelector.h \
   nodePsBuilder/nodePartPsWidget/nodePartPsWidgetBase.h \
-  QtGraph/QtGraphGlui.h
+  QtGraph/QtGraphGlui.h \
+    QtGraph/AsyncGlRepainter.h
 
 FORMS += \
   MainWindow.ui \

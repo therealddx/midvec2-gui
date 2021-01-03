@@ -1,5 +1,7 @@
 #include <unistd.h>
 
+#include <QtGraph/AsyncGlRepainter.h>
+
 #include "QtOpenGlGraph.h"
 
 QtOpenGlGraph::QtOpenGlGraph(QWidget* arg_parent, Qt::WindowFlags arg_f)
@@ -15,14 +17,15 @@ QtOpenGlGraph::QtOpenGlGraph(QWidget* arg_parent, Qt::WindowFlags arg_f)
   _shadProg = new QOpenGLShaderProgram;
   _glPoints = new std::vector<QtOpenGlPoint*>(MAX_NUM_POINTS);
 
-  _repaintThread = new QThread;
-  // todo: _repaintThread->Start(&AsyncRepaintManager);
-  moveToThread(_repaintThread);
+  _asyncRepainter = new AsyncGlRepainter(this, QThread::currentThread());
+  connect(this, SIGNAL(BeginRepaint), _asyncRepainter, SLOT(doRepaint));
+  moveToThread(_asyncRepainter);
+  _asyncRepainter->start();
 }
 
 QtOpenGlGraph::~QtOpenGlGraph()
 {
-  makeCurrent();
+  delete _asyncRepainter;
 
   for (auto each : *_glPoints)
   {
@@ -33,51 +36,12 @@ QtOpenGlGraph::~QtOpenGlGraph()
   _shadProg->release();
   delete _shadProg;
 
-  _shouldCheckRepaints = false;
-  // todo: _repaintThread->Join();
-  delete _repaintThread;
 
   /* relics of old triangle test.
    *
    * delete _vao;
    * delete _vbo;
    */
-}
-
-void QtOpenGlGraph::AsyncRepaintManager()
-{
-  _shouldCheckRepaints = true;
-
-  while (_shouldCheckRepaints)
-  {
-    if (_queuedRepaint)
-    {
-      AsyncRepaint();
-    }
-  }
-}
-
-void QtOpenGlGraph::QueueRepaint()
-{
-  _queuedRepaint = true;
-}
-
-void QtOpenGlGraph::AsyncRepaint()
-{
-  _repaintBusy = true;
-
-  _lockGlPoints.lock();
-
-  repaint();
-
-  _lockGlPoints.unlock();
-
-  _repaintBusy = false;
-}
-
-bool QtOpenGlGraph::IsRepaintDone()
-{
-  return !_repaintBusy;
 }
 
 void QtOpenGlGraph::initializeGL()
@@ -174,7 +138,10 @@ void QtOpenGlGraph::paintGL()
    */
 
   qDebug() << "QtOpenGlGraph::paintGL" ;
-/*
+
+
+/* relics of animation test.
+ *
  *   // get functions.
  *   //
  *   QOpenGLFunctions* pGlFunc = this->context()->functions();
